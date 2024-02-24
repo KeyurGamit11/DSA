@@ -1,0 +1,26 @@
+# brute force
+step:1
+start  i in loop 0 to n
+step:2
+second loop start from i+1 to n
+step:3
+compare i and i+1 with target 
+and if true increment cnt
+
+Code:
+class Solution {
+public:
+    int countPairs(vector<int>& nums, int target) {
+        int n = nums.size();
+        int cnt=0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(nums[i] + nums[j] < target){
+                    cnt++;
+                }
+            }
+        }
+         return cnt;
+        
+    }
+};
