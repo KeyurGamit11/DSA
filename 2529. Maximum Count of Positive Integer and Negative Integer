@@ -1,0 +1,23 @@
+Example 1:
+Input: nums = [-2,-1,-1,1,2,3]
+Output: 3
+Explanation: There are 3 positive integers and 3 negative integers. The maximum count among them is 3.
+#brute force :
+#code :
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+        int positive =0;
+        int negative =0;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] > 0){
+               positive++;
+            }
+            else if(nums[i] < 0){
+                negative++;
+            }
+        }
+       int max_cnt = max(positive , negative);
+       return max_cnt;
+    }
+};
