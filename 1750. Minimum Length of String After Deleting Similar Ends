@@ -1,0 +1,28 @@
+Input: s = "aabccabba"
+Output: 3
+Explanation: An optimal sequence of operations is:
+- Take prefix = "aa" and suffix = "a" and remove them, s = "bccabb".
+- Take prefix = "b" and suffix = "bb" and remove them, s = "cca".
+#code :
+class Solution {
+public:
+    int minimumLength(string s) {
+        int i=0;
+        int j = s.length()-1;
+         // Delete similar ends until the ends differ or they meet in the middle
+        while(i < j && s[i] == s[j]){
+            char c = s[i];
+          // Delete consecutive occurrences of c from prefix
+            while(i < j && s[i] == c){
+                i++;
+            }
+            // Delete consecutive occurrences of c from prefix
+            while(i <= j && s[j] == c){
+                j--;
+            }
+          
+        }
+        //remaining element 
+        return j-i+1;
+    }
+};
