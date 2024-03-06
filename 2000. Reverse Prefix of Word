@@ -1,0 +1,35 @@
+Example 1:
+Input: word = "abcdefd", ch = "d"
+Output: "dcbaefd"
+Explanation: The first occurrence of "d" is at index 3. 
+Reverse the part of word from 0 to 3 (inclusive), the resulting string is "dcbaefd".
+#step:
+use two pointer for reversing string
+find first occurance index
+take first index s as 0
+and e endex is we found first 
+then apply reverse operation
+
+#code :
+class Solution {
+public:
+    string reversePrefix(string word, char ch) {
+     // finding first occurance of ch
+        int index=0;
+        for(int i=0; i<word.size(); i++){
+            if(ch == word[i]){
+                index = i;
+                break;
+            }
+        }
+    // use two pointer for reversing 
+        int s =0;
+        int e = index;
+        while(s < e){
+            swap(word[s] , word[e]);
+                s++;
+                e--;
+        }
+        return word;
+    }
+};
