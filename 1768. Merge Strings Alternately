@@ -1,0 +1,36 @@
+Example 1:
+Input: word1 = "abc", word2 = "pqr"
+Output: "apbqcr"
+Explanation: The merged string will be merged as so:
+word1:  a   b   c
+word2:    p   q   r
+merged: a p b q c r
+#step :
+use two pointer method 
+#code :
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        int i=0;
+        int j=0;
+        string ans;
+//check for both string 
+        while(i < word1.size() && j < word2.size()){
+            ans.push_back(word1[i]);
+            ans.push_back(word2[j]);
+            i++;
+            j++;
+        }
+// remain element in word1 append in ans 
+            while(i < word1.size()){
+                ans.push_back(word1[i]);
+                i++;
+            }
+// remaining element in word2 append in ans 
+            while(j < word2.size()){
+                ans.push_back(word2[j]);
+                j++;
+            }
+        return ans;
+    }
+};
