@@ -1,0 +1,21 @@
+Example 1:
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+#step :
+use two pointer method
+take 0 index i and e at last index
+swap both and i increment(i++)
+and e decrement(e--)
+#code :
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int i=0;
+        int e = s.size()-1;
+        while(i < e){
+            swap(s[i] , s[e]);
+            i++;
+            e--;
+        } 
+    }
+};
