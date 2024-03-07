@@ -1,0 +1,79 @@
+Example 1:
+Input: head = [1,2,3,4,5]
+Output: [3,4,5]
+Explanation: The middle node of the list is node 3.
+#step :
+first found lenght of linklist
+and find middle node by n/2 
+#code :
+class Solution {
+private :
+//find the length of linklist
+int getlen(ListNode*head){
+    int len =0;
+    while(head != NULL){
+        len++;
+        head = head->next;
+    }
+    return len;
+}
+public:
+    ListNode* middleNode(ListNode* head) {
+        int len = getlen(head);
+        //find out middle length of limklist
+        int ans = (len/2);
+        //now we have to return middle node
+        ListNode*temp = head;
+        int cnt=0;
+        while(cnt < ans){
+            temp = temp->next;
+            cnt++;
+        }
+        return temp;
+    }
+};
+
+
+#Second method :
+use two pointer method 
+one at head is slow 
+second is fast head->next
+fast increment by 2
+slow increment by 1
+after full travresal when fast reach to the null slow pointer reach to the middle node of link list 
+so we return slow pointer 
+#code :
+class Solution {
+ private :
+    ListNode* getmiddle(ListNode* head){
+        //node is empty so return head
+        if(head == NULL){
+            return NULL;
+        }
+        //if node is only one return head
+        if(head->next == NULL){
+            return head;
+        }
+        //if node has two node return headnext
+        if(head ->next ->next == NULL){
+            return head->next;
+        }
+        //use two pointer method
+        ListNode* fast = head->next;
+        ListNode* slow = head;
+        while(fast != NULL){
+            //fast increment by two
+            fast = fast->next;
+            if(fast != NULL){
+                fast = fast->next;
+            }
+            //slow increment by one
+            slow = slow->next;
+        }
+        return slow;
+    }
+public:
+    ListNode* middleNode(ListNode* head) {
+        return getmiddle(head);
+    }
+   };
