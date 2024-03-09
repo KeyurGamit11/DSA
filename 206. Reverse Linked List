@@ -1,0 +1,30 @@
+Example 1:
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+#step :
+we have to just do one thing take node and point behind
+first node we have to point to the null secode node point to the first node and so on...
+for this we take node prev and node curr 
+
+#code :
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        //edge case
+        //empty list and one node
+        if(head == NULL || head -> next == NULL){
+            return head;
+        }
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* forward = NULL;
+        while(curr != NULL){
+            forward = curr -> next;
+            //main operation
+            curr -> next = prev;
+            prev = curr; // increment
+            curr = forward; // increment
+        }
+        return prev; 
+    }
+};
