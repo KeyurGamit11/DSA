@@ -1,0 +1,36 @@
+Input: head = [1,1,2]
+Output: [1,2]
+#step :
+first we take curr at head
+we check curr and curr next  data or val iterative way
+>>if condition become true
+first we made delete node that we have to delete that is curr next
+and we made next pointer next_next that we have to connect after delete duplicate
+than we delete node and connect next_next pointer
+than simply return head
+>> if curr and curr next val not match 
+we simply increment curr
+#code :
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        //edge case  for empty node
+        if(head == NULL)
+          return NULL;
+        // for more than one node  
+        ListNode* curr = head;
+        while(curr != NULL && curr -> next != NULL ){
+            if(curr -> val == curr -> next -> val){
+               ListNode* deleteNode = curr -> next;
+               ListNode* Next_Next = curr -> next -> next;
+               delete(deleteNode);
+               curr -> next = Next_Next; 
+            }
+            else{
+              //increment curr
+                curr = curr -> next;
+            }
+        }
+        return head;
+    }
+};
