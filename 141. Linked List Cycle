@@ -1,0 +1,33 @@
+#step :
+for this question we can use floyed cycle detection method
+in this method we take two pointer head
+slow and fast pointer 
+slow increment by one
+fast is increment by two
+we have to traverse loop untill slow != null or fast next != null
+if linked list is cycle then slow and fast intersect at some point (slow == fast)
+if not linked list is not cycle
+
+#code :
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        //edge case 
+        //empty list
+        if(head == NULL){
+            return false;
+        }
+        //floyed cycle detection method
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast != NULL && fast->next != NULL){
+            //fast increment by two
+            fast = fast -> next -> next;
+            //slow increment by one 
+            slow = slow -> next;
+            if(fast == slow)
+               return true;
+        }
+        return false;
+    }
+};
