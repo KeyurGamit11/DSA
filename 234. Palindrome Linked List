@@ -1,0 +1,35 @@
+Example 1:
+Input: head = [1,2,2,1]
+Output: true
+#step :
+creat array 
+copy linked list data into array
+check palindrome in array apply by two pointer method
+#code :
+class Solution {
+private:
+bool CheckPalindrome(vector<int>arr){
+    int n = arr.size();
+    int s = 0;
+    int e = n-1;
+    while(s <= e){
+        if(arr[s] != arr[e]){
+            return false; //not palindrome
+        }
+        s++;
+        e--;
+    }
+    return true;// all loop is traerse means it is palindrom
+}
+public:
+    bool isPalindrome(ListNode* head) {
+        vector<int>arr;
+        ListNode* temp = head;
+        //copy all data in array
+        while(temp != NULL){
+            arr.push_back(temp -> val);
+            temp = temp -> next;
+        }
+        return CheckPalindrome(arr);  
+    }
+};
