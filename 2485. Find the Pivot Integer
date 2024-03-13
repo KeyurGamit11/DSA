@@ -1,0 +1,49 @@
+Input: n = 8
+Output: 6
+Explanation: 6 is the pivot integer since: 1 + 2 + 3 + 4 + 5 + 6 = 6 + 7 + 8 = 21.
+#step :
+simply take two pointer at 1 and last nmber n 
+do rightsum and leftsum untill it become equal 
+#code :
+class Solution {
+public:
+    int pivotInteger(int n) {
+        int  leftvalue = 1, rightvalue = n;
+        int leftsum = leftvalue , rightsum = rightvalue;
+        if(n == 1){ // edge case
+            return n; 
+        }
+        while( leftvalue < rightvalue){
+            if(leftsum < rightsum){
+                leftvalue++;
+                leftsum += leftvalue;
+            }
+            else{
+                rightvalue--;
+                rightsum += rightvalue;
+            }
+            if(leftsum == rightsum && leftvalue +1 == rightvalue- 1){
+                return leftvalue +1;
+            }
+        }
+        return -1;
+    }
+};
+
+#second method :
+we can appply sum of all number equation and squar root
+#code :
+class Solution {
+public:
+    int pivotInteger(int n) {
+        int sum  = (n*(n+1)/2);
+        int x = sqrt(sum);
+        return x*x == sum ? x : -1;
+    }
+};
+
+
+
+
+
+
