@@ -1,0 +1,31 @@
+Example 1:
+Input: nums = [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+#step :
+we have to just count 0,1,2 and put in array 0,1,2 their count wise
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int n= nums.size();
+        int zerocnt =0 , onecnt =0 , twocnt =0;
+        for(int i=0; i< n; i++){// count 0,1,2
+            if(nums[i] == 0)
+               zerocnt++;
+            if(nums[i] == 1)
+               onecnt++;
+            else{
+                twocnt++;
+            }
+        }
+        //put 0,1,2 in array their count wise
+        for(int i=0; i<zerocnt;i++){
+            nums[i] = 0;
+        }
+        for(int i=zerocnt; i<zerocnt + onecnt; i++){
+            nums[i] = 1;
+        }
+        for(int i=zerocnt + onecnt; i<n; i++){
+            nums[i] = 2;
+        }
+    }
+};
