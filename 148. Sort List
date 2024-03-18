@@ -1,0 +1,78 @@
+Input: head = [4,2,1,3]
+Output: [1,2,3,4]
+#step :
+we just do merge sort in list
+first find mid 
+devide list into two part left and right
+apply recurion for sort left and right
+merge left and right
+#code:
+class Solution {
+private:
+ListNode* findmid(ListNode* head){
+    ListNode* slow = head;
+    ListNode* fast = head -> next;
+    while(fast != NULL && fast -> next != NULL){
+        slow = slow -> next;
+        fast = fast -> next -> next;
+    }
+    return slow;
+}
+ListNode* merge(ListNode* left , ListNode* right){
+    //edge case
+    if(left == NULL){
+        return right;
+    }
+    if(right == NULL){
+        return left;
+    }
+    ListNode* ans = new ListNode(-1);
+    ListNode* temp = ans;
+    //merge two sorted list
+    while(left != NULL && right != NULL){
+        if(left -> val < right ->val){
+            temp -> next = left;
+            temp = left;
+            left = left -> next;
+        }
+        else{
+            temp -> next = right;
+            temp = right;
+            right = right -> next;
+        }
+    }
+    //if right list become null and left list have still node
+    while(left != NULL){
+        temp -> next = left;
+        temp = left;
+        left = left -> next;
+    }
+    //if left list become null and right list have still node
+    while(right != NULL){
+        temp -> next = right;
+        temp = right;
+        right = right -> next;
+    }
+    ans = ans -> next; // ans is dummy node so we have to return ans next
+    return ans;
+}
+public:
+    ListNode* sortList(ListNode* head) {
+        //base case
+        if(head == NULL || head -> next == NULL){
+            return head;
+        }
+        //find mid
+        ListNode* mid = findmid(head);
+        //devide list in two halves
+        ListNode* left = head;
+        ListNode* right = mid -> next;
+         mid -> next = NULL;
+        //recursive call for right and left part
+        left = sortList(left);
+        right = sortList(right);
+        //merge two sorted list left and right
+        ListNode* result = merge(left , right);
+        return result;
+    }
+};
