@@ -1,0 +1,36 @@
+Input: list1 = [10,1,13,6,9,5], a = 3, b = 4, list2 = [1000000,1000001,1000002]
+Output: [10,1,13,1000000,1000001,1000002,5]
+Explanation: We remove the nodes 3 and 4 and put the entire list2 in their place. The blue edges and nodes in the above figure indicate the result.
+#step :
+we just find a-1 and b+1 index 
+a-1 point to list2 head 
+list2 end point ti b+1 index
+#code:
+class Solution {
+public:
+    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+        int index=0;
+        ListNode* p = nullptr , *q = nullptr;
+        ListNode* head = list1;
+        //find a-1 and b+1 index
+        while(head != NULL){
+            if(index == a-1){
+                p = head;
+            }
+            if(index == b+1){
+                q = head;
+            }
+            head = head -> next;
+            index++;
+        }
+        //find last node of list 2
+        ListNode* Lastnode = list2;
+        while(Lastnode -> next != NULL){
+            Lastnode = Lastnode -> next;
+        }
+        //now just point p to list2 head and list2 end to q
+        p -> next = list2;
+        Lastnode -> next = q;
+        return list1;
+    }
+};
