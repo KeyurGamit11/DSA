@@ -1,0 +1,18 @@
+
+#code :
+ //recursive way:
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        //base case
+        if(head == NULL || head -> next == NULL){
+            return head;
+        }
+        //recursive function
+        ListNode* Newnode = reverseList(head -> next);
+        ListNode* headnext = head -> next;
+        headnext -> next = head;
+        head -> next = NULL;
+        return Newnode;
+    }
+};
