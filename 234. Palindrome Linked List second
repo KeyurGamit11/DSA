@@ -1,0 +1,43 @@
+#second method:
+#step :
+we just find middle node and reverse after that node and compare with first half and second half(reverse half)
+#code:
+class Solution {
+private:
+ListNode* reverselist(ListNode* head){
+    if(head == NULL || head -> next == NULL){
+            return head;
+        }
+        //recursive function
+        ListNode* Newnode = reverselist(head -> next);
+        ListNode* headnext = head -> next;
+        headnext -> next = head;
+        head -> next = NULL;
+        return Newnode;
+}
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head == NULL || head -> next == NULL){
+            return true; //edge case
+        }
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(fast -> next != NULL && fast -> next -> next != NULL){
+            slow = slow -> next;
+            fast = fast -> next -> next; 
+        }
+        ListNode* Newhead = reverselist(slow -> next);
+        ListNode* first = head; //now compare first half and second  half (reverse half) 
+        ListNode* second = Newhead;
+        while(second != NULL){
+            if(first -> val != second -> val){
+                reverselist(Newhead);
+                return false;
+            }
+            first = first -> next;
+            second = second -> next;
+        }
+        reverselist(Newhead);
+        return true;
+    }
+};
