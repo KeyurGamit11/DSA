@@ -1,0 +1,27 @@
+Example 1:
+Input: s = "ab-cd"
+Output: "dc-ba"
+#step :
+we use isalpha function that give is alphabat or not 
+code:
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        int i=0;
+        int j = s.length();
+        while(i < j){
+            if(isalpha(s[i]) && isalpha(s[j])){ //check first is alphbat or not
+                swap(s[i] , s[j]);
+                i++;
+                j--;
+            }
+            else if(isalpha(s[i])){ // mean i is alphabet and j is not so we have to decrement j
+                j--;
+            }
+            else{ //means j is alphabet and i is not so we have to increment i
+                i++;
+            }
+        }
+        return s;
+    }
+};
