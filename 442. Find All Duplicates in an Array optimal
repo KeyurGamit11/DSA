@@ -1,0 +1,26 @@
+Input: nums = [4,3,2,7,8,2,3,1]
+Output: [2,3]
+#optimal method:
+#step:
+use number as a index
+like exmple  0 index has a 4 value so next we check the 4 index and we check as -(negative) means visited
+if we visted again we will store value that through we reach to the value
+#code:
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {                      // t.c = o(n)
+         int n = nums.size();                                            //s.c = o(1)
+        vector<int>ans;
+        for(int i=0; i<n; i++){
+            int num = abs(nums[i]);
+            int index = num -1;
+            if(nums[index] < 0){ //means visited
+                ans.push_back(num);
+            }
+            else{ //means not visted
+               nums[index] *=-1;
+            }
+        }
+        return ans;
+    }
+};
