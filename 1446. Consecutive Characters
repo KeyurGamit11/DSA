@@ -1,0 +1,23 @@
+Input: s = "leetcode"
+Output: 2
+Explanation: The substring "ee" is of length 2 with the character 'e' only.
+#code:
+class Solution {
+public:
+    int maxPower(string s) {
+        int cnt=1;
+        int ans =1;
+        for(int i=1; i<s.length(); i++){
+            if(s[i] == s[i-1]){
+                cnt++;
+            }
+            else{
+                ans = max(ans ,cnt);
+                cnt =1;
+            }
+        }
+          ans = max(ans ,cnt);
+        return ans;
+        
+    }
+};
