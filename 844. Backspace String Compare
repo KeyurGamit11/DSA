@@ -1,0 +1,48 @@
+Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
+Note that after backspacing an empty text, the text will continue empty.
+Example 1:
+Input: s = "ab#c", t = "ad#c"
+Output: true
+Explanation: Both s and t become "ac".
+#step:
+so when we found '# hash we have to delete one element 
+so for that we take to take and two string
+check if s[i] == # if yes than pop one element
+if not push element
+and after travsering all we have to tarsfer stack data into string
+and check str1 == str2
+#code :
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        stack<int> s1;
+        stack<int> s2;
+        string str1 , str2;
+        for(int i=0; i<s.length(); i++){
+            if(!s1.empty() && s[i] == '#'){
+                s1.pop();
+            }
+            else if(s[i] != '#'){
+                s1.push(s[i]);
+            }
+        }
+        for(int i=0; i<t.length(); i++){
+            if(!s2.empty() && t[i] == '#'){
+                s2.pop();
+            }
+            else if(t[i] != '#'){
+                s2.push(t[i]);
+            }
+        }
+        // noe we have to tranfer data stack into string
+        while(!s1.empty()){ //s1 stack data into str1
+            str1.push_back(s1.top());
+            s1.pop();
+        }
+        while(!s2.empty()){ //s2 stack data into str2
+            str2.push_back(s2.top());
+            s2.pop();
+        }
+       return str1 == str2;
+    }
+};
