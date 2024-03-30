@@ -1,0 +1,36 @@
+Example 1:
+Input: s = "hello"
+Output: "holle"
+#step:
+we use two pointer here i=0,j=s.length()-1
+first check isvowel or not if i,j both vowel we just swap it
+if i vowel and j not we decrement j(j--)
+if j vowel and i not we increment i(i++)
+return string
+#code:
+class Solution {
+private:
+    bool isvowel(char c){
+       c = tolower(c); //convert character to lowercase
+       return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c =='u'; //they are vowel
+    }
+public:
+    string reverseVowels(string s) {
+       int i=0;
+       int j=s.length()-1;
+       while(i < j){
+        if(isvowel(s[i]) && isvowel(s[j])){ // i and j both vowel
+            swap(s[i] , s[j]);
+            i++;
+            j--;
+        }
+        else if(isvowel(s[i])){ //i is vowel j not
+            j--;
+        }
+        else{ //j is vowel i not
+            i++;
+        }
+       }
+       return s; 
+    }
+};
