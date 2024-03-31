@@ -1,0 +1,37 @@
+Example 1:
+Input: s = "III"
+Output: 3
+Explanation: III = 3.
+#step:
+first map all symbol with theire value
+travese all element 
+we take ans is 0 if i < i+1 than we subtract in ans
+if i> i+1 we plus into ans here is why
+iV symbol value is 4 
+i =1 , v=5 in travesing i comes first i<v means we have to subtract it v-i = 5-1=4
+same iX is;
+#code:
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char,int>m;
+        m['I'] =1; // map the all value with theire symbol
+        m['V']=5;
+        m['X']=10;
+        m['L']=50;
+        m['C']=100;
+        m['D']=500;
+        m['M']=1000;
+ 
+       int ans=0;
+       for(int i=0; i<s.length(); i++){
+        if(m[s[i]] < m[s[i+1]]){
+           ans -=m[s[i]];
+        }
+        else{
+           ans +=m[s[i]];
+        }
+       }
+       return ans;
+    }
+};
