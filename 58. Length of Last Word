@@ -1,0 +1,23 @@
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+#step:
+we just started from last if we found first space we ingore that and after starting counting we found space we break it and return cnt
+#code:
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+      int cnt=0;
+      for(int i=s.length()-1; i>=0; i--){
+        if(s[i] != ' '){
+            cnt++;
+        }
+        else{
+            if(cnt >0){ // for first space
+                return cnt;
+            }
+        }
+      }
+      return cnt;  
+    }
+};
