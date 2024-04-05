@@ -1,0 +1,28 @@
+Input: s = "leEeetcode"
+Output: "leetcode"
+Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".
+#step:
+we are using stack here we check st.top with current i after converting to upercase or lowercasse if equal we pop element if not push element
+and convert stack into string we have to reverse it because stack gives you reverse output
+#code:
+class Solution {
+public:
+    string makeGood(string s) {
+        stack<char> st;
+        string str;
+        for(int i=0; i<s.length(); i++){
+            if(!st.empty() && (abs(st.top()-s[i])==32)){ // check top with current element and if same pop it 
+                st.pop();
+            }
+            else{
+                st.push(s[i]); // not same so push in stack
+            }
+        }
+        while(!st.empty()){
+          str.push_back(st.top());
+          st.pop();
+        }
+        reverse(str.begin() , str.end());
+        return str;
+    }
+};
