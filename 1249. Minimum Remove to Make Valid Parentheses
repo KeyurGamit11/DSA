@@ -1,0 +1,43 @@
+Example 1:
+Input: s = "lee(t(c)o)de)"
+Output: "lee(t(c)o)de"
+Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+#step:
+we are using stack here if we found '(' this we just push it 
+if we found ')' this we check if stack if stack is empty if empty we put '#' in string
+if not we just pop it
+edge case
+now put in string if "#" not
+#code:
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int>st;
+        for(int i=0; i<s.length(); i++){
+            if(s[i] == '('){
+                st.push(i);
+            }
+            else if(s[i] == ')'){
+                if(st.empty()){
+                    s[i] ='#'; // we dont have valid pair
+                }
+                else{
+                    st.pop(); // means we found valid pair "()" like that
+                }
+            }
+        }
+        //edge case if some perenthisis also in stack
+        while(!st.empty()){
+            s[st.top()] ='#';
+            st.pop();
+        }
+        //now put in string
+        string ans;
+        for(int i=0; i<s.length(); i++){
+            if(s[i] != '#'){
+                ans.push_back(s[i]);
+            }
+        }
+        return ans;
+    }
+};
