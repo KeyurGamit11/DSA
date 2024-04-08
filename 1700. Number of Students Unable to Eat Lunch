@@ -1,0 +1,48 @@
+Input: students = [1,1,0,0], sandwiches = [0,1,0,1]
+Output: 0 
+Explanation:
+- Front student leaves the top sandwich and returns to the end of the line making students = [1,0,0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [0,0,1,1].
+- Front student takes the top sandwich and leaves the line making students = [0,1,1] and sandwiches = [1,0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [1,1,0].
+- Front student takes the top sandwich and leaves the line making students = [1,0] and sandwiches = [0,1].
+- Front student leaves the top sandwich and returns to the end of the line making students = [0,1].
+- Front student takes the top sandwich and leaves the line making students = [1] and sandwiches = [1].
+- Front student takes the top sandwich and leaves the line making students = [] and sandwiches = [].
+Hence all students are able to eat.
+#step :
+main condintion if student want sendwitch and sanwitch top match we pop student and sandwitch from queue and stach
+if not student can go to last of the queue and wait
+we take served as 0 if student go to last of the queue we increment it 
+we have to break the loop if student dont want frist sandwitch 
+#code:
+class Solution {
+public:
+    int countStudents(vector<int>& students, vector<int>& sandwiches) {
+        queue<int> std;
+        stack<int> sandy;
+        //students element into queue std
+        for(int i=0; i< students.size(); i++){
+            std.push(students[i]);
+        }
+        //sandwiches element into stack sandy
+        for(int i=sandwiches.size()-1; i >= 0; i--){
+            sandy.push(sandwiches[i]);
+        }
+        int served =0;
+        while(!std.empty() && served < std.size()  ){
+          
+            if(std.front() == sandy.top()){ // students want sandwiches and sandy first sandwich match
+                std.pop(); // so we pop one student with one sandwich
+                sandy.pop();
+                served = 0;
+            }
+            else if(std.front() != sandy.top()){
+                 std.push(std.front()); // if student dont want sandwitch he can go to last in queue
+                 std.pop();
+                 served++; // if any student dont want first sandwitch we have to break loop
+            }
+        }
+        return std.size(); //return remaining student in queue
+    }
+};
