@@ -1,0 +1,31 @@
+Input: tickets = [2,3,2], k = 2
+Output: 6
+Explanation: 
+- In the first pass, everyone in the line buys a ticket and the line becomes [1, 2, 1].
+- In the second pass, everyone in the line buys a ticket and the line becomes [0, 1, 0].
+The person at position 2 has successfully bought 2 tickets and it took 3 + 3 = 6 seconds.
+#code:
+class Solution {
+public:
+    int timeRequiredToBuy(vector<int>& tickets, int k) {
+        queue<int>q;
+        for(int i=0; i<tickets.size(); i++){
+            q.push(i);
+        }
+        int timeneed=0;
+        while(!q.empty()){
+            timeneed++; // increment time
+
+            int idfront = q.front();
+            q.pop();
+            tickets[idfront]--; //pop ticket and decrement by one 
+            if(k == idfront && tickets[idfront] == 0){ means all ticket is taken
+                return timeneed;
+            }
+            else if(tickets[idfront] != 0){
+                q.push(idfront); //means we have to take ticket one more time so after taking ticket we push ticket number in last 
+            }
+        }
+        return timeneed;
+    }
+};
