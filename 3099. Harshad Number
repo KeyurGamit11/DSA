@@ -1,0 +1,20 @@
+Input: x = 18
+Output: 9
+Explanation:
+The sum of digits of x is 9. 18 is divisible by 9. So 18 is a Harshad number and the answer is 9.
+#code:
+class Solution {
+public:
+    int sumOfTheDigitsOfHarshadNumber(int x) {
+        int totalsum =0;
+        int orignalNum = x; // store orignal number
+        while(x){
+            totalsum += (x % 10); //part into digit and sum of it
+            x/=10;
+        }
+        if(orignalNum % totalsum == 0){
+            return totalsum;
+        }
+        return -1;
+    }
+};
