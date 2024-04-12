@@ -1,0 +1,27 @@
+Input: nums = [4,2,4]
+Output: true
+Explanation: The subarrays with elements [4,2] and [2,4] have the same sum of 6.
+#step:
+first we store all subarray sum in 
+then sort it so if i and i+1 index has same subarray so we return true 
+#code:
+class Solution {
+public:
+    bool findSubarrays(vector<int>& nums) {
+        vector<int>subsum;
+        int n = nums.size();
+        for(int i=0; i<n-1; i++){
+            int sum = nums[i] + nums[i+1];
+            subsum.push_back(sum); // we store all subarray sum in
+        }
+        //sort the subarray sum 
+        sort(subsum.begin() , subsum.end());
+        //after sorting if i th index and i+1 index has same subsum then return true
+        for(int i=0; i<subsum.size()-1; i++){
+            if(subsum[i] == subsum[i+1]){
+                return true;
+            }
+        }
+        return false;
+    }
+};
