@@ -1,0 +1,19 @@
+Input: s = "abcd", t = "abcde"
+Output: "e"
+Explanation: 'e' is the letter that was added.
+#step:
+we are using xor(^) function same same char will be xor with eachother and become zero and differnt charcter 
+#code:
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+      char result =0;
+      for(char c:s){
+        result ^= c;
+      }
+      for(char c:t){
+        result ^= c;
+      }
+      return result;
+    }
+};
