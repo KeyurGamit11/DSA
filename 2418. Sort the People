@@ -1,0 +1,21 @@
+Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+Output: ["Mary","Emma","John"]
+Explanation: Mary is the tallest, followed by Emma and John.
+#code:
+class Solution {
+public:
+    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
+        vector<pair<int , string>> v;
+        //create vector of int and string(heights , name ) put in
+        for(int i=0; i<names.size(); i++){
+            v.push_back({heights[i] , names[i]});
+        }
+        //sort in descending order
+        sort(v.rbegin(), v.rend());
+        //now we have print names
+        for(int i=0; i<names.size(); i++){
+            names[i] = v[i].second;
+        }
+        return names;
+    }
+};
