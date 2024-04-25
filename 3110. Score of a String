@@ -1,0 +1,15 @@
+Input: s = "hello"
+Output: 13
+Explanation:
+The ASCII values of the characters in s are: 'h' = 104, 'e' = 101, 'l' = 108, 'o' = 111. So, the score of s would be |104 - 101| + |101 - 108| + |108 - 108| + |108 - 111| = 3 + 7 + 0 + 3 = 13.
+#code:
+class Solution {
+public:
+    int scoreOfString(string s) {
+        int total=0;
+        for(int i=0; i<s.size()-1; i++){
+            total += abs(s[i] - s[i+1]);
+        }
+        return total;
+    }
+};
