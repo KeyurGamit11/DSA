@@ -1,0 +1,21 @@
+Input: word = "abcdefd", ch = "d"
+Output: "dcbaefd"
+Explanation: The first occurrence of "d" is at index 3. 
+Reverse the part of word from 0 to 3 (inclusive), the resulting string is "dcbaefd".
+step:
+first find word and reverse from 0 index to given word
+#code:
+class Solution {
+public:
+    string reversePrefix(string word, char ch) {
+        int index=word.find(ch);
+        int s =0;
+        int e = index;
+        while(s < e){
+            swap(word[s] , word[e]);
+                s++;
+                e--;
+        }
+        return word;
+    }
+};
