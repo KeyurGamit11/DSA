@@ -1,0 +1,18 @@
+Input: celsius = 36.50
+Output: [309.65000,97.70000]
+Explanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70
+#Note:
+Kelvin = Celsius + 273.15
+Fahrenheit = Celsius * 1.80 + 32.00
+#code:
+class Solution {
+public:
+    vector<double> convertTemperature(double celsius) {
+        double kelvin = celsius + 273.15;
+        double fahrenheit = celsius * 1.80 + 32.00;
+        vector<double>ans;
+        ans.push_back(kelvin);
+        ans.push_back(fahrenheit);
+        return ans;
+    }
+};
