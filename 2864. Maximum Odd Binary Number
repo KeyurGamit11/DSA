@@ -1,0 +1,24 @@
+Example 1:
+Input: s = "010"
+Output: "001"
+Explanation: Because there is just one '1', it must be in the last position. So the answer is "001".
+#intution:
+so we have to find maximum odd from given string so for odd first binary number from right should be '1'and for maximium from right first binary number should be '1'
+so we sort it in descending so it become maximum and for odd binary we traverse from right and swap first '1' with right first index
+dry run with "0101" output is "1001"
+#step:
+sort string in descending 
+traverse from right and when we found first '1' we just swap with last element
+#code:
+class Solution {
+public:
+    string maximumOddBinaryNumber(string s) {
+        sort(s.rbegin(), s.rend());
+        for(int i=s.size()-1; i>= 0; i--){
+            if(s[i] == '1'){
+                swap(s[i] , s[s.size()-1]);
+            }
+        }
+        return s;
+    }
+};
