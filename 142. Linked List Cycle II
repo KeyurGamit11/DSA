@@ -1,0 +1,41 @@
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+#step:
+we use floyed cycle detection method 
+first slow and fast pointer method for cycle detection
+if cycle found we move slow pointer at head
+slow move by one fast move by one and their connected point where tail connect
+#code:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        
+        //floyed cycle detection method
+        ListNode* fast = head;
+        ListNode* slow = head;
+
+        while(fast != NULL && fast -> next != NULL ){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+            
+            if(slow == fast){
+                slow = head; // slow moved at head
+                while(slow != fast){
+                    slow = slow -> next;
+                    fast = fast -> next;
+                }
+                return slow;
+            }
+        }
+        return NULL;
+    }
+};
