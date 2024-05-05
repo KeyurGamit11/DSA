@@ -1,0 +1,40 @@
+A word is considered valid if:
+It contains a minimum of 3 characters.
+It consists of the digits 0-9, and the uppercase and lowercase English letters. (Not necessary to have all of them.)
+It includes at least one vowel.
+It includes at least one consonant.
+You are given a string word.
+Return true if word is valid, otherwise, return false.
+Input: word = "234Adas"
+Output: true
+Explanation:
+This word satisfies the conditions.
+#code:
+class Solution {
+public:
+    bool isValid(string word) {
+        if(word.size() < 3){
+            return false;
+        }
+        int vowel =0;
+        int wcnt =0;
+        for(auto i:word){
+            if(isalpha(i)){
+                if(i == 'a' || i == 'e' || i == 'i' || i == 'o' || i == 'u'
+                || i == 'A' || i == 'E' || i == 'I' || i == 'O' || i == 'U'){
+                    vowel++;
+                }
+                else{
+                    wcnt++;
+                }
+            }
+            else if(! isdigit(i)){
+                return false;
+            }
+        }
+        if(vowel >= 1 && wcnt >= 1){
+            return true;
+        }
+        return false;
+    }
+};
