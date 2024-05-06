@@ -1,0 +1,35 @@
+Input: s = "lEetcOde"
+Output: "lEOtcede"
+Explanation: 'E', 'O', and 'e' are the vowels in s; 'l', 't', 'c', and 'd' are all consonants. The vowels are sorted according to their ASCII values, and the consonants remain in the same places.
+#step:
+we gonna take emety string in that emepty string we put all the vowel we found in s string
+sort vowel string 
+in second iteration we start from 0 at s string and 0 at vowel  and if we found vowel in s string we just swap it and increment j
+#code:
+class Solution {
+    bool isvowel(char c){ // for checking vowel
+       if( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || 
+         c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U'){
+            return true;
+         }
+         return false;
+    }
+public:
+    string sortVowels(string s) {
+        string v ="";
+        for(int i=0; i<s.size(); i++){
+            if(isvowel(s[i])){
+                v += s[i]; // store all vowel in this
+            }
+        }
+        sort(v.begin() , v.end()); // sort vowle
+        int j=0;
+        for(int i=0; i<s.size(); i++){
+            if(isvowel(s[i])){ // if we found vowel in s string swap it 
+                swap(s[i] , v[j]);
+                j++;
+            }
+        }
+        return s;
+    }
+};
