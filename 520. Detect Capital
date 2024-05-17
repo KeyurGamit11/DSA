@@ -1,0 +1,35 @@
+All letters in this word are capitals, like "USA".
+All letters in this word are not capitals, like "leetcode".
+Only the first letter in this word is capital, like "Google".
+#code:
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        if (isupper(word[0])) { // if 0,1 index is capital so all char should be
+                                // captial
+            if (isupper(word[1])) {
+                for (int i = 2; i < word.size(); i++) {
+                    if (islower(word[i])) {
+                        return false;
+                    }
+                }
+            } else {
+                // if 0 index is capital 1 index is small so all car after
+                // should small
+                for (int i = 1; i < word.size(); i++) {
+                    if (isupper(word[i])) {
+                        return false;
+                    }
+                }
+            }
+        } else {
+            // if 0 index is small so all char should be small
+            for (int i = 0; i < word.size(); i++) {
+                if (isupper(word[i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
