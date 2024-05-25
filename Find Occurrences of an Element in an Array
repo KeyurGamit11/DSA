@@ -1,0 +1,41 @@
+Explanation:
+Index Recording: The first loop iterates through the nums array and records the indices where x appears.
+Query Processing: For each query, we check if the queries[i]th occurrence exists in the recorded indices. If it exists, we return the corresponding index. Otherwise, we return -1.
+Result Compilation: The results are collected in the answer vector which is returned at the end.
+Example Usage:
+For nums = {1, 2, 3, 2, 2, 5, 2} and queries = {1, 2, 3, 4, 5} with x = 2:
+
+The 1st occurrence of 2 is at index 1.
+The 2nd occurrence of 2 is at index 3.
+The 3rd occurrence of 2 is at index 4.
+The 4th occurrence of 2 is at index 6.
+There is no 5th occurrence, so the result is -1.
+The output will be 1 3 4 6 -1.
+#code:
+class Solution {
+public:
+    vector<int> occurrencesOfElement(vector<int>& nums, vector<int>& queries, int x) {
+         vector<int> indices;
+        vector<int> answer;
+
+        // Record the indices of occurrences of x in nums
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] == x) {
+                indices.push_back(i);
+            }
+        }
+
+        // For each query, find the corresponding occurrence
+        for (int i = 0; i < queries.size(); i++) {
+            int occurrence = queries[i];
+            if (occurrence <= indices.size()) {
+                answer.push_back(indices[occurrence - 1]);
+            } else {
+                answer.push_back(-1);
+            }
+        }
+
+        return answer;
+    }
+    
+};
