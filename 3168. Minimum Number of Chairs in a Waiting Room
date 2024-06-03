@@ -1,0 +1,22 @@
+Input: s = "EEEEEEE"
+Output: 7
+Explanation:
+After each second, a person enters the waiting room and no person leaves it. Therefore, a minimum of 7 chairs is needed.
+#code:
+class Solution {
+public:
+    int minimumChairs(string s) {
+        int cnt =0;
+        int ans =0;
+        for(int i=0; i<s.size(); i++){
+            if(s[i] == 'E'){
+                cnt++;
+            }
+            else{
+                cnt--;
+            }
+            ans = max(cnt , ans);
+        }
+        return ans;
+    }
+};
