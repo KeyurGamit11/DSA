@@ -1,0 +1,28 @@
+Input: s = "abccccdd"
+Output: 7
+Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
+count all char freq , if char count devide by two it can make pair and single char we can put in middle (single char)
+try with example
+#code:
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int n= s.size();
+        int ans =0;
+        unordered_map<char, int>freq;
+        for(auto c: s){
+             freq[c]++;
+        }
+        bool isOdd = false;
+        for(auto [c,fr] : freq){
+            if(fr % 2 == 0){
+                ans += fr;
+            }
+            else{
+                ans += fr -1;
+                isOdd = true;
+            }
+        }
+        return ans + isOdd;
+    }
+};
