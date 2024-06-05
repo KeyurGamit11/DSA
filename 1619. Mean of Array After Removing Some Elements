@@ -1,0 +1,17 @@
+Input: arr = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3]
+Output: 2.00000
+Explanation: After erasing the minimum and the maximum values of this array, all elements are equal to 2, so the mean is 2.
+#code:
+class Solution {
+public:
+    double trimMean(vector<int>& arr) {
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        int sum=0;
+        int a = n*5/100;
+        for(int i=a; i<n-a; i++){
+            sum = sum + arr[i];
+        }
+        return (double)sum / (n-2*a);
+    }
+};
