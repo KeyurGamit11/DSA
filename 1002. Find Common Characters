@@ -1,0 +1,29 @@
+Input: words = ["bella","label","roller"]
+Output: ["e","l","l"]
+#code:
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& words) {
+        vector<int> finalfreq(26, words.size());
+
+        for(int i=0; i<words.size(); i++){
+            vector<int>curfreq(26,0);
+            //count curr freq of first word
+            for(auto c: words[i]){
+                curfreq[c-'a']++;
+            }
+            //count final frq by take minimum of curr freq(first word) and final freq(next word)
+            for(char c='a'; c <= 'z'; c++){
+                finalfreq[c-'a'] = min(finalfreq[c-'a'] , curfreq[c-'a']);
+            }
+        }
+        //now now put last final freq into ans
+        vector<string>ans;
+        for(char c='a'; c<='z'; c++){
+            while(finalfreq[c-'a']--){
+                ans.push_back(string(1,c));
+            }
+        }
+        return ans;
+    }
+};
