@@ -1,0 +1,27 @@
+Input: s = "cb34"
+Output: ""
+Explanation:
+First, we apply the operation on s[2], and s becomes "c4".
+Then we apply the operation on s[1], and s becomes "".
+#code:
+class Solution {
+public:
+    string clearDigits(string s) {
+        stack<char>st;
+        for(int i=0; i<s.length(); i++){
+            if(isdigit(s[i]) && !st.empty()){
+                st.pop();
+            }
+            else{
+                st.push(s[i]);
+            }
+        }
+        string ans="";
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
