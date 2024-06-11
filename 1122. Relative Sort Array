@@ -1,0 +1,20 @@
+Input: arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]
+Output: [2,2,2,1,4,3,3,9,6,7,19]
+#code:
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        vector<int>ans;
+        int a =0;
+        for(int i=0; i<arr2.size(); i++){
+            for(int j=0; j<arr1.size(); j++){
+                if(arr2[i] == arr1[j]){
+                    swap(arr1[a] , arr1[j]);
+                    a++;
+                }
+            }
+        }
+        sort(arr1.begin()+a , arr1.end());
+        return arr1;
+    }
+};
