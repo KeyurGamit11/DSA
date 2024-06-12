@@ -1,0 +1,24 @@
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+#step:
+inorder traversal means (left - print - right)
+#code:
+class Solution {
+private:
+     void inorder(TreeNode* node , vector<int>& result){
+      // base case
+       if(node == NULL){
+          return;
+       }
+       // left -> print -> right (inorderd traversal)
+       inorder(node -> left , result); // go to left subtree
+       result.push_back(node -> val);   // print node or take value of node
+       inorder(node -> right , result); // go to right subtree
+   }
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>result;
+        inorder(root , result);
+        return result;
+    }
+};
