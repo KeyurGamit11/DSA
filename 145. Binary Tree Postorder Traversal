@@ -1,0 +1,24 @@
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+#step:
+in postorder left -> right -> print
+#code:
+class Solution {
+private:
+    void postorder(TreeNode* root, vector<int>& result){
+        //base case
+        if(root == NULL){
+            return;
+        }
+        // in postorder left -> right -> print
+        postorder(root -> left, result); // go into left subtree
+        postorder(root -> right , result); // go into right subtree
+        result.push_back(root -> val); // put value of node in result
+    }
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>result;
+        postorder(root , result);
+        return result;
+    }
+};
