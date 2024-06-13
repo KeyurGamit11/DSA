@@ -1,0 +1,25 @@
+Input: root = [1,null,2,3]
+Output: [1,2,3]
+#step:
+in preorder print -> left -> right.
+#code:
+class Solution {
+private:
+   void preorder(TreeNode* root , vector<int>& result){
+     //base case
+        if(root == NULL){
+            return;
+        }
+      // in preorder print -> left -> right
+      result.push_back(root -> val);  // put node value in result
+      preorder(root -> left , result); // go into right subtree
+      preorder(root -> right , result); // go into left subtree 
+   }
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>result;
+        preorder(root , result);
+        return result;
+
+    }
+};
