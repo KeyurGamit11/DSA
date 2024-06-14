@@ -1,0 +1,25 @@
+Input: nums = [3,2,1,2,1,7]
+Output: 6
+Explanation: After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
+It can be shown with 5 or less moves that it is impossible for the array to have all unique values.
+#step:
+sort the array
+check if i and i-1 are same or less if yes than increment more than i , dry run the example
+#code:
+class Solution {
+public:
+    int minIncrementForUnique(vector<int>& nums) {
+
+        // sort the array
+        sort(nums.begin(), nums.end());
+        int ans =0;
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i] <= nums[i-1]){
+              ans += (nums[i-1] - nums[i]) + 1;
+              nums[i] += (nums[i-1] - nums[i]) + 1;
+            }
+        }
+        return ans;
+
+    }
+};
