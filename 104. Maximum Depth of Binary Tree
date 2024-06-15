@@ -1,0 +1,18 @@
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+#code:
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        // base case 
+        if(root == NULL){
+            return 0;
+        }
+        // take left and right hight by recursion
+        int leftheight = maxDepth(root -> left);
+        int rightheight = maxDepth(root -> right);
+
+        int ans = max(leftheight , rightheight) + 1; // take max height if left or right height and add by 1(root)
+        return ans;
+    }
+};
