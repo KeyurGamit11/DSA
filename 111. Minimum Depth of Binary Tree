@@ -1,0 +1,29 @@
+Input: root = [3,9,20,null,null,15,7]
+Output: 2
+Example 2:
+
+Input: root = [2,null,3,null,4,null,5,null,6]
+Output: 5
+#code:
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+       //base case
+       if(root == NULL){
+         return 0;
+       } 
+       // take left and right hight by recursion
+       int leftheight = minDepth(root -> left);
+       int rightheight = minDepth(root -> right);
+       // if there is no left subtree
+       if (root -> left == NULL){
+           return rightheight + 1;
+       }
+       // if there is no right subtree
+       if(root -> right == NULL){
+        return leftheight + 1;
+       }
+       int ans = min(leftheight , rightheight) + 1;
+       return ans;
+    }
+};
