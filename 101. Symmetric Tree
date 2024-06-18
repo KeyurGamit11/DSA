@@ -1,0 +1,23 @@
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+#code:
+class Solution {
+private:
+   bool issymmetrichelp(TreeNode* left , TreeNode* right){
+      if(left == NULL || right == NULL){
+        return left == right;
+      }
+      // check for one subtree left side and one subtree right side (mirror)
+      if(left -> val != right -> val){
+        return false;
+      }
+      return issymmetrichelp(right -> right , left -> left) &&  // traversal like this if one subtree right then second subtree left
+             issymmetrichelp(left -> right , right -> left);
+      // simply one subtree traverse root -> left -> right and another subtree root -> right -> left
+   }
+public:
+    bool isSymmetric(TreeNode* root) {
+        return root == NULL ||
+        issymmetrichelp(root -> left , root -> right);
+    }
+};
