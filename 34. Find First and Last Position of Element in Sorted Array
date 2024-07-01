@@ -1,0 +1,55 @@
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+dry ryn with code for better understanding
+#code:
+class Solution {
+private:
+    int  FirstPosition(vector<int>& nums, int target , int n){
+        int first = -1;
+        int low =0;
+        int high = n-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(nums[mid] == target){
+                first = mid;
+                high = mid - 1; // we have to find first position so we have to move toward left 
+            }
+            else if(nums[mid] > target){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        return first;
+    }
+    int  LastPosition(vector<int>& nums, int target , int n){
+        int last = -1;
+        int low = 0;
+        int high = n-1;
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] == target){
+                last = mid;
+                low = mid + 1; // we have to find last position so we move to right side because its sorted
+            }
+            else if(nums[mid] > target){
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+       return last;
+    }
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+       int n = nums.size();
+       int  first = FirstPosition(nums,target,n);
+       if(first == -1){  // if first pos not found means there no target in array
+        return {-1,-1};
+       }
+        int last = LastPosition(nums ,target, n);
+        return {first,last};
+    }
+};
