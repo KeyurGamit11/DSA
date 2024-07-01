@@ -1,0 +1,26 @@
+Input: arr = [1,2,34,3,4,5,7,23,12]
+Output: true
+Explanation: [5,7,23] are three consecutive odds.
+#code:
+class Solution {
+private:
+    bool isodd(int n){ // function for checking odd
+        if(n%2 != 0){
+           return true;
+        }
+        return false;
+    }
+public:
+    bool threeConsecutiveOdds(vector<int>& arr) {
+        //edge case
+        if(arr.size() < 3){
+            return false;
+        }
+        for(int i=0; i<arr.size()-2; i++){         // loop run to arr.size()-2 because we have to check three conse
+            if(isodd(arr[i]) && isodd(arr[i+1]) && isodd(arr[i+2])){    // take consective 3 to check they are odd or not
+                return true;
+            }
+        }
+        return false;
+    }
+};
