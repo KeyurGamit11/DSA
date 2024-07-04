@@ -1,0 +1,43 @@
+Input: head = [0,3,1,0,4,5,2,0]
+Output: [4,11]
+Explanation: 
+The above figure represents the given linked list. The modified list contains
+- The sum of the nodes marked in green: 3 + 1 = 4.
+- The sum of the nodes marked in red: 4 + 5 + 2 = 11.
+#code:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeNodes(ListNode* head) {
+        ListNode* dummyNode = new ListNode(0);
+        ListNode* newcurr = dummyNode; // this will be pointed to new ls
+        ListNode* curr = head;
+
+        while(true){
+            int sum = 0;
+            while(curr -> next != NULL && curr -> next -> val != 0){
+                curr = curr -> next;
+                sum += curr -> val;
+            }
+            //after doing sum till 0 to 0
+            newcurr -> next = new ListNode(sum); // make new node value is sum
+            newcurr = newcurr -> next; //
+            curr = curr -> next;
+            if(curr -> next == NULL){
+                break; // for last 0
+            }
+        }
+        ListNode* newHead = dummyNode -> next;
+        delete(dummyNode);
+        return newHead;
+    }
+};
