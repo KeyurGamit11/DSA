@@ -1,0 +1,18 @@
+Input: n = 11
+Output: 3
+Explanation:
+The input binary string 1011 has a total of three set bits.
+#code:
+class Solution {
+public:
+    int hammingWeight(int n) {
+        int ans =0;
+        while(n){
+            if(n%2){ // if n cant devide we take 1 in binary
+                ans++;
+            }
+            n = n/2;
+        }
+        return ans;
+    }
+};
