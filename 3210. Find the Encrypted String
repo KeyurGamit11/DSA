@@ -1,0 +1,25 @@
+Input: s = "dart", k = 3
+Output: "tdar"
+Explanation:
+For i = 0, the 3rd character after 'd' is 't'.
+For i = 1, the 3rd character after 'a' is 'd'.
+For i = 2, the 3rd character after 'r' is 'a'.
+For i = 3, the 3rd character after 't' is 'r'.
+#code:
+class Solution {
+public:
+    string getEncryptedString(string s, int k) {
+       
+        int n = s.size();
+        k = k % n;
+        if(k==0){
+            return s;
+        }
+        string ans;
+        for(int i=0; i<n; i++){
+           int newpos = (i+k)%n;
+           ans += s[newpos];
+        }
+        return ans;;
+    }
+};
