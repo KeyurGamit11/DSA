@@ -1,0 +1,21 @@
+Input: logs = ["d1/","d2/","../","d21/","./"]
+Output: 2
+Explanation: Use this change folder operation "../" 2 times and go back to the main folder.
+#code:
+class Solution {
+public:
+    int minOperations(vector<string>& logs) {
+        int cnt = 0;
+        for(auto log : logs){
+            if(log == "../"){
+                if(cnt>0){
+                    cnt--;
+                }
+            }
+            else if(log != "./"){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
