@@ -1,0 +1,15 @@
+Input: n = 5
+Output: 10
+Explanation: The smallest multiple of both 5 and 2 is 10.
+#code:
+class Solution {
+public:
+    int smallestEvenMultiple(int n) {
+        if(n % 2 == 0){
+            return n; // if n is even smallest even is itself
+        }
+        else{
+            return n*2; // if n is odd smallest multiple is n*2
+        }
+    }
+};
