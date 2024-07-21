@@ -1,0 +1,27 @@
+Input: s = "leetcoder"
+Output: true
+Explanation:
+Alice can win the game as follows:
+Alice plays first, she can delete the underlined substring in s = "leetcoder" which contains 3 vowels. The resulting string is s = "der".
+Bob plays second, he can delete the underlined substring in s = "der" which contains 0 vowels. The resulting string is s = "er".
+Alice plays third, she can delete the whole string s = "er" which contains 1 vowel.
+Bob plays fourth, since the string is empty, there is no valid play for Bob. So Alice wins the game.
+#code:
+class Solution {
+public:
+    bool doesAliceWin(string s) {
+        //step is cnt vowels in s if there is vowel preset means alice means no matter how many vowels 
+        //if there is no vowels in s that only way bob can win
+        unordered_set<char> vowels = {'a','e','i','o','u'};
+        int cntofvowels =0;
+        for(auto c:s){
+            if (vowels.find(c) != vowels.end()){
+                cntofvowels++;
+            }
+        }
+        if(cntofvowels >= 1){
+            return true;
+        }
+        return false;
+    }
+};
