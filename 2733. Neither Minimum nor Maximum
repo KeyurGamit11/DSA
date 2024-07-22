@@ -1,0 +1,18 @@
+Input: nums = [3,2,1,4]
+Output: 2
+Explanation: In this example, the minimum value is 1 and the maximum value is 4. Therefore, either 2 or 3 can be valid answers.
+#step: simple que says that we have find mid in that array but..
+so ques is like we have to find value that is not maximum or min so if we sort array we get maxi and min number and we find mid and return it
+#code:
+class Solution {
+public:
+    int findNonMinOrMax(vector<int>& nums) {
+        sort(nums.begin() , nums.end());
+        int mid = nums.size()/2;
+        if(nums.size() > 2)
+               return nums[mid];
+        else
+             return -1;
+    }
+};
+ 
