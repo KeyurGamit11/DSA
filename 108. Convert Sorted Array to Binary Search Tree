@@ -1,0 +1,23 @@
+Example 1:
+Input: nums = [-10,-3,0,5,9]
+Output: [0,-3,9,-10,null,5]
+Explanation: [0,-10,5,null,-3,null,9] is also accepted:
+#code:
+class Solution {
+private:
+    TreeNode* help(vector<int>& nums , int start , int end){
+        //base case
+        if(start > end){
+            return NULL;
+        }
+        int mid = start + (end-start)/2; // finding mid
+        TreeNode *node= new TreeNode(nums[mid]); // mid take as root node
+        node -> left = help(nums,start,mid-1); //left subtree is start to mid-1
+        node -> right = help(nums,mid+1,end); //right subtree is mid+1 to end
+        return node;
+    }
+public:
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        return help(nums,0,nums.size()-1); 
+    }  
+};
