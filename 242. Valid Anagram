@@ -1,0 +1,12 @@
+Input: s = "anagram", t = "nagaram"
+Output: true
+#step: just simple sort s and t if they are anagram they both are same after sorting
+#code:
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin() , s.end());
+        sort(t.begin() , t.end());
+        return s == t;
+    }
+};
