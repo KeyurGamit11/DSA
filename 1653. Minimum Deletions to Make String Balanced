@@ -1,0 +1,23 @@
+Input: s = "aababbab"
+Output: 2
+Explanation: You can either:
+Delete the characters at 0-indexed positions 2 and 6 ("aababbab" -> "aaabbb"), or
+Delete the characters at 0-indexed positions 3 and 6 ("aababbab" -> "aabbbb").
+#code:
+class Solution {
+public:
+    int minimumDeletions(string s) {
+        stack<char>st;
+        int cnt=0;
+        for(int i=0; i<s.size(); i++){
+            if(!st.empty() && st.top() == 'b' && s[i] == 'a' ){
+                    st.pop();
+                    cnt++;
+            }
+            else{
+                st.push(s[i]);
+            }
+        }
+        return cnt;
+    }
+};
