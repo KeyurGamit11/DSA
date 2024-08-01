@@ -1,0 +1,22 @@
+Input: details = ["7868190130M7522","5303914400F9211","9273338290F4010"]
+Output: 2
+Explanation: The passengers at indices 0, 1, and 2 have ages 75, 92, and 40. Thus, there are 2 people who are over 60 years old.
+#hint:
+The age of the person at index i is equal to details[i][11]*10+details[i][12].
+#code:
+class Solution {
+public:
+    int countSeniors(vector<string>& details) {
+        int cnt=0;
+        for(int i=0; i<details.size(); i++){
+            int ageten = details[i][11] -'0'; // convert char to int val 
+            int ageone = details[i][12] -'0'; //convert char to int val 
+            int age = ageten*10 + ageone; // finding age 
+
+            if(age > 60){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
