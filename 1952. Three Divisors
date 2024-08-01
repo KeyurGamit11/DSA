@@ -1,0 +1,19 @@
+Input: n = 4
+Output: true
+Explantion: 4 has three divisors: 1, 2, and 4.
+#code:
+class Solution {
+public:
+    bool isThree(int n) {
+        int cnt=0;
+        for(int i=1; i<=n; i++){
+            if(n%i == 0){    //if we get 0 after mod that means we it is divisors
+                cnt++;
+            }
+        }
+        if(cnt == 3){
+            return true;
+        }
+        return false;
+    }
+};
