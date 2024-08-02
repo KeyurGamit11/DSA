@@ -1,0 +1,17 @@
+Input: s = "aaabbb"
+Output: true
+Explanation:
+The 'a's are at indices 0, 1, and 2, while the 'b's are at indices 3, 4, and 5.
+Hence, every 'a' appears before every 'b' and we return true
+#code:
+class Solution {
+public:
+    bool checkString(string s) {
+       for(int i=0; i<s.size(); i++){
+           if(s[i] == 'b' && s[i+1] == 'a'){ //just check if i is b so i+1 is a or not
+                return false;
+           }
+       }
+       return true;
+    }
+};
