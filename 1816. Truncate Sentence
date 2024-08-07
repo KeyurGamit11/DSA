@@ -1,0 +1,24 @@
+Input: s = "Hello how are you Contestant", k = 4
+Output: "Hello how are you"
+Explanation:
+The words in s are ["Hello", "how" "are", "you", "Contestant"].
+The first 4 words are ["Hello", "how", "are", "you"].
+Hence, you should return "Hello how are you".
+#code:
+class Solution {
+public:
+    string truncateSentence(string s, int k) {
+        int cnt=0;
+        string ans="";
+        for(auto str: s){
+            if(str == ' '){ // cnt space
+                cnt++;
+            }
+            if(cnt==k){ // if space cnt is equal to k break loop
+                break;
+            }
+            ans += str; //add in ans string
+        }
+        return ans;
+    }
+};
