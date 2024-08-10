@@ -1,0 +1,27 @@
+Input: s = "abbaca"
+Output: "ca"
+Explanation: 
+For example, in "abbaca" we could remove "bb" since the letters are adjacent and equal, and this is the only possible move.
+The result of this move is that the string is "aaca", of which only "aa" is possible, so the final string is "ca".
+#code:
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        stack<char>st;
+        string ans="";
+        for(auto c:s){
+            if( !st.empty() && c == st.top() ){ //check curr ch and st top char
+                st.pop();
+            }
+            else{
+                st.push(c);
+            }
+        }
+        while(!st.empty()){ //transfer st to string
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin() , ans.end()); //reverse str because its stack
+        return ans;
+    }
+};
