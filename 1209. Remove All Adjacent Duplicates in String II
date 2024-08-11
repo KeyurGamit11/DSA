@@ -1,0 +1,33 @@
+Input: s = "deeedbbcccbdaa", k = 3
+Output: "aa"
+Explanation: 
+First delete "eee" and "ccc", get "ddbbbdaa"
+Then delete "bbb", get "dddaa"
+Finally delete "ddd", get "aa"
+#code:
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        stack<pair<char,int>>st;
+
+        for(auto i:s){
+            if(!st.empty() && st.top().first == i){
+                st.top().second++; //means if char and i same then increase second(freq of char) 
+            }
+            else{
+                st.push({i,1}); // if not same store char and freq
+            }
+
+            if(st.top().second == k){
+                st.pop(); // if freq is equal to k pop it
+            }
+        }
+        string ans="";
+        while(!st.empty()){
+            ans.append(st.top().second , st.top().first);
+            st.pop();
+        }
+        reverse(ans.begin() , ans.end());
+        return ans;
+    }
+};
