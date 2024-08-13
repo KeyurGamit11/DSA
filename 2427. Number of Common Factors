@@ -1,0 +1,16 @@
+Input: a = 12, b = 6
+Output: 4
+Explanation: The common factors of 12 and 6 are 1, 2, 3, 6.
+#code:
+class Solution {
+public:
+    int commonFactors(int a, int b) {
+        int cnt=0;
+        for(int i=1; i<=max(a,b); i++){
+            if(a%i == 0 && b%i == 0){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
