@@ -1,0 +1,38 @@
+Input: nums = [12,345,2,6,7896]
+Output: 2
+Explanation: 
+12 contains 2 digits (even number of digits). 
+345 contains 3 digits (odd number of digits). 
+2 contains 1 digit (odd number of digits). 
+6 contains 1 digit (odd number of digits). 
+7896 contains 4 digits (even number of digits). 
+Therefore only 12 and 7896 contain an even number of digits.
+#just make fun that count digit is odd or even
+#code:
+class Solution {
+private:
+    bool EvenDigit(int n){
+        int DigitCount=0;
+        while(n){
+            int digit = n%10;
+            DigitCount++; //cnt total digit in num
+            n = n /10;
+        }
+        if(DigitCount % 2 == 0){ //if digit md=od by 2 means even
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+public:
+    int findNumbers(vector<int>& nums) {
+        int cnt=0;
+        for(int i=0; i<nums.size(); i++){
+            if(EvenDigit(nums[i])){ // function that count digit is even or odd
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
