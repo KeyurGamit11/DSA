@@ -1,0 +1,30 @@
+T0 = 0, T1 = 1, T2 = 1, and Tn+3 = Tn + Tn+1 + Tn+2 for n >= 0.
+Example 1:
+Input: n = 4
+Output: 4
+Explanation:
+T_3 = 0 + 1 + 1 = 2
+T_4 = 1 + 1 + 2 = 4
+#we are using dp here
+#code:
+class Solution {
+private:
+    int recursion(int n , vector<int>& dp){
+        //base case
+        if(n == 0) return 0;
+        if(n==1 || n==2) return 1;
+        
+        if(dp[n] != -1){
+            return dp[n];
+        }
+
+        //recursive call
+         dp[n] = recursion(n-3,dp) + recursion(n-2,dp) + recursion(n-1,dp);
+         return dp[n];
+    }
+public:
+    int tribonacci(int n) {
+        vector<int>dp(n+1,-1);
+        return recursion(n,dp);
+    }
+};
