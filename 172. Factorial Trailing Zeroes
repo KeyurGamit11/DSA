@@ -1,0 +1,16 @@
+Input: n = 5
+Output: 1
+Explanation: 5! = 120, one trailing zero.
+#code:
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        //we only check 5 multiply only 5,10,15 ..... like
+        
+        int five=0;
+        for(int i=5; i<=n; i *= 5){
+             five += n/i;
+        }
+        return five;
+    }
+};
