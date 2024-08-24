@@ -1,0 +1,25 @@
+Input: n = 3
+Output: 0
+Explanation: 3! = 6, no trailing zero.
+#code;
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        long long factorial=1;
+        int zerocnt=0;
+        for(int i=1; i<=n; i++){
+             factorial *= i;
+        }
+        while(factorial){
+            int digit = factorial%10;
+            if(digit == 0){
+                zerocnt++;
+            }
+            else{
+                break;
+            }
+            factorial /= 10;
+        }
+        return zerocnt;
+    }
+};
