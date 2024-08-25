@@ -1,0 +1,26 @@
+Input: cost = [10,15,20]
+Output: 15
+Explanation: You will start at index 1.
+- Pay 15 and climb two steps to reach the top.
+The total cost is 15.
+#code:
+class Solution {
+private:
+    int solve(vector<int>& cost , int n,vector<int>&dp){
+        //base case
+        if(n==0) return cost[0];
+        if(n==1) return cost[1];
+
+        if(dp[n] != -1) return dp[n];
+        int onejump = solve(cost,n-1,dp); //you can make one just here
+        int twojump = solve(cost , n-2,dp); //you can make two jump here
+        dp[n] =cost[n] + min(onejump , twojump); //take min of both them
+        return dp[n];
+    }
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n= cost.size();
+        vector<int>dp(n+1,-1);
+        return min(solve(cost , n-1,dp) , solve(cost,n-2,dp));
+    }
+};
