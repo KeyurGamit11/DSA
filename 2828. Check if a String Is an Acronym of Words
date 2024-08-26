@@ -1,0 +1,19 @@
+Input: words = ["alice","bob","charlie"], s = "abc"
+Output: true
+Explanation: The first character in the words "alice", "bob", and "charlie" are 'a', 'b', and 'c', respectively. Hence, s = "abc" is the acronym. 
+#code:
+class Solution {
+public:
+    bool isAcronym(vector<string>& words, string s) {
+        string ans="";
+        for(int i=0; i<words.size(); i++){
+            int c = words[i][0]; //first char of every str
+            ans += c;
+        }
+        if(ans == s){
+            return true;
+        }else{
+        return false;
+        }
+    }
+};
