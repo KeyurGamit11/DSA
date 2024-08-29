@@ -1,0 +1,23 @@
+Input: n = 5, bad = 4
+Output: 4
+Explanation:
+call isBadVersion(3) -> false
+call isBadVersion(5) -> true
+call isBadVersion(4) -> true
+Then 4 is the first bad version.
+t.c is o(n) so we optimaze it by using binary search
+#code:
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        for(int i=0; i<=n; i++){
+            if(isBadVersion(i)){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
