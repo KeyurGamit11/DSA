@@ -1,0 +1,23 @@
+Input: num = "35427"
+Output: "35427"
+Explanation: "35427" is already an odd number.
+Input: num = "52"
+Output: "5"
+Explanation: The only non-empty substrings are "5", "2", and "52". "5" is the only odd number.
+#step: so we start bfor right side from n-1 and find first odd number  so from 0 ind to first from n-1 ind odd is our biggest odd number look at example for better understandong
+#code:
+class Solution {
+public:
+    string largestOddNumber(string num) {
+       
+        int n = num.size();
+        int ind=-1;
+        for(int i=n-1; i>=0; i--){
+            if(num[i] % 2 != 0){
+                ind = i;
+                break;
+            }
+        }
+        return num.substr(0,ind+1);
+    }
+};
