@@ -1,0 +1,24 @@
+Input: moves = "L_RL__R"
+Output: 3
+Explanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves "LLRLLLR".
+#code:
+class Solution {
+public:
+    int furthestDistanceFromOrigin(string moves) {
+        int cnt=0;
+        int Rcnt=0;
+        int Lcnt=0;
+        for(int i=0; i<moves.size(); i++){
+            if(moves[i] == '_'){
+                cnt++;
+            }
+            if(moves[i] == 'L'){
+                Lcnt++;
+            }
+            if(moves[i] == 'R'){
+                Rcnt++;
+            }
+        }
+        return abs(Rcnt - Lcnt)+cnt;
+    }
+};
