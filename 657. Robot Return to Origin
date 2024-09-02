@@ -1,0 +1,24 @@
+Input: moves = "UD"
+Output: true
+Explanation: The robot moves up once, and then down once. All moves have the same magnitude, so it ended up at the origin where it started. Therefore, we return true.
+#step: simply just check if he goes left he should also go to right like that up and down
+#code:
+class Solution {
+public:
+    bool judgeCircle(string moves) {
+        int Ucnt=0;
+        int Dcnt=0;
+        int Lcnt=0;
+        int Rcnt=0;
+        for(int i=0; i<moves.size(); i++){
+            if(moves[i] == 'U') Ucnt++;
+            if(moves[i] == 'D') Dcnt++;
+            if(moves[i] == 'L') Lcnt++;
+            if(moves[i] == 'R') Rcnt++;
+        }
+        if((Ucnt-Dcnt)==0 && (Rcnt-Lcnt)==0){
+            return true;
+        }
+       return false;
+    }
+};
