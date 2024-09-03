@@ -1,0 +1,30 @@
+Input: s = "iiii", k = 1
+Output: 36
+Explanation: The operations are as follows:
+- Convert: "iiii" ➝ "(9)(9)(9)(9)" ➝ "9999" ➝ 9999
+- Transform #1: 9999 ➝ 9 + 9 + 9 + 9 ➝ 36
+Thus the resulting integer is 36.
+#code:
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        string ans="";
+        for(int i=0; i<s.length(); i++){
+            ans += to_string(s[i]-'a'+1); //convert a into 1 and all
+        }
+        int sum = 0;
+        for(int i=0; i<ans.length(); i++){
+            sum += ans[i]-'0';
+        }
+        for(int i=1; i<k; i++){
+            int newsum =0;  //new sum that only for one time
+            while(sum){
+                int digit=sum%10;
+                newsum += digit;
+                sum /=10;
+            }
+            sum = newsum;  //here sum  is total sum k time newsum
+        }
+        return sum;
+    }
+};
