@@ -1,0 +1,30 @@
+Input: chalk = [5,1,5], k = 22
+Output: 0
+Explanation: The students go in turns as follows:
+- Student number 0 uses 5 chalk, so k = 17.
+- Student number 1 uses 1 chalk, so k = 16.
+- Student number 2 uses 5 chalk, so k = 11.
+- Student number 0 uses 5 chalk, so k = 6.
+- Student number 1 uses 1 chalk, so k = 5.
+- Student number 2 uses 5 chalk, so k = 0.
+Student number 0 does not have enough chalk, so they will have to replace it.
+#code:
+class Solution {
+public:
+    int chalkReplacer(vector<int>& chalk, int k) {
+        long long sum=0;
+        for(int i=0; i<chalk.size(); i++){
+            sum += chalk[i];  //total sum of chalk
+        }
+        
+        k = k%sum; // it take care that i not goes to outof the bond of one cycle or than it start from 0
+        for(int i=0; i<chalk.size(); i++){
+            
+            if(chalk[i] > k){
+                return i;
+            }
+            k -= chalk[i]; //subtract chalk from k
+        }
+        return 0; //this will never execute
+    }
+};
