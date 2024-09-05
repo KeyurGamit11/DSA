@@ -1,0 +1,21 @@
+Input: num = 28
+Output: true
+Explanation: 28 = 1 + 2 + 4 + 7 + 14
+1, 2, 4, 7, and 14 are all divisors of 28.
+#code:
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        vector<int>ans;
+        for(int i=1; i<num; i++){
+            if(num%i == 0){ //this means i is devisor of num
+                ans.push_back(i); 
+            }
+        }
+        int sum=0;
+        for(int i=0; i<ans.size(); i++){
+            sum += ans[i]; //sum of all devisor
+        }
+        return sum == num;
+    }
+};
