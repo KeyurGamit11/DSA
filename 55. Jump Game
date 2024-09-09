@@ -1,0 +1,18 @@
+Input: nums = [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+#we couont ind + ind val , if we get maxind is more than arr size than we can go to last ind
+#code:
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int n=nums.size();
+         int maxind =0;
+        for(int i=0; i<n; i++){
+            
+            if(i>maxind) return false;
+            maxind = max(maxind , i+nums[i]); //take max everytime ind + ind val and store in maxind
+        }
+        return true;
+    }
+};
