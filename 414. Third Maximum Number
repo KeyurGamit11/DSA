@@ -1,0 +1,20 @@
+Input: nums = [3,2,1]
+Output: 1
+Explanation:
+The first distinct maximum is 3.
+The second distinct maximum is 2.
+The third distinct maximum is 1.
+#code:
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        set<int>st(nums.begin(),nums.end());
+        if(st.size()<3){
+            return *st.rbegin(); //return maximum
+        }
+         // Otherwise, return the third maximum
+        auto it=st.rbegin();  // Reverse iterator for the set (starts from largest)
+        advance(it,2); // Move the iterator to the 3rd element
+        return *it;   
+    }
+};
