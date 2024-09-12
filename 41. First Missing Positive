@@ -1,0 +1,22 @@
+Input: nums = [3,4,-1,1]
+Output: 2
+Explanation: 1 is in the array but 2 is missing.
+#code:
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+        for (int i = 0; i < nums.size(); i++) {
+            while (nums[i] > 0 && nums[i] <= n &&
+                   nums[i] != nums[nums[i] - 1]) {
+                swap(nums[i], nums[nums[i] - 1]); //swap all element so it become in order
+            }
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return n + 1;
+    }
+};
