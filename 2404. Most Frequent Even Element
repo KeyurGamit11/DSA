@@ -1,0 +1,26 @@
+Input: nums = [0,1,2,2,4,4,1]
+Output: 2
+Explanation:
+The even elements are 0, 2, and 4. Of these, 2 and 4 appear the most.
+We return the smallest one, which is 2.
+#code:
+class Solution {
+public:
+    int mostFrequentEven(vector<int>& nums) {
+        unordered_map<int,int>cnt;
+        for(auto i:nums){
+            cnt[i]++;
+        }
+        int maxcnt=0;
+        int mostfrq =-1;
+        for(auto& it:cnt){
+            if(it.first % 2==0){
+                if(it.second > maxcnt || (it.second==maxcnt&&it.first<mostfrq)){
+                    mostfrq=it.first;
+                    maxcnt=it.second;
+                }
+            }
+        }
+        return mostfrq;
+    }
+};
