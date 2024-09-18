@@ -1,0 +1,30 @@
+Input: nums = [10,2]
+Output: "210"
+#code:
+class Solution {
+    static bool compare(int a , int b){
+        string a1 = to_string(a);
+        string b1 = to_string(b);
+
+        //custome compare to check which concaration is large
+        if((a1+b1) > (b1+a1)){
+            return true;
+        }
+        return false;
+    }
+public:
+    string largestNumber(vector<int>& nums) {
+        //sort using custom comparator
+        sort(nums.begin(),nums.end(), compare);
+        
+        //if largest num after sorting is 0 return 0
+        if(nums[0]==0){
+            return "0";
+        }
+        string ans="";
+        for(int num:nums){
+            ans += to_string(num);
+        }
+        return ans;
+    }
+};
