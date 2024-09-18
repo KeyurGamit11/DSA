@@ -1,0 +1,28 @@
+Example 1:
+Input: n = 5
+Output: 2
+Explanation: Because the 3rd row is incomplete, we return 2.
+#code:
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        int i=0;
+        int j=n;
+        int ans=0;
+        while(i<=j){
+            int mid=i+(j-i)/2;
+            long long row = (long long)mid*(mid+1)/2;
+            if(row == n){
+               return mid;
+            }
+            else if(row > n){
+                j=mid-1;
+            }
+            else{
+                ans = mid;
+                i=mid+1;
+            }
+        }
+        return ans;
+    }
+};
