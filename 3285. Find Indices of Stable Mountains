@@ -1,0 +1,19 @@
+Input: height = [1,2,3,4,5], threshold = 2
+Output: [3,4]
+Explanation:
+Mountain 3 is stable because height[2] == 3 is greater than threshold == 2.
+Mountain 4 is stable because height[3] == 4 is greater than threshold == 2
+#code:
+class Solution {
+public:
+    vector<int> stableMountains(vector<int>& height, int threshold) {
+        vector<int>ans;
+        int n=height.size();
+        for(int i=0; i<n-1; i++){
+            if(height[i] > threshold){
+                ans.push_back(i+1);
+            }
+        }
+        return ans;
+    }
+};
