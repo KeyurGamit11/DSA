@@ -1,0 +1,30 @@
+nums after all minimum 1
+Explanation:
+nums replacements, 4, 3, with [10,12,13,14]
+Output: 1. [1, = element Input: becomes 5]
+Note: Please do not copy the description during the contest to maintain the integrity of your submissions.
+#code:
+class Solution {
+private:
+   int sum(int n){
+     int ans=0;
+     while(n){
+        ans += n%10;
+        n /= 10;
+     }
+     return ans;
+   }
+public:
+    int minElement(vector<int>& nums) {
+       int mini=INT_MAX;
+       vector<int>digitsum;
+       for(int i=0; i<nums.size(); i++){
+           digitsum.push_back(sum(nums[i]));
+       }
+       for(int i=0; i<digitsum.size(); i++){
+         mini = min(mini , digitsum[i]);
+       }
+       return mini;
+
+    }
+};
