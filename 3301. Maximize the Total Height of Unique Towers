@@ -1,0 +1,26 @@
+Input: maximumHeight = [2,3,4,3]
+Output: 10
+Explanation:
+We can assign heights in the following way: [1, 2, 4, 3].
+#code:
+class Solution {
+#define ll long long
+public:
+    long long maximumTotalSum(vector<int>& maximumHeight) {
+        sort(maximumHeight.rbegin() , maximumHeight.rend()); //sort in desc
+        ll ans = 0;
+        int n = maximumHeight.size();
+        ll num = maximumHeight[0];
+        ans = num;
+        for(ll  i=1; i<n; i++){
+            num--;
+            num = min((ll)maximumHeight[i] , num);
+            if(num <= 0){
+                return -1;
+            }
+            ans += num;
+        }
+        return ans;
+        
+    }
+};
