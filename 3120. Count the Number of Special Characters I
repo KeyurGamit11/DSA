@@ -1,0 +1,26 @@
+Input: word = "aaAbcBC"
+Output: 3
+Explanation:
+The special characters in word are 'a', 'b', and 'c'.
+#code:
+class Solution {
+public:
+    int numberOfSpecialChars(string word) {
+        set<char>lower , upper;
+        for(auto ch:word){
+            if(islower(ch)){
+                lower.insert(ch);
+            }
+            else{
+                upper.insert(ch);
+            }
+        }
+        int specialchar =0;
+        for(char ch:lower){
+            if(upper.find(toupper(ch)) != upper.end()){
+                specialchar++;
+            }
+        }
+        return specialchar;
+    }
+};
