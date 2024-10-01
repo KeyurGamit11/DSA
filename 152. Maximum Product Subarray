@@ -1,0 +1,26 @@
+Input: nums = [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+#code:
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0) return 0;
+        int pref = 1;
+        int suff = 1;
+        int ans = INT_MIN;
+        for(int i=0; i<n; i++){
+            if(pref == 0){
+                pref = 1;
+            }
+            if(suff == 0){
+                suff = 1;
+            }
+            pref = pref * nums[i];
+            suff = suff * nums[n-i-1];
+            ans = max(ans , max(suff ,pref));
+        }
+        return ans;
+    }
+};
