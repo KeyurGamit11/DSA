@@ -1,0 +1,26 @@
+The student was absent ('A') for strictly fewer than 2 days total.
+The student was never late ('L') for 3 or more consecutive days.
+#code:
+Input: s = "PPALLP"
+Output: true
+Explanation: The student has fewer than 2 absences and was never late 3 or more consecutive days.
+#code:
+class Solution {
+public:
+    bool checkRecord(string s) {
+        int Lcnt=0;
+        int Acnt=0;
+        for(int i=0; i<s.length(); i++){
+            if(s[i] == 'A'){
+                Acnt++;
+            }
+        }
+        bool ch=(s.find("LLL") != -1);
+        
+        cout<<Acnt<<" "<<ch<<endl;
+        if(!ch && Acnt<=1){
+            return true;
+        }
+        return false;
+    }
+};
