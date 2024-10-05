@@ -1,0 +1,34 @@
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+#step: just do in comment and dry run for better understanding
+#code:
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int n=s1.length();
+        int m = s2.length();
+
+        vector<int>s1_freq(26,0);
+        vector<int>s2_freq(26,0);
+
+        for(auto ch:s1){
+            s1_freq[ch-'a']++; //take freq of s1 str
+        }
+        //now apply sliding window of s1 length
+        int i=0,j=0;
+        while(j < m){
+            s2_freq[s2[j]-'a']++;
+            
+            if(j-i+1 > n){ //means windo size is greater than s1 so we srink window by increment i
+                s2_freq[s2[i]-'a']--;//but first remove i frq
+                i++;
+            }
+            if(s1_freq == s2_freq){
+                return true;
+            }
+            j++; //j increment everytime
+        }
+        return false;
+    }
+};
