@@ -1,0 +1,20 @@
+Input: nums = [1,2,3]
+Output: 3
+Explanation: Only three moves are needed (remember each move increments two elements):
+[1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4]
+#step: find min and subtract all by min a plus all
+#code:
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        int mini = INT_MAX;
+        for(auto i:nums){
+            mini = min(i,mini);
+        }
+        int cnt=0;
+        for(int i=0; i<nums.size(); i++){
+            cnt += abs(mini - nums[i]);
+        }
+        return cnt;
+    }
+};
