@@ -1,0 +1,26 @@
+Input: s = "]]][[["
+Output: 2
+Explanation: You can do the following to make the string balanced:
+- Swap index 0 with index 4. s = "[]][][".
+- Swap index 1 with index 5. s = "[[][]]".
+The resulting string is "[[][]]".
+#step: so we remove all the valid parenthesis and put only '[' this in stack (if we remove all parenthesis it become ]]][[[ like that)
+after [ cnt this moves is (n+1)/2 , dry run this for better understanding
+#code:
+class Solution {
+public:
+    int minSwaps(string s) {
+        stack<char>st;
+        for(auto &ch:s){
+            if(!st.empty() && ch == ']' && st.top()=='['){ // valid parenth so we pop it
+                st.pop();
+            }
+            else if(ch == '['){
+                st.push(ch);
+            }
+        }
+        int n = st.size();
+       // cout<<n<<endl;
+        return (n+1)/2;
+    }
+};
