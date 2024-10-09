@@ -1,0 +1,20 @@
+Input: s = "())"
+Output: 1
+#step: we take stack if is valid parentheses we pop or we just put in stack 
+and total number of parentheses we need to add so we retunr stack size
+#code:
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+        stack<char> st;
+
+        for (auto ch : s) {
+            if (!st.empty() && ch == ')' && st.top() == '(') {
+                st.pop();
+            } else {
+                st.push(ch);
+            }
+        }
+        return st.size();
+    }
+};
