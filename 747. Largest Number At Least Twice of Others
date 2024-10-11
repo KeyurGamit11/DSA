@@ -1,0 +1,34 @@
+Input: nums = [3,6,1,0]
+Output: 1
+Explanation: 6 is the largest integer.
+For every other number in the array x, 6 is at least twice as big as x.
+The index of value 6 is 1, so we return 1.
+#code:
+class Solution {
+public:
+    int dominantIndex(vector<int>& nums) {
+        int mexi=INT_MIN;
+        int secmexi = INT_MIN;
+        int ind=0;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] > mexi){
+                mexi = nums[i];
+                ind = i;
+            }
+        }
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] != mexi){
+                secmexi = max(nums[i] , secmexi);
+            }
+        }
+        //cout<<ind<<endl;
+        //cout<<mexi<<" "<<secmexi<<endl;
+        if(secmexi ==0  || secmexi == 1) return ind;
+        if(mexi >= 2*secmexi){
+            return ind;
+        }
+        else{
+            return -1;
+        }
+    }
+};
