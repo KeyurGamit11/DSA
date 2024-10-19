@@ -1,0 +1,27 @@
+Input: s1 = "bank", s2 = "kanb"
+Output: true
+Explanation: For example, swap the first character with the last character of s2 to make "bank".
+#code:
+class Solution {
+public:
+    bool areAlmostEqual(string s1, string s2) {
+        if(s1==s2) return true;
+        string k=s1;
+        string p=s2;
+        sort(k.begin() , k.end());
+        sort(p.begin() , p.end());
+        if(k != p){
+            return false;
+        }
+        int cnt=0;
+        for(int i=0; i<s1.size(); i++){
+            if(s1[i] != s2[i]){
+                cnt++;
+            }
+        }
+        if(cnt<=2){
+            return true;
+        }
+        return false;
+    }
+};
