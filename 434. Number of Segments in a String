@@ -1,0 +1,17 @@
+Input: s = "Hello, my name is John"
+Output: 5
+Explanation: The five segments are ["Hello,", "my", "name", "is", "John"]
+#code:
+class Solution {
+public:
+    int countSegments(string s) {
+        
+        int cnt=0;
+        for(int i=0; i<s.size(); i++){
+           if(s[i] !=' ' && (i==0 || s[i-1] == ' ')){
+            cnt++;
+           }
+        }
+        return cnt;
+    }
+};
