@@ -1,0 +1,19 @@
+Input: nums = [2,5,6,9,10]
+Output: 2
+Explanation:
+The smallest number in nums is 2.
+The largest number in nums is 10.
+The greatest common divisor of 2 and 10 is 2.
+#code:
+class Solution {
+public:
+    int findGCD(vector<int>& nums) {
+        int mini = INT_MAX;
+        int maxi = INT_MIN;
+        for(auto &i:nums){
+            mini = min(i,mini);
+            maxi= max(i, maxi);
+        }
+        return __gcd(mini,maxi);
+    }
+};
