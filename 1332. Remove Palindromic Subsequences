@@ -1,0 +1,22 @@
+If it's empty sting, return 0;
+If it's palindrome, return 1;
+Otherwise, we need at least 2 operation.
+Input: s = "ababa"
+Output: 1
+Explanation: s is already a palindrome, so its entirety can be removed in a single step.
+#code:
+class Solution {
+public:
+    int removePalindromeSub(string s) {
+        int cnt=0;
+        int i=0,j=s.size()-1;
+        while(i<j){
+            if(s[i]!=s[j]){
+                return 2; //if not ot always take two moves
+            }
+            i++;
+            j--;
+        }
+        return 1;//means it is palindrome so e can remove it by 1 moves
+    }
+};
