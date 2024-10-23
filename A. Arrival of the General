@@ -1,0 +1,36 @@
+#Problem Link : https://codeforces.com/contest/144/problem/A
+#code:
+/**
+ *    author:  Keyur11
+ *    created: 23-10-24
+**/
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n;
+    cin>>n;
+    vector<int>a(n);
+    for(int i=0; i<n; i++){
+    	cin>>a[i];
+    }
+
+    int minind = 0, maxind = 0;
+    for (int i = 0; i < n; i++) {
+        if (a[i] > a[maxind]) {
+            maxind = i;
+        }
+        if (a[i] <= a[minind]) {
+            minind = i;
+        }
+    }
+    int ans = maxind +(n-1-minind);
+    if(maxind>minind){
+    	ans--; //means one less move min and max swap eachother
+    }
+    cout<<ans<<endl;
+    return 0;
+}
