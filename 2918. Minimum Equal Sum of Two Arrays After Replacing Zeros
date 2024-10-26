@@ -1,0 +1,40 @@
+Input: nums1 = [3,2,0,1,0], nums2 = [6,5,0]
+Output: 12
+Explanation: We can replace 0's in the following way:
+- Replace the two 0's in nums1 with the values 2 and 4. The resulting array is nums1 = [3,2,2,1,4].
+- Replace the 0 in nums2 with the value 1. The resulting array is nums2 = [6,5,1].
+Both arrays have an equal sum of 12. It can be shown that it is the minimum sum we can obtain.
+#code:
+class Solution {
+public:
+    long long minSum(vector<int>& nums1, vector<int>& nums2) {
+        long long sum1 = 0;
+        long long sum2 = 0;
+        int zcnt1 = 0;
+        int zcnt2 = 0;
+        for (int i = 0; i < nums1.size(); i++) {
+            sum1 += nums1[i];
+            if (nums1[i] == 0) {
+                zcnt1++;
+            }
+        }
+        for (int i = 0; i < nums2.size(); i++) {
+            sum2 += nums2[i];
+            if (nums2[i] == 0) {
+                zcnt2++;
+            }
+        }
+       // cout << sum1 << " " << sum2 << endl;
+        long long minsum1 = sum1+zcnt1;
+        long long minsum2 = sum2 + zcnt2;
+        if ( zcnt2==0 && minsum2 < minsum1) {
+            return -1;
+        } 
+        if(zcnt1==0 && minsum1 < minsum2){
+            return -1;
+        }
+        else {
+            return max(minsum1, minsum2);
+        }
+    }
+};
