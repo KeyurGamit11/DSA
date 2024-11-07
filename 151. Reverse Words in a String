@@ -1,0 +1,25 @@
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+#first reverse all , than take only one one word reverse it and ut in ans
+dry run for better understanding
+#code:
+class Solution {
+public:
+    string reverseWords(string s) {
+        int n=s.size();
+        reverse(s.begin(),s.end());
+        string ans="";
+        for(int i=0; i<n; i++){
+            string word="";
+            while(i < n && s[i] != ' '){
+                word += s[i]; //take every word in string
+                i++;
+            }
+            reverse(word.begin() , word.end()); 
+            if(word.size()>0){ //so it doesnt take space 
+                ans += " "+ word;
+            }
+        }
+        return ans.substr(1);
+    }
+};
