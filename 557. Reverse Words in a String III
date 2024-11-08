@@ -1,0 +1,20 @@
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+#code:
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans="";
+        int n=s.size();
+        for(int i=0; i<n; i++){
+            string word="";
+            while(i<n && s[i] != ' '){
+                word += s[i]; //take every word one by one and reverse it
+                i++;
+            }
+            reverse(word.begin() , word.end());
+            ans += word +" ";
+        }
+        return ans.substr(0,ans.size()-1);
+    }
+};
