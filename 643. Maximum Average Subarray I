@@ -1,0 +1,24 @@
+Input: nums = [1,12,-5,-6,50,3], k = 4
+Output: 12.75000
+Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+#code:
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double ans=0,maxi=INT_MIN,total=0;
+        int l=0,r=0;
+        int n=nums.size();
+        while(r<n){
+           total += nums[r];
+            
+            if(r-l+1 == k){ //means window reach to k element ,so we take avg and decrement leftmost and move forward
+                ans = total/k;
+                maxi = max(ans,maxi);
+                total -= nums[l];
+                l++;
+            }
+            r++;
+        }
+        return maxi;
+    }
+};
