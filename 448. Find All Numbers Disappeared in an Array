@@ -1,0 +1,20 @@
+Input: nums = [4,3,2,7,8,2,3,1]
+Output: [5,6]
+#code:
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int>ans;
+        int n=nums.size();
+        unordered_map<int,int>mp;
+        for(auto i:nums){
+            mp[i]++;
+        }
+        for(int i=1; i<=n; i++){
+            if(mp.find(i)==mp.end()){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
