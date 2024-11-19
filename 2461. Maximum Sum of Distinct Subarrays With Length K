@@ -1,0 +1,36 @@
+Input: nums = [1,5,4,2,9,9,9], k = 3
+Output: 15
+Explanation: The subarrays of nums with length 3 are:
+- [1,5,4] which meets the requirements and has a sum of 10.
+- [5,4,2] which meets the requirements and has a sum of 11.
+- [4,2,9] which meets the requirements and has a sum of 15.
+- [2,9,9] which does not meet the requirements because the element 9 is repeated.
+- [9,9,9] which does not meet the requirements because the element 9 is repeated.
+We return 15 because it is the maximum subarray sum of all the subarrays that meet the conditions
+#code:
+class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) {
+        long long r=0,l=0,max_sum=0,curr_sum=0;
+        int n=nums.size();
+        unordered_set<int>st;
+        while(r < n){
+            while(st.count(nums[r])){ //means duplicate found 
+                curr_sum -= nums[l];
+                st.erase(nums[l]);
+                l++; // l is increasing ,and erase val from st
+            }
+            curr_sum += nums[r];
+            st.insert(nums[r]); //curr r into sum and set
+
+            if(r-l+1 == k){ //means window found
+                max_sum = max(max_sum , curr_sum);
+                curr_sum -= nums[l];
+                st.erase(nums[l]);
+                l++; //after taking max we need strink window and erase j rom st
+            }
+            r++;
+        }
+        return max_sum;
+    }
+};
