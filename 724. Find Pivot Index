@@ -1,0 +1,26 @@
+Input: nums = [1,7,3,6,5,6]
+Output: 3
+Explanation:
+The pivot index is 3.
+Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11
+Right sum = nums[4] + nums[5] = 5 + 6 = 11
+#code:
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>rightsum(n,0),leftsum(n,0);
+        for(int i=1; i<nums.size(); i++){
+            leftsum[i] = leftsum[i-1]+nums[i-1];
+        }
+        for(int i=nums.size()-2; i>=0; i--){
+            rightsum[i] = rightsum[i+1] + nums[i+1];
+        }
+        for(int i=0; i<nums.size(); i++){
+            if(rightsum[i]==leftsum[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
