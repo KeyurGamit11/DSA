@@ -1,0 +1,21 @@
+Input: n = 12
+Output: true
+Explanation:
+Alice removes 10 stones on her first turn, leaving 2 stones for Bob.
+Bob cannot remove 9 stones, so Alice wins.
+#code:
+class Solution {
+public:
+    bool canAliceWin(int n) {
+        if(n<10) return false;
+        int i=10;
+        bool ch = false;
+        while(n>=i){
+            n -= i;
+            i--;
+            ch = !ch;
+        }
+        
+        return ch;
+    }
+};
