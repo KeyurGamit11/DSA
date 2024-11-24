@@ -1,0 +1,28 @@
+Input: nums = [3, -2, 1, 4], l = 2, r = 3
+Output: 1
+Explanation:
+The subarrays of length between l = 2 and r = 3 where the sum is greater than 0 are:
+[3, -2] with a sum of 1
+[1, 4] with a sum of 5
+[3, -2, 1] with a sum of 2
+[-2, 1, 4] with a sum of 3
+Out of these, the subarray [3, -2] has a sum of 1, which is the smallest positive sum. Hence, the answer is 1.
+#code:
+class Solution {
+public:
+    int minimumSumSubarray(vector<int>& nums, int l, int r) {
+        int mini = INT_MAX;
+        int n=nums.size();
+        for(int i=0; i<n; i++){
+            int sum=0;
+            for(int j=i; j<n; j++){
+                sum += nums[j];
+                if(j-i+1>=l && j-i+1<=r && sum > 0){
+                    mini = min(mini,sum);
+                }
+            }
+        }
+        if(mini != INT_MAX) return mini;
+        else return -1;
+    }
+};
