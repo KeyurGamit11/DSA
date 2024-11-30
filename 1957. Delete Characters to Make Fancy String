@@ -1,0 +1,25 @@
+Input: s = "leeetcode"
+Output: "leetcode"
+Explanation:
+Remove an 'e' from the first group of 'e's to create "leetcode".
+No three consecutive characters are equal, so return "leetcode".
+#code:
+class Solution {
+public:
+    string makeFancyString(string s) {
+        int cnt=0;
+        string ans="";
+        for(int i=0; i<s.size(); i++){
+            if(i> 0 && s[i]==s[i-1]){
+                cnt++;
+            }
+            else{
+                cnt=1;
+            }
+            if(cnt<3){
+                ans += s[i];
+            }
+        }
+        return ans;
+    }
+};
