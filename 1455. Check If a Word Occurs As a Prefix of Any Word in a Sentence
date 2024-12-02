@@ -1,0 +1,21 @@
+Input: sentence = "i love eating burger", searchWord = "burg"
+Output: 4
+Explanation: "burg" is prefix of "burger" which is the 4th word in the sentence.
+#Split sentence into word anf then find
+#code:
+class Solution {
+public:
+    int isPrefixOfWord(string sentence, string searchWord) {
+        //split sentece into words
+        istringstream iss(sentence);
+        string word="";
+        int i=0;
+        while(iss >> word){
+            if(word.find(searchWord)==0){ // after split , use find fun for searchword
+                return i+1;
+            }
+            i++;
+        }
+        return -1;
+    }
+};
