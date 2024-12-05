@@ -1,0 +1,30 @@
+Input: start = "_L__R__R_", target = "L______RR"
+Output: true
+Explanation: We can obtain the string target from start by doing the following moves:
+- Move the first piece one step to the left, start becomes equal to "L___R__R_".
+- Move the last piece one step to the right, start becomes equal to "L___R___R".
+- Move the second piece three steps to the right, start becomes equal to "L______RR".
+Since it is possible to get the string target from start, we return true.
+#code:
+class Solution {
+public:
+    bool canChange(string start, string target) {
+        int n=start.size();
+        int sid=0,tid=0;
+        while(sid<n || tid<n){
+            while(sid<n && start[sid] == '_') sid++; //if we get "_" simply move
+            while(tid<n && target[tid] =='_') tid++; //same for target str
+
+            if(sid==n && tid==n) return true; //means both reach to end
+            if(sid==n || tid==n) return false; // means one str not reach to end so there is one diff
+
+            if((start[sid] != target[tid]) || (start[sid]=='L'&& sid < tid) ||
+            (start[sid]=='R' && sid>tid)){ //look at eg. do observation
+                return false;
+            }
+            sid++;
+            tid++;
+        }
+        return true;
+    }
+};
