@@ -1,0 +1,29 @@
+Input: nums = [3,6,2,7,1], k = 6
+Output: 4
+Explanation: The subarrays of nums where 6 is the least common multiple of all the subarray's elements are:
+- [3,6,2,7,1]
+- [3,6,2,7,1]
+- [3,6,2,7,1]
+- [3,6,2,7,1]
+#code:
+class Solution {
+private: 
+    
+public:
+    int subarrayLCM(vector<int>& nums, int k) {
+        int cnt=0;
+        for(int i=0; i<nums.size(); i++){
+            int ans=1;
+            for(int j=i; j<nums.size(); j++){
+                ans = lcm(nums[j] , ans);
+                if(ans==k){
+                    cnt++;
+                }
+                else if(ans>k){
+                    break;
+                }
+            }
+        }
+        return cnt;
+    }
+};
