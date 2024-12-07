@@ -1,0 +1,25 @@
+Input: nums = [9,3,1,2,6,3], k = 3
+Output: 4
+Explanation: The subarrays of nums where 3 is the greatest common divisor of all the subarray's elements are:
+- [9,3,1,2,6,3]
+- [9,3,1,2,6,3]
+- [9,3,1,2,6,3]
+- [9,3,1,2,6,3]
+#code:
+class Solution {
+public:
+    int subarrayGCD(vector<int>& nums, int k) {
+        int n=nums.size();
+        int cnt=0;
+        for(int i=0; i<n; i++){
+            int ans=0;
+            for(int j=i; j<n; j++){
+                ans = __gcd(nums[j],ans);
+                if(ans==k){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+};
