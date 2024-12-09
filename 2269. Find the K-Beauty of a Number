@@ -1,0 +1,32 @@
+Input: num = 240, k = 2
+Output: 2
+Explanation: The following are the substrings of num of length k:
+- "24" from "240": 24 is a divisor of 240.
+- "40" from "240": 40 is a divisor of 240.
+Therefore, the k-beauty is 2.
+#code:
+class Solution {
+public:
+    int divisorSubstrings(int num, int k) {
+        string s = to_string(num);
+        int l=0,r=0;
+        string total="";
+        int n=s.size();
+        int cnt=0;
+        while(r<n){
+            total +=s[r];
+           
+            if(r-l+1==k){
+                int ans = stoi(total);
+                if(ans != 0 &&num%ans==0){
+                   // cout<<ans<<"\n";
+                    cnt++;
+                }
+                total.erase(0,1);
+                l++;
+            }
+            r++;
+        }
+        return cnt;
+    }
+};
