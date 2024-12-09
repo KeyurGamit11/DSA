@@ -1,0 +1,27 @@
+Input: n = 10
+Output: [[3,7],[5,5]]
+Explanation: In this example, there are two prime pairs that satisfy the criteria. 
+These pairs are [3,7] and [5,5], and we return them in the sorted order as described in the problem statement.
+#code:
+class Solution {
+public:
+    vector<vector<int>> findPrimePairs(int n) {
+        vector<vector<int>>ans;
+        //pre-compute all prime using sieve of eratosthenes
+        vector<bool>primes(n+1,true);
+        primes[0]=primes[1]=false;
+        for(int i=2; i*i<=n; i++){
+            if(primes[i]){
+                for(int j=i*i; j<=n; j+=i){
+                    primes[j]=false;
+                }
+            }
+        }
+        for(int i=0; i<=n/2; i++){
+            if(primes[i]&&primes[n-i]){ //means for 10 , 3 is prime than check 10-3=7 also prime so add into ans
+                ans.push_back({i,n-i});
+            }
+        }
+        return ans;
+    }
+};
