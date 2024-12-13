@@ -1,0 +1,21 @@
+Input: nums = [3,2,3]
+Output: [3]
+#just use map in count freq of all element and take n/3 freq or more than this element
+#code:
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        unordered_map<int,int>freq;
+        vector<int>ans;
+        int n=nums.size();
+        for(auto &i:nums){
+            freq[i]++;
+        }
+        for(auto &i:freq){
+            if(i.second > n/3){
+                ans.push_back(i.first);
+            }
+        }
+        return ans;
+    }
+};
