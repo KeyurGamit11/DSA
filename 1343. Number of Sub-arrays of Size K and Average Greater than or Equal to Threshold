@@ -1,0 +1,25 @@
+Input: arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+Output: 3
+Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).
+#code:
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+        int l=0,r=0,avg=0,total=0;
+        int n=arr.size(),cnt=0;
+        while(r<n){
+            total += arr[r];
+            if(r-l+1>k){
+                total -= arr[l];
+                l++;
+            }
+            if(r-l+1==k && total/k>=threshold){
+                cnt++;
+                total -= arr[l];
+                l++;
+            }
+            r++;
+        }
+        return cnt;
+    }
+};
