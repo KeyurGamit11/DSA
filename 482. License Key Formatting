@@ -1,0 +1,26 @@
+Input: s = "5F3Z-2e-9-w", k = 4
+Output: "5F3Z-2E9W"
+Explanation: The string s has been split into two parts, each part has 4 characters.
+Note that the two extra dashes are not needed and can be removed.
+#code:
+class Solution {
+public:
+    string licenseKeyFormatting(string s, int k) {
+        string ans="";
+        for(int i=0; i<s.size(); i++){
+            if(s[i] != '-')
+                ans += toupper(s[i]);
+        }
+        //cout<<ans<<"\n";
+        reverse(ans.begin(),ans.end());
+        string p="";
+        for(int i=0; i<ans.size(); i++){
+            if(i>0 && i%k==0){
+                p += '-';
+            }
+            p+=ans[i];
+        }
+        reverse(p.begin(),p.end());
+        return p;
+    }
+};
