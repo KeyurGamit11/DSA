@@ -1,0 +1,38 @@
+Input: nums = [4,1,2,3]
+Output: [2,3,4,1]
+Explanation: 
+First, we sort the values present at odd indices (1 and 3) in non-increasing order.
+So, nums changes from [4,1,2,3] to [4,3,2,1].
+Next, we sort the values present at even indices (0 and 2) in non-decreasing order.
+So, nums changes from [4,1,2,3] to [2,3,4,1].
+Thus, the array formed after rearranging the values is [2,3,4,1].
+#code:
+class Solution {
+public:
+    vector<int> sortEvenOdd(vector<int>& nums) {
+        vector<int>Odd,Even;
+        for(int i=0; i<nums.size(); i++){
+            if(i%2==0){
+                Even.push_back(nums[i]);
+            }
+            else{
+                Odd.push_back(nums[i]);
+            }
+        }
+        sort(Even.begin(),Even.end());
+        sort(Odd.rbegin(),Odd.rend());
+        vector<int>ans;
+        int j=0,k=0;
+        for(int i=0; i<nums.size(); i++){
+            if(i%2==0){
+                ans.push_back(Even[j]);
+                j++;
+            }
+            else{
+                ans.push_back(Odd[k]);
+                k++;
+            }
+        }
+        return ans;
+    }
+};
