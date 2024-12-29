@@ -1,0 +1,24 @@
+Input: mainTank = 5, additionalTank = 10
+Output: 60
+Explanation: 
+After spending 5 litre of fuel, fuel remaining is (5 - 5 + 1) = 1 litre and distance traveled is 50km.
+After spending another 1 litre of fuel, no fuel gets injected in the main tank and the main tank becomes empty.
+Total distance traveled is 60km.
+#code:
+class Solution {
+public:
+    int distanceTraveled(int mainTank, int additionalTank) {
+        int ans = 0;
+        while (mainTank >= 1) {
+
+            ans++;
+            mainTank--;
+            if (ans % 5 == 0 && additionalTank > 0) {
+
+                additionalTank--;
+                mainTank++;
+            }
+        }
+        return (ans) * 10;
+    }
+};
