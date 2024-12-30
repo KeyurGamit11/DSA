@@ -1,0 +1,18 @@
+Input: s = "xyzzaz"
+Output: 1
+Explanation: There are 4 substrings of size 3: "xyz", "yzz", "zza", and "zaz". 
+The only good substring of length 3 is "xyz".
+#code:
+class Solution {
+public:
+    int countGoodSubstrings(string s) {
+        int cnt=0;
+        int n=s.size();
+        for(int i=0; i<=n-3; i++){
+            if(s[i] != s[i+1] && s[i+1] != s[i+2] && s[i] != s[i+2]){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
