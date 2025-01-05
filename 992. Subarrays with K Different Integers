@@ -1,0 +1,31 @@
+Input: nums = [1,2,1,2,3], k = 2
+Output: 7
+Explanation: Subarrays formed with exactly 2 different integers: [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2]
+#code:
+class Solution {
+private:
+    int solve(vector<int>& nums, int k){
+         int l=0,r=0,ans=0;
+        int n=nums.size();
+        unordered_map<int,int>mp;
+        while(r<n){
+            mp[nums[r]]++;
+            while(mp.size()>k){
+                mp[nums[l]]--;
+                if(mp[nums[l]]==0){
+                    mp.erase(nums[l]);
+                }
+                l++;
+            }
+            ans += (r-l+1);
+            r++;
+        }
+        return ans;
+    }
+public:
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+       int ans1 = solve(nums,k); //find <=k and <=k-1 and subtract them thats out ans
+       int ans2= solve(nums,k-1);
+       return ans1-ans2;
+    }
+};
