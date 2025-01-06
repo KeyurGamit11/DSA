@@ -1,0 +1,31 @@
+Input: s = "abciiidef", k = 3
+Output: 3
+Explanation: The substring "iii" contains 3 vowel letters.
+#code:
+class Solution {
+private:
+bool isVowel(char c){
+    return c=='a' || c=='e' || c=='i' || c=='o' || c=='u';
+}
+public:
+    int maxVowels(string s, int k) {
+        int ans=0,l=0,r=0,cnt=0;
+        int n=s.size();
+        while(r<n){
+            if(isVowel(s[r])){
+                cnt++;
+            }
+            if(r-l+1>k){
+                if(isVowel(s[l])){
+                    cnt--;
+                }
+                l++;
+            }
+            if(r-l+1==k){
+                ans = max(cnt,ans);
+            }
+            r++;
+        }
+        return ans;
+    }
+};
