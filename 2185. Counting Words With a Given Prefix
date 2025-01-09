@@ -1,0 +1,28 @@
+Input: words = ["pay","attention","practice","attend"], pref = "at"
+Output: 2
+Explanation: The 2 strings that contain "at" as a prefix are: "attention" and "attend".
+#code:
+class Solution {
+private:
+    bool isPrefix(string s , string& pref){
+        
+        for(int i=0; i<pref.size(); i++){
+            if(s[i] != pref[i]){
+                return false;
+                
+                break;
+            }
+        }     
+        return true;
+    }
+public:
+    int prefixCount(vector<string>& words, string pref) {
+        int cnt=0;
+        for(int i=0; i<words.size(); i++){
+            if(isPrefix(words[i] , pref)){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
