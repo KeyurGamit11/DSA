@@ -1,0 +1,56 @@
+Input: answerKey = "TTFF", k = 2
+Output: 4
+Explanation: We can replace both the 'F's with 'T's to make answerKey = "TTTT".
+There are four consecutive 'T's.
+#step: we just need to found maximum of T consective with k and F consective with k
+#in this code we can also do like in fun pass true or false  so we dont need to write fun for both 
+#code:
+class Solution {
+private:
+    int Total_False(string s, int k){
+        int l=0,r=0,ans=0,cnt=0;
+        int n=s.size();
+        while(r < n){
+            if(s[r]=='T'){
+                cnt++;
+            }
+            if(cnt<=k){
+                ans = max(ans , r-l+1);
+            }
+            if(cnt>k){
+                if(s[l]=='T'){
+                    cnt--;
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+    int Total_True(string s, int k){
+        int l=0,r=0,ans=0,cnt=0;
+        int n=s.size();
+        while(r < n){
+            if(s[r]=='F'){
+                cnt++;
+            }
+            if(cnt<=k){
+                ans = max(ans , r-l+1);
+            }
+            if(cnt>k){
+                if(s[l]=='F'){
+                    cnt--;
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+public:
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        int ans1 = Total_True(answerKey , k); //cnt of consective true with k false
+        int ans2 = Total_False(answerKey , k); // cnt of consective false with k true
+        return max(ans1,ans2); //ans maximu of both 
+    }
+};
