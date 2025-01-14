@@ -1,0 +1,33 @@
+Input: nums = [2,6,7,3,1,7], m = 3, k = 4
+Output: 18
+Explanation: There are 3 almost unique subarrays of size k = 4. These subarrays are [2, 6, 7, 3], [6, 7, 3, 1], and [7, 3, 1, 7].
+Among these subarrays, the one with the maximum sum is [2, 6, 7, 3] which has a sum of 18.
+#code:
+class Solution {
+public:
+    long long maxSum(vector<int>& nums, int m, int k) {
+        long long r=0,l=0,sum=0,ans=0;
+        int n = nums.size();
+        unordered_map<int,int>mp;
+        while(r < n){
+            mp[nums[r]]++;
+            sum += nums[r];
+            if(r-l+1>k){ //when window size is  > k shrink window 
+                mp[nums[l]]--;
+                if(mp[nums[l]]==0){
+                    mp.erase(nums[l]);
+                }
+                sum -= nums[l];
+                l++;
+            }
+            if(r-l+1==k){ //when window size == k ans distinct elem is >= m take sum 
+                if(mp.size() >= m){
+                    ans = max(ans,sum);
+                }
+            }
+            
+            r++;
+        }
+        return ans;
+    }
+};
