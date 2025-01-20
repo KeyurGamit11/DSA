@@ -1,0 +1,28 @@
+Input: n = 2
+Output: [0,1,1]
+Explanation:
+0 --> 0
+1 --> 1
+2 --> 10
+#code:
+class Solution {
+private:
+    int Count(int n){
+        int ans =0;
+        while(n){
+            if(n%2){
+                ans++;
+            }
+            n = n/2;
+        }
+        return ans;
+    }
+public:
+    vector<int> countBits(int n) {
+        vector<int>ans;
+        for(int i=0; i<=n; i++){
+            ans.push_back(Count(i));
+        }   
+        return ans;
+    }
+};
