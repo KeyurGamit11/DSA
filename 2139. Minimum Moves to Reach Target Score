@@ -1,0 +1,32 @@
+Input: target = 19, maxDoubles = 2
+Output: 7
+Explanation: Initially, x = 1
+Increment 3 times so x = 4
+Double once so x = 8
+Increment once so x = 9
+Double again so x = 18
+Increment once so x = 19
+#code:
+class Solution {
+public:
+    int minMoves(int target, int maxDoubles) {
+        int cnt=0;
+        
+        while(target != 1){
+            if(target % 2 == 0 && maxDoubles > 0){ //so start from target to make equal to 1
+                cnt++;
+                target /= 2;  //if target is even and we have maxDoubles we can use it most effective
+                maxDoubles--;
+            }
+            else if(target %2 !=0 && maxDoubles > 0){   // if target is odd but we have maxDoubles 
+                target--;       //so we can use it later so we just use first op , 
+                cnt++;
+            }
+            else{
+                cnt += target-1; //means we dont have maxDoubles so we can only use first op increment
+                break; //so we direct add all remaining target-1 and break loop
+            }
+        }
+        return cnt;
+    }
+};
