@@ -1,0 +1,29 @@
+Input: s = "(*))"
+Output: true
+#code:
+class Solution {
+public:
+    bool checkValidString(string s) {
+        
+        int n = s.size();
+        int leftMin=0,leftMax=0;
+        for(int i=0; i<s.size(); i++){
+            if(s[i] == '('){
+                leftMin++;
+                leftMax++;
+            }
+            else if(s[i] == ')'){
+                leftMin--; //here we can eliminate "(" with ")"
+                leftMax--;
+            }
+            else if(s[i] == '*'){
+                leftMin--; //if we found * this we can eliminate "(" with  
+                leftMax++;
+            }
+            if(leftMax < 0) return false; //if leftMax become negative return false
+            if(leftMin < 0) leftMin =0;
+        }
+        
+        return leftMin == 0;
+    }
+};
