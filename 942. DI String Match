@@ -1,0 +1,24 @@
+Input: s = "IDID"
+Output: [0,4,1,3,2]
+#code:
+class Solution {
+public:
+    vector<int> diStringMatch(string s) {
+        vector<int>ans;
+        int n=s.size();
+        int start=0,end=n;
+        for(int i=0; i<n; i++){
+            if(s[i]=='I'){
+                ans.push_back(start);
+                start++;
+            }
+            else{
+                ans.push_back(end); 
+                end--;
+            }
+        }
+        //cout<<end<<" "<<start<<"\n";
+        ans.push_back(start); //last element of prem or we can put end also
+        return ans;
+    }
+};
