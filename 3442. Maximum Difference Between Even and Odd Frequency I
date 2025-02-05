@@ -1,0 +1,30 @@
+Input: s = "aaaaabbc"
+Output: 3
+Explanation:
+The character 'a' has an odd frequency of 5, and 'b' has an even frequency of 2.
+The maximum difference is 5 - 2 = 3.
+#code:
+class Solution {
+public:
+    int maxDifference(string s) {
+        unordered_map<char,int>mp;
+        for(auto &ch:s){
+            mp[ch]++;
+        }
+        int max_odd_freq=0,min_even_freq=INT_MAX;
+        for(auto &i:mp){
+            int odd_freq=0,even_freq=INT_MAX;
+            if(i.second%2 != 0){
+                odd_freq=i.second;
+            }
+            else{
+                even_freq=i.second;
+            }
+            max_odd_freq = max(max_odd_freq , odd_freq);
+            min_even_freq = min(min_even_freq , even_freq);
+
+        }
+        //cout<<max_odd_freq<<" "<<min_even_freq<<"\n";
+        return max_odd_freq - min_even_freq;
+    }
+};
