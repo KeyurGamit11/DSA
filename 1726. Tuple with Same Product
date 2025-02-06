@@ -1,0 +1,27 @@
+Input: nums = [2,3,4,6]
+Output: 8
+Explanation: There are 8 valid tuples:
+(2,6,3,4) , (2,6,4,3) , (6,2,3,4) , (6,2,4,3)
+(3,4,2,6) , (4,3,2,6) , (3,4,6,2) , (4,3,6,2)
+#code:
+class Solution {
+public:
+    int tupleSameProduct(vector<int>& nums) {
+        int ans=0;
+        unordered_map<int,int>mp;
+        //all element are distinct make product of two element and check their freq
+        for(int i=0; i<nums.size(); i++){
+            for(int j=i+1; j<nums.size(); j++){
+                int product = nums[i]*nums[j];
+                mp[product]++;
+            }
+        }
+        for(auto &i:mp){
+            int freq = i.second;
+            if(freq > 1){
+                ans+= 8 *(freq *(freq-1)/2); //one pair of a*b=c*d apply combination formula 
+            }
+        }
+        return ans;
+    }
+};
