@@ -1,0 +1,26 @@
+Input: piles = [5,4,9], k = 2
+Output: 12
+Explanation: Steps of a possible scenario are:
+- Apply the operation on pile 2. The resulting piles are [5,4,5].
+- Apply the operation on pile 0. The resulting piles are [3,4,5].
+The total number of stones in [3,4,5] is 12.
+#code:
+class Solution {
+public:
+    int minStoneSum(vector<int>& piles, int k) {
+        priority_queue<int>pq;
+        for(int num:piles){
+            pq.push(num);
+        }
+        int total = accumulate(piles.begin(),piles.end(),0); //total sum of pile
+        while(k--){
+            int num = pq.top();
+            pq.pop();
+            int reduce = floor(num/2);
+            total -= reduce; 
+            num -= reduce;
+            pq.push(num);
+        }
+        return total;
+    }
+};
