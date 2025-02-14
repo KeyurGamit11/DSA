@@ -1,0 +1,36 @@
+Input: nums = [5,19,8,1]
+Output: 3
+Explanation: The initial sum of nums is equal to 5 + 19 + 8 + 1 = 33.
+The following is one of the ways to reduce the sum by at least half:
+Pick the number 19 and reduce it to 9.5.
+Pick the number 9.5 and reduce it to 4.75.
+Pick the number 8 and reduce it to 4.
+The final array is [5, 4.75, 4, 1] with a total sum of 5 + 4.75 + 4 + 1 = 14.75. 
+The sum of nums has been reduced by 33 - 14.75 = 18.25, which is at least half of the initial sum, 18.25 >= 33/2 = 16.5.
+Overall, 3 operations were used so we return 3.
+It can be shown that we cannot reduce the sum by at least half in less than 3 operations.
+#code:
+class Solution {
+public:
+    int halveArray(vector<int>& nums) {
+        int ans=0;
+        int n = nums.size();
+        priority_queue<double>pq;
+        for(int num:nums){
+            pq.push(num);
+        }
+        double total_sum = accumulate(nums.begin(),nums.end(),0.0);
+        double half_sum = total_sum / 2.0;
+        while(total_sum > half_sum){
+            double num = pq.top();
+            total_sum -= num; //first subtract largest num
+            num /= 2.0;
+            total_sum += num; //add half of largest num
+            pq.pop();
+            pq.push(num);
+            ans++;
+        }
+        return ans;
+
+    }
+};
