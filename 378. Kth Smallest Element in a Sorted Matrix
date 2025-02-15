@@ -1,0 +1,21 @@
+Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
+Output: 13
+Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
+#code:
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<int>pq;
+        int n = matrix.size();
+        int m = matrix[0].size();
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                pq.push(matrix[i][j]);
+                if(pq.size() > k){ // we need k size pq so we pop largest element from pq
+                    pq.pop();
+                }
+            }
+        }
+        return pq.top(); //k th smallest element
+    }
+};
