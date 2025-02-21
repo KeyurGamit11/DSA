@@ -1,0 +1,25 @@
+Input: cards = [3,4,2,3,4,7]
+Output: 4
+Explanation: We can pick up the cards [3,4,2,3] which contain a matching pair of cards with value 3. Note that picking up the cards [4,2,3,4] is also optimal.
+#code:
+class Solution {
+public:
+    int minimumCardPickup(vector<int>& cards) {
+        unordered_map<int,int>mp;
+        int l=0,r=0,ans=INT_MAX;
+        int n = cards.size();
+        while(r < n){
+            mp[cards[r]]++;
+            while(mp[cards[r]] > 1){
+                ans = min(ans,r-l+1);
+                mp[cards[l]]--;
+                if(mp[cards[l]]==0){
+                    mp.erase(cards[l]);
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans != INT_MAX ? ans:-1;
+    }
+};
