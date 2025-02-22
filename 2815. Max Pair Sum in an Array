@@ -1,0 +1,35 @@
+Input: nums = [2536,1613,3366,162]
+Output: 5902
+Explanation:
+All the numbers have 6 as their largest digit, so the answer is 2536 + 3366 = 5902.
+#code:
+class Solution {
+
+private:
+    int digit(int n){
+        int ans = INT_MIN;
+        while(n){
+           ans = max(ans,n%10);
+           n /= 10;
+        }
+        return ans;
+    }
+public:
+    int maxSum(vector<int>& nums) {
+        vector<int>LargeDigits;
+        int ans = -1;
+        for(int i=0; i<nums.size(); i++){
+            int elem = digit(nums[i]);
+            LargeDigits.push_back(elem);
+        }
+        
+        for(int i=0; i<LargeDigits.size(); i++){
+            for(int j=i+1; j<LargeDigits.size(); j++){
+                if(LargeDigits[i]==LargeDigits[j]){
+                    ans = max(ans , nums[i]+nums[j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
