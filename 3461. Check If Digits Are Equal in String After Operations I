@@ -1,0 +1,31 @@
+Input: s = "3902"
+Output: true
+Explanation:
+Initially, s = "3902"
+First operation:
+(s[0] + s[1]) % 10 = (3 + 9) % 10 = 2
+(s[1] + s[2]) % 10 = (9 + 0) % 10 = 9
+(s[2] + s[3]) % 10 = (0 + 2) % 10 = 2
+s becomes "292"
+Second operation:
+(s[0] + s[1]) % 10 = (2 + 9) % 10 = 1
+(s[1] + s[2]) % 10 = (9 + 2) % 10 = 1
+s becomes "11"
+Since the digits in "11" are the same, the output is true.
+#code:
+class Solution {
+public:
+    bool hasSameDigits(string s) {
+        
+        while(s.size() > 2){
+            string ans="";
+            for(int i=0;i<s.size()-1;i++){
+               int sum = (s[i]-'0') + (s[i+1] -'0');
+                ans += to_string(sum%10);
+            }
+            s = ans;
+        }
+        cout<<s;
+        return s[0]==s[1];
+    }
+};
