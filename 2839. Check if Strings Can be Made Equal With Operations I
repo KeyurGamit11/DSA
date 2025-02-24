@@ -1,0 +1,19 @@
+Input: s1 = "abcd", s2 = "cdab"
+Output: true
+Explanation: We can do the following operations on s1:
+- Choose the indices i = 0, j = 2. The resulting string is s1 = "cbad".
+- Choose the indices i = 1, j = 3. The resulting string is s1 = "cdab" = s2.
+#code:
+class Solution {
+public:
+    bool canBeEqual(string s1, string s2) {
+        //check for odd ind 
+        //we can directly check because size is 4
+        bool odd_Check = (s1[1]==s2[1] && s1[3]==s2[3]) || (s1[1] == s2[3] && s1[3] == s2[1]);
+        //check for even ind
+        bool Even_Check = (s1[0]==s2[0] && s1[2]==s2[2]) || (s1[0]==s2[2] && s1[2] == s2[0]);
+
+        // return true if both true else false
+        return odd_Check && Even_Check;
+    }
+};
