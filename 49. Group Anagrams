@@ -1,0 +1,29 @@
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Explanation:
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other
+#code:
+class Solution {
+    bool check(string s1 , string s2){
+        sort(s1.begin(), s1.end());
+        sort(s2.begin(),s2.end());
+        return s1 == s2;
+    }
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>ans;
+        unordered_map<string,vector<string>>mp;
+
+        for(auto s:strs){
+            string sort_s = s;
+            sort(sort_s.begin() , sort_s.end());
+            mp[sort_s].push_back(s); //store orignal s and sort val like aet -> eat eg.
+        }
+        for(auto [key , val] : mp){
+            ans.push_back(val);
+        }
+        return ans;
+    }
+};
