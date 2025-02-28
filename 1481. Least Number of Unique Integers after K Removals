@@ -1,0 +1,35 @@
+Input: arr = [4,3,1,1,3,3,2], k = 3
+Output: 2
+Explanation: Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.
+#code:
+class Solution {
+public:
+    int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
+        unordered_map<int,int>mp;
+        for(auto &i:arr){
+            mp[i]++;
+        }
+        //min-heap
+        priority_queue<int,vector<int>,greater<int>>pq;
+        for(auto &[key,count]:mp){
+            pq.push(count);
+        }
+
+        int remove = 0 ,cnt=0;
+        bool ch=false;
+        while(remove  < k){
+            if(pq.top() + remove <= k){
+                remove += pq.top();
+                cnt++;
+            }
+            else{
+                ch = true; //means there is some occurance of number still there so we cant count all 
+                cnt++; 
+                break;
+            }
+            pq.pop();
+        }
+        //ch is true means element some occur still there so we dont count that numb that why + 1 there
+        return ch ? mp.size()-cnt+1 :mp.size()-cnt ;
+    }
+};
