@@ -1,0 +1,41 @@
+Input: nums1 = [[1,2],[2,3],[4,5]], nums2 = [[1,4],[3,2],[4,1]]
+Output: [[1,6],[2,3],[3,2],[4,6]]
+Explanation: The resulting array contains the following:
+- id = 1, the value of this id is 2 + 4 = 6.
+- id = 2, the value of this id is 3.
+- id = 3, the value of this id is 2.
+- id = 4, the value of this id is 5 + 1 = 6
+#code:
+class Solution {
+public:
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+        int i=0,j=0;
+        vector<vector<int>>ans;
+        int n = nums1.size() , m = nums2.size();
+        while(i < n && j<m){
+            if(nums1[i][0] == nums2[j][0]){ //if id same
+                ans.push_back({nums1[i][0] , nums1[i][1] + nums2[j][1]}); //store //id -> nums1+nums2
+                i++;
+                j++;
+            }
+            else if(nums1[i][0] < nums2[j][0]){
+                ans.push_back({nums1[i][0] , nums1[i][1]});
+                i++;
+            }
+            else{
+                ans.push_back({nums2[j][0] , nums2[j][1]});
+                j++;
+            }
+        }
+        //if there is still element left
+        while(i<n){
+             ans.push_back({nums1[i][0] , nums1[i][1]});
+             i++;
+        }
+        while(j<m){
+            ans.push_back({nums2[j][0] , nums2[j][1]});
+            j++;
+        }
+        return ans;
+    }
+};
