@@ -1,0 +1,29 @@
+Input: s = "cccaaa"
+Output: "aaaccc"
+Explanation: Both 'c' and 'a' appear three times, so both "cccaaa" and "aaaccc" are valid answers.
+Note that "cacaca" is incorrect, as the same characters must be together.
+#code:
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int>mp;
+        string ans="";
+        for(auto &i:s){ //take frq of all char
+            mp[i]++;
+        }
+        priority_queue<pair<int,char>>pq; //take pq of pair char and theire cnt
+        for(auto &[ch,freq]:mp){
+            pq.push({freq,ch}); //push based on theire freq
+        }
+        while(!pq.empty()){
+            int freq = pq.top().first; //we need to take element time that occur,freq of element
+            while(freq != 0){
+                ans.push_back(pq.top().second); //push into ans based on freq of element
+                freq--;
+            }
+            pq.pop();
+        }
+        return ans;
+
+    }
+};
