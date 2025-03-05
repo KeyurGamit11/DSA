@@ -1,0 +1,14 @@
+Input: n = 2
+Output: 5
+Explanation: After 2 minutes, there are 4 colored cells on the boundary and 1 in the center, so we return 5. 
+The formula for the number of colored cells at step n follows a quadratic pattern:
+
+                    ans=1+2(n−1)n
+#code:
+class Solution {
+public:
+    long long coloredCells(int n) {
+        
+        return 1LL + 2LL *(n-1)*n; //formula
+    }
+};
