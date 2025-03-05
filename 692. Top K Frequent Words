@@ -1,0 +1,40 @@
+Input: words = ["i","love","leetcode","i","love","coding"], k = 2
+Output: ["i","love"]
+Explanation: "i" and "love" are the two most frequent words.
+Note that "i" comes before "love" due to a lower alphabetical order
+#code:
+class Solution {
+private:
+    struct cmp{
+        bool operator()(const pair<int,string>&a , const pair<int,string>&b){
+            if(a.first == b.first){ //if freq is same
+                return a.second < b.second; //sort lexicographicaly in min heap
+            }
+            return a.first > b.first; //sort based on freq in min heap
+        }
+    };
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int>mp;
+        priority_queue<pair<int,string>, vector<pair<int,string>>,cmp>pq; //we need to use custom operator in min heap
+        vector<string>ans;
+        for(auto &i:words){
+            mp[i]++;
+        }
+        for(auto &[str,frq]:mp){
+            pq.push({frq,str});
+            
+            if(pq.size() > k){ //maintain only k element
+                pq.pop();
+            }
+            
+        }
+        while(!pq.empty() ){
+            ans.push_back(pq.top().second);
+            pq.pop();
+           
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
