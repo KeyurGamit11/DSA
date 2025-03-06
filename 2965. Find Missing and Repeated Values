@@ -1,0 +1,33 @@
+Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
+Output: [9,5]
+Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
+#code:
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        unordered_map<int,int>mp;
+        vector<int>ans;
+        int sum = 0;
+        int n = 0;
+        for(auto &i:grid){
+            for(auto &p:i){
+            mp[p]++;
+            sum += p;
+            n++;
+            }
+        }
+        int double_el = 0;
+        for(auto &i:mp){
+            if(i.second==2){
+                double_el = i.first;
+                ans.push_back(i.first);
+            }
+            
+        }
+        int total_sum = n*(n+1)/2;
+        
+        int missing = total_sum -(sum-double_el);
+        ans.push_back(missing);
+        return ans;
+    }
+};
