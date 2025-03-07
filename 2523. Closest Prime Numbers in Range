@@ -1,0 +1,42 @@
+Input: left = 10, right = 19
+Output: [11,13]
+Explanation: The prime numbers between 10 and 19 are 11, 13, 17, and 19.
+The closest gap between any pair is 2, which can be achieved by [11,13] or [17,19].
+Since 11 is smaller than 17, we return the first pair.
+#code:
+class Solution {
+
+public:
+    vector<int> closestPrimes(int left, int right) {
+        int n = 1000000;
+        //seive of Eratosthenes algo for prime
+        vector<int> prime(n + 1, true);
+        prime[0] = prime[1] = false;
+        for (int i = 2; i * i <= n; i++) {
+            if (prime[i]) {
+                for (int j = i * 2; j <= n; j += i) {
+                    prime[j] = false;
+                }
+            }
+        }
+        int diff = INT_MAX, one = -1, two = -1;
+        int first = -1, second = -1;
+        for (int i = left; i <= right; i++) {
+
+            if (prime[i]) {
+                if (first == -1) {
+                    first = i; //first prime
+                } else {
+                    second = i;  //second prime
+                    if (second - first < diff) {
+                        one = first;
+                        two = second;
+                        diff = second - first;
+                    }
+                    first = second; //update first for next pair
+                }
+            }
+        }
+        return {one,two};
+    }
+};
