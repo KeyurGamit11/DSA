@@ -1,0 +1,27 @@
+Input: s = "abcabc"
+Output: 10
+Explanation: The substrings containing at least one occurrence of the characters a, b and c are "abc", "abca", "abcab", "abcabc", "bca", "bcab", "bcabc", "cab", "cabc" and "abc" (again).
+#code:
+class Solution {
+   
+public:
+    int numberOfSubstrings(string s) {
+        int l = 0, r = 0;
+        int n = s.size();
+        int ans = 0;
+        unordered_map<char, int> mp;
+        while (r < n) {
+            mp[s[r]]++;
+            while(mp.size() == 3){
+                ans += n-r; //count all sbstring then strink from left
+                mp[s[l]]--;
+                if(mp[s[l]]==0){
+                    mp.erase(s[l]); //remove el if count become 0
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+};
