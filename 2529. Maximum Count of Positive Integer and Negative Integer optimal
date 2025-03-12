@@ -1,0 +1,41 @@
+Input: nums = [-2,-1,-1,1,2,3]
+Output: 3
+Explanation: There are 3 positive integers and 3 negative integers. The maximum count among them is 3.
+#code:
+/*
+    first find first pos, last neg from that count of pos,neg , ignore zeroes
+*/
+
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+        int n = nums.size();
+        int start=0,end=n-1;
+        int first_positive=n;
+        while(start <= end){
+            int mid = start + (end-start) / 2;
+            if(nums[mid] > 0){
+                first_positive = mid;
+                end = mid -1;
+            }
+            else {
+                start = mid + 1;
+            }
+        }
+        start = 0 , end = n-1;
+        int last_negative = -1;
+        while(start <= end){
+            int mid = start + (end-start)/2;
+            if(nums[mid] < 0){
+                last_negative = mid;
+                start = mid + 1;
+            }
+            else{
+                end = mid -1;
+            }
+        }
+        int positive = n - first_positive;
+        int negative = last_negative+1 ;
+        return max(positive,negative);
+    }
+};
