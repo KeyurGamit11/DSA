@@ -1,0 +1,27 @@
+Input: nums = ["3","6","7","10"], k = 4
+Output: "3"
+Explanation:
+The numbers in nums sorted in non-decreasing order are ["3","6","7","10"].
+The 4th largest integer in nums is "3".
+#code:
+class Solution {
+
+public:
+    string kthLargestNumber(vector<string>& nums, int k) {
+        auto cmp=[](const string& a, const string& b) {
+            if (a.size() == b.size()) {
+                return a > b;
+            }
+            return a.size() > b.size();
+        };
+        priority_queue<string, vector<string>, decltype(cmp)> pq(
+            cmp); // min heap with custom comparator
+        for (const string  &num: nums) {
+            pq.push(num);
+            if (pq.size() > k) {
+                pq.pop();
+            }
+        }
+        return pq.top();
+    }
+};
