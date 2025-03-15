@@ -1,0 +1,30 @@
+Input: nums = [6,3,3,2], k = 2
+Output: 216
+Explanation: Increment the second number 1 time and increment the fourth number 1 time.
+Now nums = [6, 4, 3, 3], with a product of 6 * 4 * 3 * 3 = 216.
+It can be shown that 216 is maximum product possible, so we return 216.
+Note that there may be other ways to increment nums to have the maximum product.
+#code:
+class Solution {
+#define mod 1000000007
+public:
+    int maximumProduct(vector<int>& nums, int k) {
+        long long ans = 1;
+        priority_queue<int,vector<int>,greater<int>>pq; //min heap
+        for(auto &i:nums){
+            pq.push(i);
+        }
+        while(k--){
+            int min_el = pq.top(); //everytime we pick only min el to increase product
+            pq.pop();
+            min_el++;
+            pq.push(min_el);
+        }
+        while(!pq.empty()){
+            int el = pq.top();
+            ans = (ans*el) % mod;
+            pq.pop();
+        }
+        return ans%mod;
+    }
+};
