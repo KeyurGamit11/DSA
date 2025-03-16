@@ -1,0 +1,27 @@
+Input: digits = [1,2,3,4]
+Output: 12
+Explanation: The 12 distinct 3-digit even numbers that can be formed are 124, 132, 134, 142, 214, 234, 312, 314, 324, 342, 412,
+and 432. Note that 222 cannot be formed because there is only 1 copy of the digit 2
+#code:
+class Solution {
+public:
+    int totalNumbers(vector<int>& digits) {
+        set<int>ans;
+        int n = digits.size();
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                for(int k=0; k<n; k++){
+                    if(i!=j && i != k&& j!=k ){
+                        if(digits[i] != 0){ //first digit cant be 0
+                            if(digits[k] % 2==0){//last dig should be even
+                                int num = digits[i]*100 + digits[j]*10 + digits[k];
+                                ans.insert(num);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ans.size();
+    }
+};
