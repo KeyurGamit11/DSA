@@ -1,0 +1,28 @@
+Input: cardPoints = [1,2,3,4,5,6,1], k = 3
+Output: 12
+Explanation: After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score.
+The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12.
+#code:
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int max_score = 0;
+        int left_sum = 0, right_sum = 0;
+        int n = cardPoints.size();
+        // take first k element sum from left side in leftsum
+        for (int i = 0; i < k; i++) {
+            left_sum += cardPoints[i];
+        }
+        max_score = left_sum;
+        // now shrink window from left side and add right side and window should
+        // be k
+        int rightind = n - 1;
+        for (int i = k - 1; i >= 0; i--) {
+            right_sum += cardPoints[rightind];
+            left_sum -= cardPoints[i];
+            rightind--;
+            max_score = max(left_sum + right_sum, max_score);
+        }
+        return max_score;
+    }
+};
