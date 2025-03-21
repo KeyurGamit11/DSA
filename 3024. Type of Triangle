@@ -1,0 +1,32 @@
+Input: nums = [3,3,3]
+Output: "equilateral"
+Explanation: Since all the sides are of equal length, therefore, it will form an equilateral triangle.
+#code:
+class Solution {
+public:
+    string triangleType(vector<int>& nums) {
+        //valid triangle check
+        if(!(nums[0]+ nums[1] > nums[2]) || !(nums[0] + nums[2] > nums[1]) || !(nums[1] + nums[2] > nums[0])){
+            return "none";
+        }
+        int arr[101] = {0};
+        for(int i=0; i<nums.size(); i++){
+            arr[nums[i]]++;
+        }
+        int cnt=0;
+        for(auto &i:arr){
+            if(i != 0){
+                cnt++;
+            }
+        }
+        if(cnt==1){
+            return "equilateral";
+        }
+        else if(cnt==2){
+            return "isosceles";
+        }
+        else{
+            return "scalene";
+        }
+    }
+};
