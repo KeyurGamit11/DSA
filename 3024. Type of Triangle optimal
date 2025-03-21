@@ -1,0 +1,25 @@
+Input: nums = [3,3,3]
+Output: "equilateral"
+Explanation: Since all the sides are of equal length, therefore, it will form an equilateral triangle.
+#here we also use set , if set size 1,2,3  so asn ->equilateral,isosceles,scalene like that
+#code:
+class Solution {
+public:
+    string triangleType(vector<int>& nums) {
+        //valid triangle check
+        if(!(nums[0]+ nums[1] > nums[2]) || !(nums[0] + nums[2] > nums[1]) || !(nums[1] + nums[2] > nums[0])){
+            return "none";
+        }
+
+        // Checking for triangle type directly using side comparisons
+        if (nums[0] == nums[1] && nums[1] == nums[2]) {
+            return "equilateral";
+        } 
+        else if (nums[0] == nums[1] || nums[1] == nums[2] || nums[0] == nums[2]) {
+            return "isosceles";
+        } 
+        else {
+            return "scalene";
+        }
+    }
+};
