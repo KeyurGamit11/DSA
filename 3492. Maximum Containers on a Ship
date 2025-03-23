@@ -1,0 +1,18 @@
+Input: n = 2, w = 3, maxWeight = 15
+Output: 4
+Explanation:
+The deck has 4 cells, and each container weighs 3. The total weight of loading all containers is 12, which does not exceed maxWeight.
+#code:
+class Solution {
+public:
+    int maxContainers(int n, int w, int maxWeight) {
+        int deck = n*n;
+        int cnt=0,total_w=0;
+        while(deck-- && total_w < maxWeight){
+            if(total_w + w > maxWeight) break;
+            total_w += w;
+            cnt++;
+        }
+        return cnt;
+    }
+};
