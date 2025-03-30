@@ -1,0 +1,21 @@
+Input: s = "abc"
+Output: 148
+Explanation:
+Letter	Index in Reversed Alphabet	Index in String	Product
+'a'	26	1	26
+'b'	25	2	50
+'c'	24	3	72
+The reversed degree is 26 + 50 + 72 = 148.
+#code:
+class Solution {
+public:
+    int reverseDegree(string s) {
+        int ans=0;
+        for(int i=0; i<s.size(); i++){
+            int el = 'z'-s[i]+1;
+            ans += el*(i+1);
+            
+        }
+        return ans;
+    }
+};
