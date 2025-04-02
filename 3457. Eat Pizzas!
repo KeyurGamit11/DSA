@@ -1,0 +1,30 @@
+Input: pizzas = [1,2,3,4,5,6,7,8]
+Output: 14
+Explanation:
+On day 1, you eat pizzas at indices [1, 2, 4, 7] = [2, 3, 5, 8]. You gain a weight of 8.
+On day 2, you eat pizzas at indices [0, 3, 5, 6] = [1, 4, 6, 7]. You gain a weight of 6.
+The total weight gained after eating all the pizzas is 8 + 6 = 14.
+#code:
+class Solution {
+public:
+    long long maxWeight(vector<int>& pizzas) {
+        sort(pizzas.rbegin(), pizzas.rend()); // Sort in descending order
+        long long ans = 0;
+        int total_pizzas = pizzas.size();
+        int total_days = total_pizzas / 4; // Number of full days
+
+        int ind = 0;
+        //take odd days first 
+        for (int i = 1; i <= total_days; i+=2) {
+            ans += pizzas[ind];
+            ind++;
+        }
+        ind++;
+        //now take even days skip-take...
+        for(int i=2; i<=total_days; i+=2){
+            ans += pizzas[ind];
+            ind += 2;
+        }
+        return ans;
+    }
+};
