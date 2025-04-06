@@ -1,0 +1,40 @@
+Input: a = 2, b = 4, c = 6
+Output: 6
+Explanation: The starting state is (2, 4, 6). One optimal set of moves is:
+- Take from 1st and 3rd piles, state is now (1, 4, 5)
+- Take from 1st and 3rd piles, state is now (0, 4, 4)
+- Take from 2nd and 3rd piles, state is now (0, 3, 3)
+- Take from 2nd and 3rd piles, state is now (0, 2, 2)
+- Take from 2nd and 3rd piles, state is now (0, 1, 1)
+- Take from 2nd and 3rd piles, state is now (0, 0, 0)
+There are fewer than two non-empty piles, so the game ends. Total: 6 points.
+#code:
+class Solution {
+public:
+    int maximumScore(int a, int b, int c) {
+        priority_queue<int>pq;
+        pq.push(a);
+        pq.push(b);
+        pq.push(c);
+        int ans=0;
+        //take two maxi everytime , game stop if both become 0
+        while(pq.top() != 0){
+            int first = pq.top();
+            pq.pop();
+            int second = pq.top();
+            pq.pop();
+            ans++;
+            int third = pq.top();
+            pq.pop();
+            first--;
+            second--;
+            if(first==0 && second==0 ||(third<=0 && second ==0)){ //extra check dry run a=6,b=2,c=1 for better understanding
+                break;
+            }
+            pq.push(first);
+            pq.push(second);
+            pq.push(third);
+        }
+        return ans;
+    }
+};
