@@ -1,0 +1,17 @@
+Input: num = 2932
+Output: 52
+Explanation: Some possible pairs [new1, new2] are [29, 23], [223, 9], etc.
+The minimum sum can be obtained by the pair [29, 23]: 29 + 23 = 52.
+#code:
+class Solution {
+public:
+    int minimumSum(int num) {
+        string s = to_string(num);
+        sort(s.begin(), s.end());
+        string num1 = string(1,s[0]) + s[3];
+        string num2 = string(1,s[1]) + s[2];
+        //cout<<num1<<" "<<num2<<"\n";
+        int ans = stoi(num1) + stoi(num2);
+        return ans;
+    }
+};
