@@ -1,0 +1,27 @@
+Input: nums = [5,2,5,4,5], k = 2
+Output: 2
+Explanation:
+The operations can be performed in order using valid integers 4 and then 2.
+#code:
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int k) {
+        set<int>st;
+        int cnt=0;
+        for(auto i:nums){
+            if(i > k){
+                st.insert(i);
+            }
+            else if(i==k){
+                cnt++;
+            }
+            else{
+                return -1;
+            }
+        }
+        if(cnt==nums.size()){
+            return 0;
+        }
+        return st.empty() ? -1 : st.size(); 
+    }
+};
