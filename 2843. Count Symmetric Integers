@@ -1,0 +1,31 @@
+Input: low = 1, high = 100
+Output: 9
+Explanation: There are 9 symmetric integers between 1 and 100: 11, 22, 33, 44, 55, 66, 77, 88, and 99.
+#code:
+class Solution {
+private:
+    bool check(int i){
+        string s = to_string(i);
+        if(s.size()%2 != 0){
+            return false;
+        }
+        int sum1=0,sum2=0;
+        for(int i=0; i<s.size()/2; i++){
+            sum1 += (s[i]-'0');
+        }
+        for(int i=s.size()/2; i<s.size(); i++){
+            sum2 += (s[i]-'0');
+        }
+        return sum1 == sum2;
+    }
+public:
+    int countSymmetricIntegers(int low, int high) {
+        int ans=0;
+        for(int i=low; i<=high; i++){
+            if(check(i)){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
