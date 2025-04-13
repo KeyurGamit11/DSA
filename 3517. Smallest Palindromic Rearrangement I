@@ -1,0 +1,23 @@
+Input: s = "babab"
+Output: "abbba"
+Explanation:
+Rearranging "babab" → "abbba" gives the smallest lexicographic palindrome.
+#code:
+class Solution {
+public:
+    string smallestPalindrome(string s) {
+        int mid = s.size() / 2, n = s.size();
+
+        sort(s.begin(), s.begin() + mid);
+
+        if (n % 2 == 0) {
+
+            sort(s.rbegin(), s.rbegin() + (n - mid));
+        } else {
+
+            sort(s.rbegin(), s.rbegin() + (n - mid - 1));
+        }
+
+        return s;
+    }
+};
