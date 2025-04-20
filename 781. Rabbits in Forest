@@ -1,0 +1,26 @@
+Input: answers = [1,1,2]
+Output: 5
+Explanation:
+The two rabbits that answered "1" could both be the same color, say red.
+The rabbit that answered "2" can't be red or the answers would be inconsistent.
+Say the rabbit that answered "2" was blue.
+Then there should be 2 other blue rabbits in the forest that didn't answer into the array.
+The smallest possible number of rabbits in the forest is therefore 5: 3 that answered plus 2 that didn't.
+#code:
+class Solution {
+public:
+    int numRabbits(vector<int>& answers) {
+        unordered_map<int,int>mp;
+        int ans=0;
+        for(auto i:answers){
+            mp[i]++;
+        }
+        for(auto [x,count]:mp){
+           int group_size = x+1;
+           int groups_Need = (count + group_size - 1) / group_size; //ceil of (count / group_size);
+           ans += (group_size * groups_Need); 
+        }
+        return ans;
+
+    }
+};
