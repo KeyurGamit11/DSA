@@ -1,0 +1,46 @@
+Input: n = 13
+Output: 4
+Explanation: There are 9 groups in total, they are grouped according sum of its digits of numbers from 1 to 13:
+[1,10], [2,11], [3,12], [4,13], [5], [6], [7], [8], [9].
+There are 4 groups with largest size.
+#code:
+class Solution {
+private:
+    //for digitsum
+    int solve(int n){
+        int sum=0;
+        while(n){
+            sum += n%10;
+            n /= 10;
+        }
+        return sum;
+    }
+public:
+    int countLargestGroup(int n) {
+        vector<int>digitsum;
+        for(int i=1; i<=n; i++){
+            int sum = solve(i);
+            digitsum.push_back(sum);
+        }
+        unordered_map<int,int>mp;
+        for(auto i:digitsum){
+            mp[i]++;
+        }
+        int freq=0,cnt=0;
+        //count highest num of freq of digitsum
+        for(auto[x,count]:mp){
+            if(count>freq){
+                freq = count;
+            }
+        }
+        //how many has highest num of freq
+        for(auto[x,count]:mp){
+            if(count==freq){
+                cnt++;
+            }
+        }
+
+        
+        return cnt;
+    }
+};
