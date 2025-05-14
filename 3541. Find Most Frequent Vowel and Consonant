@@ -1,0 +1,34 @@
+Input: s = "successes"
+Output: 6
+Explanation:
+The vowels are: 'u' (frequency 1), 'e' (frequency 2). The maximum frequency is 2.
+The consonants are: 's' (frequency 4), 'c' (frequency 2). The maximum frequency is 4.
+The output is 2 + 4 = 6.
+#code:
+class Solution {
+
+private:
+    bool isvowel(char ch){
+        return ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u';
+    }
+public:
+    int maxFreqSum(string s) {
+        unordered_map<char,int>consonant;
+        unordered_map<char,int>vowel;
+        for(auto &i:s){
+            if(isvowel(i)){
+                vowel[i]++;
+            }else{
+                consonant[i]++;
+            }
+        }
+        int max_vowel=0,max_consonant=0;
+        for(auto &[x,count]:vowel){
+            max_vowel = max(max_vowel,count);
+        }
+        for(auto &[x,count]:consonant){
+            max_consonant = max(max_consonant,count);
+        }
+        return max_vowel + max_consonant;
+    }
+};
