@@ -1,0 +1,23 @@
+Input: s = "yyyzz", k = 1
+Output: 2
+Explanation:
+s has two distinct characters ('y' and 'z') with frequencies of 3 and 2, respectively.
+Since we can have at most k = 1 distinct character, remove all occurrences of any one character from the string.
+Removing all 'z' results in at most k distinct characters. Thus, the answer is 2.
+#code:
+class Solution {
+public:
+    int minDeletion(string s, int k) {
+        vector<int> freq(26, 0);
+        for (auto i : s) {
+            freq[(i - 'a')]++;
+        }
+        sort(freq.begin(),freq.end());
+        int ans=0;
+        //remove smallest freq
+        for(int i=0; i<freq.size()-k; i++){
+            ans+=freq[i];
+        }
+        return ans;
+    }
+};
