@@ -1,0 +1,29 @@
+Input: s = "adcb"
+Output: ""
+Explanation:
+Remove "dc" from the string, leaving "ab" as the remaining string.
+Remove "ab" from the string, leaving "" as the remaining string.
+No further operations are possible. Thus, the resulting string after all possible removals is "".
+#code:
+class Solution {
+public:
+    string resultingString(string s) {
+        stack<char>st;
+        string ans="";
+        for(auto ch:s){
+            
+            if(!st.empty() && (abs(ch-st.top())==1 || abs(ch-st.top())==25)){ //check using ascii val a-b or a-z like that
+                st.pop();
+            }else{
+                st.push(ch);
+            }
+            
+        }
+        while(!st.empty()){
+            ans += st.top();
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
