@@ -1,0 +1,21 @@
+Input: n = 6, m = 5, k = 5
+Output: 5
+Explanation:
+Cut the log with length 6 into logs with length 1 and 5, at a cost equal to 1 * 5 == 5. Now the three logs of length 1, 5, and 5 can fit in one truck each.
+#code:
+class Solution {
+public:
+    long long minCuttingCost(int n, int m, int k) {
+        long long ans=0;
+        if(n<=k && m<=k){
+            return 0;
+        }
+        if(n>k){
+            ans += (long long)k*(n-k);
+        }
+        else if(m > k){
+            ans += (long long)k*(m-k);
+        }
+        return ans;
+    }
+};
