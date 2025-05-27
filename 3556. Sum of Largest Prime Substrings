@@ -1,0 +1,43 @@
+Input: s = "12234"
+Output: 1469
+Explanation:
+The unique prime numbers formed from the substrings of "12234" are 2, 3, 23, 223, and 1223.
+The 3 largest primes are 1223, 223, and 23. Their sum is 1469.
+#code:
+class Solution {
+private:
+    bool prime(long long n){
+        if(n < 2) return false;
+        for(long long i=2; i*i<=n; i++){
+            if(n%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+public:
+    long long sumOfLargestPrimes(string s) {
+        set<long long,greater<long long>>st; //take set in sorted manner so we can take first 3 el
+
+        for(int i=0; i<s.size(); i++){
+            string str="";
+            for(int j=i; j<s.size(); j++){
+                str += s[j];
+                long long n = stoll(str);
+                if(prime(n)){
+                    st.insert(n);
+                }
+            }
+        }
+        long long ans=0;
+        int cnt=0;
+        for(auto i:st){
+            if(cnt==3)break;
+            ans += i;
+            cnt++;
+        }
+        return ans;
+
+    }
+};
