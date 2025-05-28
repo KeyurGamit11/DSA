@@ -1,0 +1,19 @@
+Input: s = "iloveleetcode", words = ["i","love","leetcode","apples"]
+Output: true
+Explanation:
+s can be made by concatenating "i", "love", and "leetcode" together.
+#code:
+class Solution {
+public:
+    bool isPrefixString(string s, vector<string>& words) {
+        string str="";
+        int n = s.size();
+        for(auto word:words){
+            str += word; //concatenating all words till s and str length same
+            if(n == str.size()){
+                break;
+            }
+        }
+        return s==str;
+    }
+};
