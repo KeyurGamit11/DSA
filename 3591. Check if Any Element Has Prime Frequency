@@ -1,0 +1,30 @@
+Input: nums = [1,2,3,4,5,4]
+Output: true
+Explanation:
+4 has a frequency of two, which is a prime number.
+#code:
+class Solution {
+private:
+    bool isprime(int n){
+        if(n<=1)return false;
+        for(int i=2; i*i<=n; i++){
+            if(n%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+public:
+    bool checkPrimeFrequency(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        for(auto &i:nums){
+            mp[i]++;
+        }
+        for(auto &[n,cnt]:mp){
+            if(isprime(cnt)){
+                return true;
+            }
+        }
+        return false;
+    }
+};
