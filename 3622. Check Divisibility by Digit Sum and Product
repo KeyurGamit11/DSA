@@ -1,0 +1,20 @@
+Input: n = 99
+Output: true
+Explanation:
+Since 99 is divisible by the sum (9 + 9 = 18) plus product (9 * 9 = 81) of its digits (total 99), the output is true.
+#code:
+class Solution {
+public:
+    bool checkDivisibility(int n) {
+        int dig_sum=0;
+        int dig_pro=1,total=0;
+        int num = n;
+        while(num){
+            dig_sum += num%10;
+            dig_pro *= num%10;
+            num /= 10;
+        }
+        total = (dig_sum + dig_pro);
+        return n % total ==0;
+    }
+};
