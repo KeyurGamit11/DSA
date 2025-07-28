@@ -1,0 +1,27 @@
+Input: nums = [3,1]
+Output: 2
+Explanation: The maximum possible bitwise OR of a subset is 3. There are 2 subsets with a bitwise OR of 3:
+- [3]
+- [3,1]
+#code:
+class Solution {
+public:
+    int countMaxOrSubsets(vector<int>& nums) {
+        int maxOR=0;
+        int n = nums.size();
+        for(int i:nums){
+            maxOR |= i;
+        }
+        int cnt=0;
+        for(int mask=0; mask<(1 << n); mask++){
+            int s=0;
+            for(int j=0; j<nums.size(); j++){
+               if(mask & (1 << j)){ //it convert i into binary and check if it has set bit or not
+                 s |= nums[j];
+               }
+            }
+            if(s == maxOR)cnt++;
+        }
+        return cnt;
+    }
+};
