@@ -1,0 +1,27 @@
+Input: num = "6777133339"
+Output: "777"
+Explanation: There are two distinct good integers: "777" and "333".
+"777" is the largest, so we return "777".
+#code:
+class Solution {
+public:
+    string largestGoodInteger(string num) {
+       
+        string s="";
+        for(int i=1; i<num.size()-1; i++){
+            string ans="";
+            if(num[i] == num[i+1] && num[i] == num[i-1]){
+                ans += num[i];
+                ans += num[i-1];
+                ans += num[i+1];       
+            }
+            if(!ans.empty()){
+                if(s.empty() || ans > s){
+                    s= ans;
+                }
+            }
+            
+        }
+        return  s;
+    }
+};
