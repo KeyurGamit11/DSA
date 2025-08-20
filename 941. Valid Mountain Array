@@ -1,0 +1,32 @@
+Input: arr = [0,3,2,1]
+Output: true
+#code:
+class Solution {
+public:
+    bool validMountainArray(vector<int>& arr) {
+        if(arr.size() < 3) return false;
+        int maxi = *max_element(arr.begin(), arr.end());
+        int ind = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == maxi) {
+                ind = i;
+                break;
+            }
+        }
+        if(ind==0 || ind == arr.size()-1)return false;
+        bool ch1 = true, ch2 = true;
+        for (int i = 0; i < ind; i++) {
+            if (arr[i] >= arr[i + 1]) {
+                ch1 = false;
+                break;
+            }
+        }
+        for (int i = ind; i < arr.size() - 1; i++) {
+            if (arr[i] <= arr[i + 1]) {
+                ch2 = false;
+                break;
+            }
+        }
+        return ch1 && ch2 ;
+    }
+};
