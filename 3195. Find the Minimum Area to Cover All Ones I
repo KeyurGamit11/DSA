@@ -1,0 +1,30 @@
+Input: grid = [[0,1,0],[1,0,1]]
+Output: 6
+Explanation:
+The smallest rectangle has a height of 2 and a width of 3, so it has an area of 2 * 3 = 6.
+#just draw  matrix you will understand
+#code:
+class Solution {
+public:
+    int minimumArea(vector<vector<int>>& grid) {
+        int n = grid.size(),m= grid[0].size();
+        int maxi = 0, maxi1 = 0;
+        int mini = INT_MAX, mini1 = INT_MAX;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1) {
+                    maxi = max(maxi, i);
+                    maxi1 = max(maxi1, j);
+                    mini = min(mini, i);
+                    mini1 = min(mini1, j);
+                }
+            }
+        }
+        // cout<<maxi<<" "<<mini<<endl;
+        // cout<<maxi1<<" "<<mini1<<endl;
+        int h = maxi - mini + 1;
+        int w = maxi1 - mini1 + 1;
+        int ans = h * w;
+        return ans;
+    }
+};
