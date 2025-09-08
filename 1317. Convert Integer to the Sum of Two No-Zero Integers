@@ -1,0 +1,38 @@
+Input: n = 11
+Output: [2,9]
+Explanation: Let a = 2 and b = 9.
+Both a and b are no-zero integers, and a + b = 11 = n.
+Note that there are other valid answers as [8, 3] that can be accepted.
+#code:
+class Solution {
+private:
+    bool check(int i,int j){
+        bool ch1=false,ch2=false;
+        while(i){
+            if(i%10==0){
+                ch1=true;
+            }
+            i /= 10;
+        }
+         while(j){
+            if(j%10==0){
+                ch2=true;
+            }
+            j /= 10;
+        }
+        return !ch1 && !ch2;
+    }
+public:
+    vector<int> getNoZeroIntegers(int n) {
+        int j=n-1;
+        vector<int>ans;
+        for(int i=1; i<=n; i++){
+            if(check(i,n-i)){
+                ans.push_back(i);
+                ans.push_back(n-i);
+                break;
+            }
+        }
+        return ans;
+    }
+};
