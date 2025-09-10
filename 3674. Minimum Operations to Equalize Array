@@ -1,0 +1,18 @@
+Input: nums = [1,2]
+Output: 1
+Explanation:
+Choose nums[0...1]: (1 AND 2) = 0, so the array becomes [0, 0] and all elements are equal in 1 operation.
+#code:
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        set<int>st;
+        //if there all same element ans is -> 0 
+        //if there is diff element means set size is not 1 , so we take 1 ops and make all same by AND oprator
+        for(auto i:nums){
+            st.insert(i);
+        }
+        if(st.size()==1) return 0; // means already same
+        else return 1; // means we need to do one step take subarr 0--n-1
+    }
+};
