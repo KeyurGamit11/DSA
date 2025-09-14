@@ -1,0 +1,141 @@
+Input: wordlist = ["KiTe","kite","hare","Hare"], queries = ["kite","Kite","KiTe","Hare","HARE","Hear","hear","keti","keet","keto"]
+Output: ["kite","KiTe","KiTe","Hare","hare","","","KiTe","","KiTe"]
+#code:
+#TLE:
+class Solution {
+private:
+    string Exact_match(string s , vector<string>& wordlist ){
+        for(auto i:wordlist){
+            if(i==s){
+                return i;
+            }
+        }
+        return "";
+    }
+    string Lowercase(string s , vector<string>& wordlist ){
+        //string s into lowercase
+        for(auto &c:s){
+            c = tolower(c);
+        }
+        for(auto &word:wordlist){
+            string str = word;
+            for(auto &ch:str){
+                ch = tolower(ch);
+            }
+            if(s==str){
+                return word;
+            }
+        }
+        return "";
+    }
+    bool isVowel(char c) {
+            c = tolower(c);
+            return (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+    }
+    string Vowel(string s , vector<string>& wordlist ){
+        for (auto &ch : s) ch = tolower(ch);
+        for(int i=0; i<s.size(); i++){
+            if(isVowel(s[i])){
+                s[i] = '*';
+            }
+        }
+
+        for(auto &c:wordlist){
+            string str = c;
+            for (auto &ch : str) ch = tolower(ch);
+            for(int i=0; i<str.size(); i++){
+                if(isVowel(str[i])){
+                    str[i] = '*';
+                }
+            }
+            if(str==s){
+                return c;
+            }
+        }
+        return "";
+    }
+public:
+    vector<string> spellchecker(vector<string>& wordlist,vector<string>& queries) {
+        vector<string> ans;
+        for (int i = 0; i < queries.size(); i++) {
+
+            string res = Exact_match(queries[i], wordlist);
+            if (!res.empty()) {
+                ans.push_back(res);
+                continue;
+            }
+            res = Lowercase(queries[i], wordlist);
+            if (!res.empty()) {
+                ans.push_back(res);
+                continue;
+            }
+
+            res = Vowel(queries[i], wordlist);
+            if (!res.empty()) {
+                ans.push_back(res);
+                continue;
+            }
+
+            ans.push_back(""); // if none match
+        }
+        return ans;
+    }
+};
+
+#OPTIMAL :
+class Solution {
+private:
+    bool isVowel(char c) {
+        c = tolower(c);
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+
+    string maskVowels(const string &s) {
+        string t = s;
+        for (auto &ch : t) {
+            ch = tolower(ch);
+            if (isVowel(ch)) ch = '*';
+        }
+        return t;
+    }
+
+public:
+    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+        // Preprocess wordlist
+        unordered_set<string> exactSet(wordlist.begin(), wordlist.end());
+        unordered_map<string,string> lowerMap;
+        unordered_map<string,string> vowelMap;
+
+        for (auto &w : wordlist) {
+            string lw = w;
+            for (auto &c : lw) c = tolower(c);
+            if (!lowerMap.count(lw)) lowerMap[lw] = w;
+
+            string vw = maskVowels(w);
+            if (!vowelMap.count(vw)) vowelMap[vw] = w;
+        }
+
+        vector<string> ans;
+        for (auto &query : queries) {
+            if (exactSet.count(query)) {
+                ans.push_back(query);
+                continue;
+            }
+
+            string lowerQuery = query;
+            for (auto &c : lowerQuery) c = tolower(c);
+
+            string vowelQuery = maskVowels(query);
+
+            if (lowerMap.count(lowerQuery)) {
+                ans.push_back(lowerMap[lowerQuery]);
+            } else if (vowelMap.count(vowelQuery)) {
+                ans.push_back(vowelMap[vowelQuery]);
+            } else {
+                ans.push_back("");
+            }
+        }
+
+        return ans;
+    }
+};
