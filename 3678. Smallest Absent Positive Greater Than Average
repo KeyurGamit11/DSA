@@ -1,0 +1,26 @@
+Input: nums = [3,5]
+Output: 6
+Explanation:
+The average of nums is (3 + 5) / 2 = 8 / 2 = 4.
+The smallest absent positive integer greater than 4 is 6.
+#code:
+class Solution {
+public:
+    int smallestAbsent(vector<int>& nums) {
+        int avg=0,sum=0;
+        int n = nums.size();
+        for(auto i:nums){
+            sum += i;
+        }
+        set<int>st(nums.begin(),nums.end());
+
+        avg = sum/n;
+        avg++;
+        while(true){
+            if(avg > 0 && st.find(avg) == st.end()){
+                return avg;
+            }
+            avg++;
+        }
+    }
+};
