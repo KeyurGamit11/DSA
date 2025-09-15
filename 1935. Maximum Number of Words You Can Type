@@ -1,0 +1,23 @@
+Input: text = "hello world", brokenLetters = "ad"
+Output: 1
+Explanation: We cannot type "world" because the 'd' key is broken.
+#code:
+class Solution {
+public:
+    int canBeTypedWords(string text, string brokenLetters) {
+        set<char>st(brokenLetters.begin() , brokenLetters.end());
+        int cnt=0;
+        bool ch=false;
+        for(int i=0; i<text.size(); i++){
+            if(text[i] == ' '){
+                if(!ch)cnt++;
+                ch = false;
+            }
+            if(st.find(text[i]) != st.end()){
+                ch = true;  //means broken letter is found
+            }            
+        }
+        if(!ch)cnt++; // for last word
+        return cnt;
+    }
+};
