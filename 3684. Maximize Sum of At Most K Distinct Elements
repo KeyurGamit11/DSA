@@ -1,0 +1,23 @@
+Input: nums = [84,93,100,77,90], k = 3
+Output: [100,93,90]
+Explanation:
+The maximum sum is 283, which is attained by choosing 93, 100 and 90. We rearrange them in strictly descending order as [100, 93, 90].
+#code:
+class Solution {
+public:
+    vector<int> maxKDistinct(vector<int>& nums, int k) {
+        set<int>st;
+        sort(nums.rbegin(),nums.rend());
+        int i=0;
+        vector<int>ans;
+        while(st.size() != k && i < nums.size()){
+            st.insert(nums[i]);
+            i++;
+        }
+        for(auto &i:st){
+            ans.push_back(i);
+        }
+        sort(ans.rbegin(),ans.rend());
+        return ans;
+    }
+};
