@@ -1,0 +1,19 @@
+Input: nums = [4,2,5,1], k = 3
+Output: 12
+Explanation:
+One optimal approach is:
+Choose nums[0..3] = [4, 2, 5, 1]. The maximum is 5 and the minimum is 1, giving a value of 5 - 1 = 4.
+Choose nums[0..3] = [4, 2, 5, 1]. The maximum is 5 and the minimum is 1, so the value is also 4.
+Choose nums[2..3] = [5, 1]. The maximum is 5 and the minimum is 1, so the value is again 4.
+Adding these gives 4 + 4 + 4 = 12.
+#code:
+class Solution {
+public:
+    long long maxTotalValue(vector<int>& nums, int k) {
+        //so here we can choose same subarray more than once , so we take k time subarray taht contain min and max element
+        //so we just need to find min amd max element and ans is k time max-min
+        long long maxi= *max_element(nums.begin(),nums.end());
+        long long mini = *min_element(nums.begin(),nums.end());
+        return k*(maxi-mini);
+    }
+};
