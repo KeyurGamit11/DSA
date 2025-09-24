@@ -1,0 +1,41 @@
+Input: numerator = 4, denominator = 333
+Output: "0.(012)"
+#code:
+class Solution {
+public:
+    string fractionToDecimal(int numerator, int denominator) {
+        if(numerator==0)return "0";
+        string ans;
+        if((long long)numerator*(long long)denominator < 0 ){
+            ans += "-";
+        }
+        long long absNumerator = labs(numerator);
+        long long absDenominator = labs(denominator);
+        long long intDiv = absNumerator/absDenominator; //first integer in ans
+        
+        ans += to_string(intDiv);
+
+        long long remain = absNumerator % absDenominator;
+        if(remain==0){
+            return ans;
+        }
+        ans += '.';
+        unordered_map<int,int>mp;
+
+        while(remain != 0){
+            if(mp.count(remain)){ //means remain is repating so in ans also repating
+                ans.insert(mp[remain] , "(");
+                ans += ")";
+                break;
+            }
+            mp[remain] = ans.size();
+            remain *= 10;
+            int dig = remain / absDenominator; //new dig after adding 
+            ans += to_string(dig);
+            remain = remain % absDenominator;
+        }
+        return ans;
+
+       
+    }
+};
