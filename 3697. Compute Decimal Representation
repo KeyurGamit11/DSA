@@ -1,0 +1,27 @@
+Input: n = 537
+Output: [500,30,7]
+Explanation
+We can express 537 as 500 + 30 + 7. It is impossible to express 537 as a sum using fewer than 3 base-10 components.
+#code:
+class Solution {
+public:
+    vector<int> decimalRepresentation(int n) {
+        vector<int>ans;
+        int k = n;
+        long long place=1;
+        long long num = n;  
+        
+        while(num){
+            int d = num%10;
+            
+            if(d != 0){
+                ans.push_back(d * place);
+            }
+            place *= 10;
+            num /= 10;
+            
+        }
+        sort(ans.rbegin(),ans.rend());
+        return ans;
+    }
+};
