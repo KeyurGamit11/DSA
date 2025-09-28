@@ -1,0 +1,42 @@
+Input: s = "aaabbbccdddde"
+Output: "ab"
+Explanation:
+Frequency (k)	Distinct characters in group	Group size	Majority?
+4	{d}	1	No
+3	{a, b}	2	Yes
+2	{c}	1	No
+1	{e}	1	No
+Both characters 'a' and 'b' share the same frequency 3, they are in the majority frequency group. "ba" is also a valid answer.
+#code:
+class Solution {
+public:
+    string majorityFrequencyGroup(string s) {
+        unordered_map<int,int>mp;
+        for(auto i:s){
+            mp[i]++;
+        }
+        unordered_map<int , vector<char>>grp;
+        for(auto &i:mp){
+            grp[i.second].push_back(i.first);
+        }
+        int maxSize = 0;
+        int bestFreq = 0;
+        vector<char> bestGroup;
+
+        for (auto &g : grp) {
+            int f = g.first;
+            int size = g.second.size();
+
+            if (size > maxSize || (size == maxSize && f > bestFreq)) {
+                maxSize = size;
+                bestFreq = f;
+                bestGroup = g.second;
+            }
+        }
+
+        string ans = "";
+        for (char c : bestGroup) ans.push_back(c);
+        return ans;
+        
+    }
+};
