@@ -1,0 +1,22 @@
+Input: numBottles = 13, numExchange = 6
+Output: 15
+Explanation: The table above shows the number of full water bottles, empty water bottles, the value of numExchange, and the number of bottles drunk.
+#code:
+class Solution {
+public:
+    int maxBottlesDrunk(int numBottles, int numExchange) {
+        int maxi = numBottles;
+        int empty = numBottles;
+       
+        if (numBottles < numExchange)
+            return numBottles;
+        while (empty >= numExchange) {
+            maxi++;                      // you drink one more bottle
+            empty = empty - numExchange; // spend empties to get new full bottle
+            empty++;                     // after drinking, you get 1 empty back
+            numExchange++;               // next trade is harder
+        }
+
+        return maxi;
+    }
+};
