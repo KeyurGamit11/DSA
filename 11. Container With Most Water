@@ -1,0 +1,24 @@
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+#code:
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int maxWater = 0;
+        int n = height.size();
+        int i=0,j=n-1;
+        while(i < j){
+            int w = j-i;
+            int h = min(height[i] , height[j]); //water is store till min of both
+            int area = w*h;
+            maxWater = max(area,maxWater);
+            if(height[i] < height[j]){ //we decrease w so we need to choose between i , j  ,take max everytime
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return maxWater;
+    }
+};
