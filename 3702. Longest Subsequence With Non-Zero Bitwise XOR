@@ -1,0 +1,20 @@
+Input: nums = [1,2,3]
+Output: 2
+Explanation:
+One longest subsequence is [2, 3]. The bitwise XOR is computed as 2 XOR 3 = 1, which is non-zero.
+#code:
+class Solution {
+public:
+    int longestSubsequence(vector<int>& nums) {
+        int n=nums.size();
+        int x=0;
+        for(int i=0; i<nums.size(); i++){
+           x ^= nums[i];
+        }
+        if(x!=0) return n; //means we can take whole element
+        for(auto &i:nums){
+            if(i!=0)return n-1; //means total x is 0 so we can take n-1 element
+        }
+        return 0; //means all element are 0 so ans is 0
+    }
+};
