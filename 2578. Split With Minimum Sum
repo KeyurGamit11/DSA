@@ -1,0 +1,24 @@
+Input: num = 4325
+Output: 59
+Explanation: We can split 4325 so that num1 is 24 and num2 is 35, giving a sum of 59. We can prove that 59 is indeed the minimal possible sum.
+#code:
+class Solution {
+public:
+    int splitNum(int num) {
+        vector<int>dig;
+        while(num){
+            dig.push_back(num%10);
+            num /= 10;
+        }
+        sort(dig.begin(),dig.end());
+        int num1=0,num2=0;
+        for(int i=0; i<dig.size(); i++){
+            if(i%2==0){
+                num1 = (num1*10) + dig[i];
+            }else{
+                num2 = (num2*10)+ dig[i];
+            }
+        }
+        return num1+num2;
+    }
+};
