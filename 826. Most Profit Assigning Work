@@ -1,0 +1,44 @@
+Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]
+Output: 100
+Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and they get a profit of [20,20,30,30] separately.
+#code:
+class Solution {
+private:
+    int Binary_Search(vector<pair<int, int>>& p, int n) {
+        int ind = -1;
+        int i = 0, j = p.size() - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            if (p[mid].first <= n) {
+                ind = mid;
+                i = mid + 1;
+            } else {
+                j = mid - 1;
+            }
+        }
+        return ind;
+    }
+
+public:
+    int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit, vector<int>& worker) {
+        vector<pair<int, int>> p;
+        int ans = 0;
+        for (int i = 0; i < difficulty.size(); i++) {
+            p.push_back({difficulty[i], profit[i]});
+        }
+        sort(p.begin(), p.end());
+        //// Make profits non-decreasing with difficulty
+        for (int i = 1; i < p.size(); i++) {
+            p[i].second = max(p[i].second, p[i - 1].second);
+        }
+        for (int i = 0; i < worker.size(); i++) {
+            int w = Binary_Search(p, worker[i]);
+            if (w == -1) {
+                ans += 0;
+            } else {
+                ans += p[w].second;
+            }
+        }
+        return ans;
+    }
+};
