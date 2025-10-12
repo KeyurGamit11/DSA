@@ -1,0 +1,25 @@
+Input: nums = [1,2,2,3,3,3,3,4], k = 2
+Output: 16
+Explanation:
+The number 1 appears once (odd frequency).
+The number 2 appears twice (even frequency).
+The number 3 appears four times (even frequency).
+The number 4 appears once (odd frequency).
+So, the total sum is 2 + 2 + 3 + 3 + 3 + 3 = 16.
+#code:
+class Solution {
+public:
+    int sumDivisibleByK(vector<int>& nums, int k) {
+       int ans=0;
+        unordered_map<int,int>mp;
+        for(auto &i:nums){
+            mp[i]++;
+        }
+        for(auto &i:mp){
+            if(i.second%k==0){
+                ans += (i.first*i.second);
+            }
+        }
+        return ans;
+    }
+};
