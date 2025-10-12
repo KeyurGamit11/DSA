@@ -1,0 +1,25 @@
+Input: s = "adcb"
+Output: true
+Explanation:
+Split at index i = 1:
+Left substring = s[0..1] = "ad" with score = 1 + 4 = 5
+Right substring = s[2..3] = "cb" with score = 3 + 2 = 5
+Both substrings have equal scores, so the output is true.
+#code:
+class Solution {
+public:
+    bool scoreBalance(string s) {
+        int total = 0;
+        for (char c : s)
+            total += (c - 'a' + 1);
+
+        int leftSum = 0;
+        for (int i = 0; i < s.size(); i++) {
+            leftSum += (s[i] - 'a' + 1);
+            int rightSum = total - leftSum ;
+            if (leftSum == rightSum)
+                return true;
+        }
+        return false;
+    }
+};
