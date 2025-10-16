@@ -1,0 +1,26 @@
+Input: nums = [1,-10,7,13,6,8], value = 5
+Output: 4
+Explanation: One can achieve this result by applying the following operations:
+- Add value to nums[1] twice to make nums = [1,0,7,13,6,8]
+- Subtract value from nums[2] once to make nums = [1,0,2,13,6,8]
+- Subtract value from nums[3] twice to make nums = [1,0,2,3,6,8]
+The MEX of nums is 4. It can be shown that 4 is the maximum MEX we can achieve.
+#code:
+class Solution {
+public:
+    int findSmallestInteger(vector<int>& nums, int value) {
+        unordered_map<int,int>mp;
+        for(auto &i:nums){
+            int rem = ((i%value) + value ) %value;
+            mp[rem]++;
+        }
+        //take %value so we can make after adding value 
+        //put into map so we can check if value is present or not
+        int MEX=0;
+        while(mp[(MEX%value)] > 0){
+            mp[MEX%value]--;
+            MEX++;
+        }
+        return MEX;
+    }
+};
