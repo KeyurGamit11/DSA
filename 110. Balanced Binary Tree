@@ -1,0 +1,21 @@
+Input: root = [3,9,20,null,null,15,7]
+Output: true
+#code:
+class Solution {
+public:
+    int height(TreeNode* root){
+        if(root==NULL)return NULL;
+        return 1 + max(height(root->left) , height(root->right));
+    }
+    bool isBalanced(TreeNode* root) {
+        if(root == NULL){
+            return true;
+        }
+        int leftht = height(root->left);
+        int rightht = height(root->right);
+        if(abs(leftht-rightht) > 1){
+            return false;
+        }
+        return isBalanced(root->left) && isBalanced(root->right);
+    }
+};
