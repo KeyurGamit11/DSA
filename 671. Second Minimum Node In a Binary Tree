@@ -1,0 +1,32 @@
+Input: root = [2,2,5,null,null,5,7]
+Output: 5
+Explanation: The smallest value is 2, the second smallest value is 5.
+#code:
+class Solution {
+public:
+ 
+    long secondMin = LONG_MAX;
+    int minVal;
+    void solve(TreeNode* root){
+        
+        if(root==NULL){
+            return;
+        }
+        if (root->val > minVal && root->val < secondMin) {
+            secondMin = root->val;
+        }
+        solve(root->left);
+        solve(root->right);
+        
+    }
+    
+    
+    int findSecondMinimumValue(TreeNode* root) {
+        if (!root) return -1;
+        minVal = root->val;
+        solve(root);
+
+        return (secondMin == LONG_MAX) ? -1 : (int)secondMin;
+
+    }
+};
