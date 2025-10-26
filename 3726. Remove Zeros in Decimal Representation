@@ -1,0 +1,18 @@
+Input: n = 1020030
+Output: 123
+Explanation:
+After removing all zeros from 1020030, we get 123.
+#code:
+class Solution {
+public:
+    long long removeZeros(long long n) {
+        string s = to_string(n);
+        string ans="";
+        for(auto i:s){
+            if(i!='0'){
+                ans += i;
+            }
+        }
+        return stoll(ans);
+    }
+};
