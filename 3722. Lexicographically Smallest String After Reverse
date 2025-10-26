@@ -1,0 +1,20 @@
+Input: s = "dcab"
+Output: "acdb"
+Explanation:
+Choose k = 3, reverse the first 3 characters.
+Reverse "dca" to "acd", resulting string s = "acdb", which is the lexicographically smallest string achievable.
+#code:
+class Solution {
+public:
+    string lexSmallest(string s) {
+        string ans=s;
+        for(int i=1; i<=s.size(); i++){
+            string s1=s,s2=s;
+            reverse(s1.begin(),s1.begin()+i);
+            reverse(s2.end()-i , s2.end());
+            ans = min({ans,s1,s2});
+        }
+        return ans;
+        
+    }
+};
