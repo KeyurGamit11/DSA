@@ -1,0 +1,30 @@
+Input: n = 5
+Output: 7
+Explanation:
+The binary representation of 7 is "111".
+#hint : find greater than n  is power of 2 - 1
+#code:
+class Solution {
+private:
+    bool check(int n){
+        if(n<=1)return false;
+        while(n>1){
+            if(n%2 != 0){
+                return false;
+            }
+            n /= 2;
+        }
+        return true;
+    }
+public:
+    int smallestNumber(int n) {
+        int ans=0;
+        for(int i=n+1; i<=1024; i++){
+            if(check(i)){
+                ans=i;
+                break;
+            }
+        }
+        return ans-1;
+    }
+};
