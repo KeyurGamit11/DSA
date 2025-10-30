@@ -1,0 +1,24 @@
+Input: root = [4,2,6,1,3]
+Output: 1
+#hint : we know that BST inorder is sorted so we can use that
+#code:
+class Solution {
+public:
+    void solve(TreeNode* root , vector<int>&arr){
+        if(root==NULL){
+            return;
+        }
+        solve(root->left,arr);
+        arr.push_back(root->val);
+        solve(root->right,arr);
+    }
+    int getMinimumDifference(TreeNode* root) {
+        vector<int>arr;
+        solve(root,arr);  
+        int ans=INT_MAX;
+        for(int i=0; i<arr.size()-1; i++){
+            ans = min(abs(arr[i]-arr[i+1]) , ans);
+        }      
+        return ans;
+    }
+};
