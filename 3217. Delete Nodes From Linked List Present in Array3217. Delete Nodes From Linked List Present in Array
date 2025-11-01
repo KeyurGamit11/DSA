@@ -1,0 +1,25 @@
+Input: nums = [1,2,3], head = [1,2,3,4,5]
+Output: [4,5]
+#code:
+class Solution {
+public:
+    ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+        set<int> st;
+        for (auto& i : nums) {
+            st.insert(i);
+        }
+        ListNode* curr = head;
+        ListNode* dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode* prev = dummy;
+        while (curr != NULL) {
+            if (st.count(curr->val)) {
+                prev->next = curr->next;
+            }else{
+                prev = curr;
+            }
+            curr = curr -> next;
+        }
+        return dummy->next;
+    }
+};
