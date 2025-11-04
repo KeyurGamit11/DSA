@@ -1,0 +1,51 @@
+Input: nums = [1,1,2,2,3,4,2,3], k = 6, x = 2
+Output: [6,10,12]
+Explanation:
+For subarray [1, 1, 2, 2, 3, 4], only elements 1 and 2 will be kept in the resulting array. Hence, answer[0] = 1 + 1 + 2 + 2.
+For subarray [1, 2, 2, 3, 4, 2], only elements 2 and 4 will be kept in the resulting array. Hence, answer[1] = 2 + 2 + 2 + 4. Note that 4 is kept in the array since it is bigger than 3 and 1 which occur the same number of times.
+For subarray [2, 2, 3, 4, 2, 3], only elements 2 and 3 are kept in the resulting array. Hence, answer[2] = 2 + 2 + 2 + 3 + 3.
+#code:
+class Solution {
+private:
+    typedef pair<int,int>p;
+    int FindTopXsum(unordered_map<int,int>&mp , int x){
+        //pair<int,int>p;
+        priority_queue <p, vector<p>, greater<p>> pq;//min heap
+        for(auto &i:mp){
+            pq.push({i.second,i.first});
+            if(pq.size() > x){
+                pq.pop();
+            }
+        }
+        int sum=0;
+        while(!pq.empty()){
+            auto [freq,val] = pq.top();
+            
+            pq.pop();
+            sum += val*freq;
+        }
+        return sum;
+    }
+public:
+    vector<int> findXSum(vector<int>& nums, int k, int x) {
+        int sum=0;
+        vector<int>ans;
+        unordered_map<int,int>mp;
+        
+        int l=0,r=0;
+        int n = nums.size();
+        while(r < n){
+            mp[nums[r]]++;
+            if(r-l+1 == k){
+                ans.push_back(FindTopXsum(mp,x));
+                mp[nums[l]]--;
+                if(mp[nums[l]]==0){
+                    mp.erase(nums[l]);
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans;
+    }
+};
