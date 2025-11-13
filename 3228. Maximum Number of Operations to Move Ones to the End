@@ -1,0 +1,28 @@
+Input: s = "1001101"
+Output: 4
+Explanation:
+We can perform the following operations:
+Choose index i = 0. The resulting string is s = "0011101".
+Choose index i = 4. The resulting string is s = "0011011".
+Choose index i = 3. The resulting string is s = "0010111".
+Choose index i = 2. The resulting string is s = "0001111".
+#code:
+class Solution {
+public:
+    int maxOperations(string s) {
+        int ans=0,cnt=0, i=0;
+        while(i < s.size()){
+            if(s[i]=='0'){
+                ans += cnt;
+                while(s[i]=='0' && i<s.size()){
+                    i++;
+                }
+            }
+            else if(s[i]=='1'){
+                cnt++;
+                i++;
+            }
+        }
+        return ans;
+    }
+};
