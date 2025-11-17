@@ -1,0 +1,16 @@
+Input: s = "aabbab"
+Output: 0
+Explanation:
+The substring "aabbab" has three 'a' and three 'b'. Since their counts are equal, we can remove the entire string directly. The minimum length is 0.
+#code:
+class Solution {
+public:
+    int minLengthAfterRemovals(string s) {
+        int cnt1=0,cnt2=0;
+        for(auto i:s){
+            if(i=='a')cnt1++;
+            else cnt2++;
+        }
+        return abs(cnt2-cnt1);
+    }
+};
