@@ -1,0 +1,28 @@
+Input: nums = [1,0,0,0,1,0,0,1], k = 2
+Output: true
+Explanation: Each of the 1s are at least 2 places away from each other.
+#code:
+class Solution {
+public:
+    bool kLengthApart(vector<int>& nums, int k) {
+        int ind1=-1 , ind2=-1;
+        int n = nums.size();
+        //just keep track of 1 and previous seen 1 ind
+        for(int i=0; i<n; i++){
+            if(nums[i]==1 && ind1 == -1 ){
+                ind1=i;
+            }else if(nums[i]==1 && ind1 != -1){
+                ind2 = i;
+                // cout<<ind1<<" "<<ind2<<"\n";
+                if(abs(ind2-ind1-1) < k){
+                    return false;
+                }else{
+                    ind1 = ind2;
+                    
+                }
+            }
+
+        }
+        return true;
+    }
+};
