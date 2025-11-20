@@ -1,0 +1,21 @@
+Input: root = [4,2,6,1,3]
+Output: 1
+#code:
+class Solution {
+public:
+    void inorder(TreeNode* root , vector<int>&arr){
+        if(root==NULL)return;
+        inorder(root->left,arr);
+        arr.push_back(root->val);
+        inorder(root->right,arr);
+    }
+    int minDiffInBST(TreeNode* root) {
+        int ans=INT_MAX;
+        vector<int>arr;
+        inorder(root,arr);
+        for(int i=0; i<arr.size()-1; i++){
+            ans = min(ans , arr[i+1]-arr[i]);
+        }
+        return ans;
+    }
+};
