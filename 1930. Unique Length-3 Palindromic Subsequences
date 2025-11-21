@@ -1,0 +1,34 @@
+Input: s = "aabca"
+Output: 3
+Explanation: The 3 palindromic subsequences of length 3 are:
+- "aba" (subsequence of "aabca")
+- "aaa" (subsequence of "aabca")
+- "aca" (subsequence of "aabca")
+#code:
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        vector<int>first(26,-1),last(26,-1);
+        for (int i = 0; i < s.size(); i++) {
+            int c = s[i]-'a';
+            if (first[c] == -1) {
+                first[c] = i;
+            }
+            last[c] = i;
+        }
+        int ans=0;
+        for(int c=0; c<26; c++){
+            int l = first[c];
+            int r = last[c];
+            //now take middle elemnet that are between two char occuracance
+            if(l != -1 && r != -1 && l < r){
+                unordered_set<char>st;
+                for(int i=l+1; i<r; i++){
+                    st.insert(s[i]);
+                }
+                ans += st.size();
+            }
+        }
+        return ans;
+    }
+};
