@@ -1,0 +1,27 @@
+Input: s = "aaa"
+Output: 6
+Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+#code:
+class Solution {
+private:
+    bool is_palindrom(string &s){
+        string str = s;
+        reverse(str.begin(),str.end());
+        return s==str;
+    }
+public:
+    int countSubstrings(string s) {
+        int ans=0;
+        for(int i=0; i<s.size(); i++){
+            string str;
+            for(int j=i; j<s.size(); j++){
+                str += s[j];
+                
+                if(is_palindrom(str)){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
