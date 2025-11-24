@@ -1,0 +1,29 @@
+Input: n = 10203004
+Output: 12340
+Explanation:
+The non-zero digits are 1, 2, 3, and 4. Thus, x = 1234.
+The sum of digits is sum = 1 + 2 + 3 + 4 = 10.
+Therefore, the answer is x * sum = 1234 * 10 = 12340.
+#code:
+class Solution {
+public:
+    long long sumAndMultiply(int n) {
+        string s = to_string(n);    
+        string str;
+        int sum=0;
+        long long ans=0;
+        for(int i=0; i<s.size(); i++){
+            if(s[i] != '0'){
+                str += s[i];
+            }
+            if(s[i] != '0'){
+                sum += s[i]-'0';
+            }
+        }
+        long long k=1;
+        if(str.size()>=1)
+             k = stoll(str);
+        ans = sum*k*1LL;
+        return ans;
+    }
+};
