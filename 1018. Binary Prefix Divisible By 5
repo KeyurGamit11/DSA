@@ -1,0 +1,23 @@
+Input: nums = [0,1,1]
+Output: [true,false,false]
+Explanation: The input numbers in binary are 0, 01, 011; which are 0, 1, and 3 in base-10.
+Only the first number is divisible by 5, so answer[0] is true.
+#code:
+class Solution {
+public:
+    vector<bool> prefixesDivBy5(vector<int>& nums) {
+        int n =  nums.size();
+        vector<bool>ans;
+        int curr=0;
+        for(int i=0; i<n; i++){
+            curr = (curr*2 + nums[i])%5;
+            
+            if(curr==0){
+                ans.push_back(1);
+            }else{
+                ans.push_back(0);
+            }
+        }
+        return ans;
+    }
+};
