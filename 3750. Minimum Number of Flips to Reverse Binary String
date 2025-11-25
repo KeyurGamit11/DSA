@@ -1,0 +1,36 @@
+Input: n = 10
+Output: 4
+Explanation:
+The binary representation of 10 is "1010". Its reverse is "0101". All four bits must be flipped to make them equal.
+Thus, the minimum number of flips required is 4.
+#code:
+class Solution {
+public:
+    int minimumFlips(int n) {
+        int ans=0;
+        vector<int>binary;
+        
+        while(n){
+            if(n%2==0){
+                binary.push_back(0);
+            }else{
+                binary.push_back(1);
+            }
+            n /= 2;
+        }
+        int s = binary.size();
+        vector<int>rev;
+        //reverse push into rev arr
+        for(int i=s-1; i>=0; i--){
+            rev.push_back(binary[i]);
+        }
+       
+
+        for(int i=0; i<s; i++){
+            if(rev[i] != binary[i]){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
