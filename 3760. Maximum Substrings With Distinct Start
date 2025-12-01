@@ -1,0 +1,16 @@
+Input: s = "abab"
+Output: 2
+Explanation:
+Split "abab" into "a" and "bab".
+Each substring starts with a distinct character i.e 'a' and 'b'. Thus, the answer is 2.
+#code:
+class Solution {
+public:
+    int maxDistinct(string s) {
+        set<int>st;
+        for(auto i:s){
+            st.insert(i);
+        }
+        return st.size();
+    }
+};
