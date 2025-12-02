@@ -1,0 +1,33 @@
+Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
+Output: [-1,3,-1]
+Explanation: The next greater element for each value of nums1 is as follows:
+- 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
+- 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
+- 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
+#code:
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int>ans;
+        int n = nums1.size(); 
+        int m = nums2.size();
+        for(int i=0; i<n; i++){
+            int el = nums1[i];
+            bool ch=false , ch2=false;
+            for(int j=0; j<m; j++){
+                if(nums2[j]==el){
+                    ch = true;
+                }
+                if(nums2[j] > el && ch){
+                    ans.push_back(nums2[j]);
+                    ch2 = true;
+                    break;
+                }
+            }
+            if(!ch2){
+                ans.push_back(-1);
+            }
+        }
+        return ans;
+    }
+};
