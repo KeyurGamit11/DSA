@@ -1,0 +1,16 @@
+Input: low = 3, high = 7
+Output: 3
+Explanation: The odd numbers between 3 and 7 are [3,5,7].
+#code:
+class Solution {
+public:
+    int countOdds(int low, int high) {
+        int ans=0;
+        for(int i=low; i<=high; i++){
+            if(i%2==1){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
