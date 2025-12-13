@@ -1,0 +1,61 @@
+Example 1:
+Input: code = ["SAVE20","","PHARMA5","SAVE@20"], businessLine = ["restaurant","grocery","pharmacy","restaurant"], isActive = [true,true,true,true]
+Output: ["PHARMA5","SAVE20"]
+Explanation:
+First coupon is valid.
+Second coupon has empty code (invalid).
+Third coupon is valid.
+Fourth coupon has special character @ (invalid).
+#code:
+class Solution {
+public:
+    int priority(const string& s) {
+        if (s == "electronics")
+            return 0;
+        if (s == "grocery")
+            return 1;
+        if (s == "pharmacy")
+            return 2;
+        return 3; // restaurant
+    }
+
+    bool check(string s1, string s2, bool ch) {
+        if (!ch)
+            return false;
+        if (s1.empty() || s2.empty())
+            return false;
+
+        if (s2 != "electronics" && s2 != "grocery" && s2 != "pharmacy" &&
+            s2 != "restaurant") {
+            return false;
+        }
+
+        for (char c : s1) {
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+                (c >= '0' && c <= '9') || c == '_')
+                continue;
+            return false;
+        }
+        return true;
+    }
+
+    vector<string> validateCoupons(vector<string>& code,vector<string>& businessLine,vector<bool>& isActive) {
+
+        vector<pair<int, string>> valid;
+
+        for (int i = 0; i < code.size(); i++) {
+            if (check(code[i], businessLine[i], isActive[i])) {
+                valid.push_back({priority(businessLine[i]), code[i]});
+            }
+        }
+
+        sort(valid.begin(), valid.end());
+
+        vector<string> ans;
+        for (auto& p : valid) {
+            ans.push_back(p.second);
+        }
+
+        return ans;
+    }
+};
