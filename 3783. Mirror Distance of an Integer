@@ -1,0 +1,15 @@
+Input: n = 25
+Output: 27
+Explanation:
+reverse(25) = 52.
+Thus, the answer is abs(25 - 52) = 27
+#code:
+class Solution {
+public:
+    int mirrorDistance(int n) {
+        string s = to_string(n);
+        reverse(s.begin(),s.end());
+        long long num = stoll(s);
+        return abs(num-n);
+    }
+};
