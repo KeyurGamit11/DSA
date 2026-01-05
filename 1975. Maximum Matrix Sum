@@ -1,0 +1,31 @@
+Input: matrix = [[1,-1],[-1,1]]
+Output: 4
+Explanation: We can follow the following steps to reach sum equals 4:
+- Multiply the 2 elements in the first row by -1.
+- Multiply the 2 elements in the first column by -1.
+#code:
+class Solution {
+public:
+    long long maxMatrixSum(vector<vector<int>>& matrix) {
+        long long sum=0;
+        int cnt=0;
+        int mini = INT_MAX;
+        for(int i=0; i<matrix.size(); i++){
+            for(int j=0; j<matrix[0].size(); j++){
+                sum += abs(matrix[i][j]);
+                if(matrix[i][j]<0){
+                    cnt++;
+                }
+                mini = min(mini,abs(matrix[i][j]));
+
+            }
+        }
+        if(cnt%2==0){
+            return sum; //means we can make all neg element into positive, we can make pairs
+        }else{
+            return sum-2LL*mini; // if neg is odd we can't make all neg into pos w left one el thats mini of abs val
+            //we need to subtract 2 mini because we count all abs sum first
+            
+        }
+    }
+};
