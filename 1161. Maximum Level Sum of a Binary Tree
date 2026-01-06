@@ -1,0 +1,39 @@
+Input: root = [1,7,0,7,-8,null,null]
+Output: 2
+Explanation: 
+Level 1 sum = 1.
+Level 2 sum = 7 + 0 = 7.
+Level 3 sum = 7 + -8 = -1.
+So we return the level with the maximum sum which is level 2.
+#code:
+class Solution {
+public:
+    int maxLevelSum(TreeNode* root) {
+        int maxi_sum=INT_MIN;
+        queue<TreeNode*>que;
+        que.push(root);
+        int level=1;
+        int ans=0;
+        while(!que.empty()){
+            int sum=0;
+            int n = que.size();
+            while(n--){
+                TreeNode* temp = que.front();
+                que.pop();
+                sum += temp->val;
+                if(temp->left){
+                    que.push(temp->left);
+                }
+                if(temp->right){
+                    que.push(temp->right);
+                }
+            }
+            if(sum > maxi_sum){
+                maxi_sum = sum;
+                ans = level;
+            }
+            level++;
+        }
+        return ans;
+    }
+};
