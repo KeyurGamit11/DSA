@@ -1,0 +1,39 @@
+Input: root = [1,2,3,4,5,6]
+Output: 110
+Explanation: Remove the red edge and get 2 binary trees with sum 11 and 10. Their product is 110 (11*10)
+#code:
+class Solution {
+//If we know the sum of a subtree, the answer is max( (total_sum - subtree_sum) * subtree_sum) in each node. 
+//just look at that hint 
+public:
+    long long total_sum=0;
+    long long ans=0;
+    static const int MOD = 1e9 + 7;
+    long long sum(TreeNode* root){
+        if(root==NULL){
+            return 0;
+        }
+
+        long long sum1 = root->val;
+        sum1 += sum(root->left);
+        sum1 += sum(root->right);
+        return sum1;
+    }
+    long long subtreesum(TreeNode* root){
+        
+        if(root==NULL){
+            return 0;
+        }
+        long long curr_sum = root->val;
+        curr_sum += subtreesum(root->left);
+        curr_sum += subtreesum(root->right);
+        ans = max((total_sum-curr_sum)*curr_sum , ans);
+        return curr_sum;
+    }
+    int maxProduct(TreeNode* root) {
+        
+       total_sum = sum(root);
+       subtreesum(root);
+        return ans %MOD;
+    }
+};
