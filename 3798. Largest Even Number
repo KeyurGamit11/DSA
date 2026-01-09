@@ -1,0 +1,22 @@
+Input: s = "1112"
+Output: "1112"
+Explanation:
+The string already represents the largest possible even number, so no deletions are needed.
+#code:
+class Solution {
+public:
+    string largestEven(string s) {
+        int ind=-1;
+        int n = s.size();
+        for(int i=n-1; i>=0; i--){
+            if(s[i]=='2'){
+                ind = i+1;
+                break;
+            }
+        }
+        if(ind==-1){
+            return "";
+        } 
+        return s.substr(0,ind);
+    }
+};
