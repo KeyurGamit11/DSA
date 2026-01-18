@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        /* Page */
+        .container {
+            padding: 30px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-info {
+            flex: 2;
+        }
+
+        .cart-info h3 {
+            margin: 0;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quantity button:hover {
+            background: #219150;
+        }
+
+        .remove {
+            background: red;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            font-size: 18px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Protect Page -->
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><b>Grocery System</b></div>
+        <div>
+            <a href="home.html">Home</a>
+            <a href="groceries.html">Groceries</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </div>
+
+    <!-- Cart Content -->
+    <div class="container">
+        <h2>Your Cart</h2>
+        <div id="cartItems"></div>
+        <div class="total" id="totalPrice"></div>
+    </div>
+    <div style="text-align:right; margin-top:20px;">
+        <button onclick="goToCheckout()" style="
+      padding:12px 20px;
+      font-size:16px;
+      background:#2980b9;
+      color:white;
+      border:none;  
+      border-radius:5px;
+      cursor:pointer;
+    ">
+            Proceed to Checkout
+        </button>
+    </div>
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartDiv = document.getElementById("cartItems");
+            const totalDiv = document.getElementById("totalPrice");
+
+            cartDiv.innerHTML = "";
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartDiv.innerHTML = '<div class="empty">Your cart is empty</div>';
+                totalDiv.innerText = "";
+                return;
+            }
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+
+                cartDiv.innerHTML += `
+          <div class="cart-item">
+            <div class="cart-info">
+              <h3>${item.name}</h3>
+              <div class="price">₹ ${item.price}</div>
+            </div>
+
+            <div class="quantity">
+              <button onclick="changeQty(${index}, -1)">−</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+            </div>
+
+            <button class="remove" onclick="removeItem(${index})">
+              Remove
+            </button>
+          </div>
+        `;
+            });
+
+            totalDiv.innerText = "Total: ₹ " + total;
+        }
+
+        function goToCheckout() {
+            window.location.href = "checkout.html";
+        } 
+
+        function changeQty(index, change) {
+            let cart = JSON.parse(localStorage.getItem("cart"));
+
+            cart[index].quantity += change;
+
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart"));
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        loadCart();
+    </script>
+
+</body>
+
+</html>
