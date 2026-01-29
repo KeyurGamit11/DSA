@@ -1,0 +1,18 @@
+Input: nums = [1,-1,2,3,3,4,5]
+Output: 4
+Explanation:
+Removing the prefix = [1, -1, 2, 3] leaves the remaining array [3, 4, 5] which is strictly increasing.
+#code:
+class Solution {
+public:
+    int minimumPrefixLength(vector<int>& nums) {
+        int n = nums.size();
+        int i;
+        for(i=n-1; i>0; i--){
+            if(nums[i] <= nums[i-1]){
+                break;
+            }
+        }
+        return i;
+    }
+};
