@@ -1,0 +1,25 @@
+Input: nums = [2,1,5], k = 2
+Output: 1
+Explanation:
+Remove nums[2] = 5 to get nums = [2, 1].
+Now max = 2, min = 1 and max <= min * k as 2 <= 1 * 2. Thus, the answer is 1.
+#code:
+class Solution {
+public:
+    int minRemoval(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        int i=0,j=0;
+        int n = nums.size();
+        int max_len = 0;
+        while(j < n){
+            if(nums[j] <= (long long)nums[i]*k ){
+                max_len = max(max_len , j-i+1);
+                j++;
+            }else{
+                i++;
+            }
+        }
+        int ans = n-max_len;
+        return ans;
+    }
+};
