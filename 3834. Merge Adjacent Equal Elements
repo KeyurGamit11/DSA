@@ -1,0 +1,31 @@
+Input: nums = [3,1,1,2]
+Output: [3,4]
+Explanation:
+The middle two elements are equal and merged into 1 + 1 = 2, resulting in [3, 2, 2].
+The last two elements are equal and merged into 2 + 2 = 4, resulting in [3, 4].
+No adjacent equal elements remain. Thus, the answer is [3, 4].
+#code:
+class Solution {
+public:
+    vector<long long> mergeAdjacent(vector<int>& nums) {
+        stack<long long>st;
+        vector<long long>ans;
+        for(int i=0; i<nums.size(); i++){
+            long long curr = nums[i];
+            while(!st.empty() && st.top()==curr){
+                curr += st.top();
+                st.pop();
+                
+            }
+            st.push(curr);
+            
+        }
+        while(!st.empty()){
+         
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
