@@ -1,0 +1,29 @@
+Input: nums = [5,4,3]
+
+Output: 2
+
+Explanation:
+
+At index i = 0, the value 5 is dominant as 5 > average(4, 3) = 3.5.
+At index i = 1, the value 4 is dominant over the subarray [3].
+Index i = 2 is not dominant as there are no elements to its right. Thus, the answer is 2.
+#code:
+class Solution {
+public:
+    int dominantIndices(vector<int>& nums) {
+        int ans=0;
+        for(int i=0; i<nums.size()-1; i++){
+            int n = nums[i];
+            int sum=0,cnt=0;
+            for(int j=i+1; j<nums.size(); j++){
+                sum+=nums[j];
+                cnt++;
+            }
+            int avg = sum/cnt;
+            if(n > avg){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
