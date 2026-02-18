@@ -1,0 +1,27 @@
+Input: n = 5
+Output: true
+Explanation: The binary representation of 5 is: 101
+#code:
+class Solution {
+public:
+    bool hasAlternatingBits(int n) {
+       
+        int f;
+        int prev=n%2;
+        n /= 2;
+        while(n){
+            if(n%2==0){
+                f=0;
+            }else{
+                f=1;
+            }
+
+            if( prev==f){
+                return false;
+            }
+            prev = f;
+            n /= 2;
+        }
+        return true;
+    }
+};
