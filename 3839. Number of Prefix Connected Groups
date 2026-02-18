@@ -1,0 +1,26 @@
+Input: words = ["apple","apply","banana","bandit"], k = 2
+Output: 2
+Explanation:
+Words sharing the same first k = 2 letters are grouped together:
+words[0] = "apple" and words[1] = "apply" share prefix "ap".
+words[2] = "banana" and words[3] = "bandit" share prefix "ba".
+Thus, there are 2 connected groups, each containing at least two words.
+#code:
+class Solution {
+public:
+    int prefixConnected(vector<string>& words, int k) {
+        unordered_map<string,int>mp;
+        for(int i=0; i<words.size(); i++){
+            if(words[i].size() >= k){
+                string str =words[i].substr(0,k);
+                mp[str]++;
+            }
+        }
+        int ans=0;
+        for(auto i:mp){
+            if(i.second >=2)ans++;
+        }
+        return ans;
+    }
+    
+};
