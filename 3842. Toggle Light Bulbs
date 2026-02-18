@@ -1,0 +1,26 @@
+Input: bulbs = [10,30,20,10]
+Output: [20,30]
+Explanation:
+The bulbs[0] = 10th light bulb is currently off. We switch it on.
+The bulbs[1] = 30th light bulb is currently off. We switch it on.
+The bulbs[2] = 20th light bulb is currently off. We switch it on.
+The bulbs[3] = 10th light bulb is currently on. We switch it off.
+In the end, the 20th and the 30th light bulbs are on.
+#code:
+class Solution {
+public:
+    vector<int> toggleLightBulbs(vector<int>& bulbs) {
+        vector<int>ans;
+        unordered_map<int,int>mp;
+        for(auto i:bulbs){
+            mp[i]++;
+        }
+        for(auto i:mp){
+            if(i.second%2==1){
+                ans.push_back(i.first);
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
