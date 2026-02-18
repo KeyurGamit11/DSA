@@ -1,0 +1,18 @@
+Input: n = 43261596
+Output: 964176192
+#code:
+class Solution {
+public:
+    int reverseBits(int n) {
+         // Step 1: Convert to 32-bit binary string
+        string binary = bitset<32>(n).to_string();
+        
+        // Step 2: Reverse the string
+        reverse(binary.begin(), binary.end());
+        
+        // Step 3: Convert reversed binary string back to number
+        uint32_t result = bitset<32>(binary).to_ulong();
+        
+        return result;
+    }
+};
