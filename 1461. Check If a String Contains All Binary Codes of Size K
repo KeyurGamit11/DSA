@@ -1,0 +1,25 @@
+Input: s = "00110110", k = 2
+Output: true
+Explanation: The binary codes of length 2 are "00", "01", "10" and "11". They can be all found as substrings at indices 0, 1, 3 and 2 respectively.
+#code:
+class Solution {
+public:
+    bool hasAllCodes(string s, int k) {
+        int cnt=0;
+        int total = pow(2,k);
+        int n =s.size();
+        unordered_set<string>st;
+
+        for(int i=k; i<=n; i++){
+            string sub = s.substr(i-k,k);
+            if(!st.count(sub)){
+                st.insert(sub);
+                total--;
+            }
+            if(total==0){
+                return true;
+            }
+        }
+        return false;
+    }
+};
