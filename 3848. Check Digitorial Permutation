@@ -1,0 +1,30 @@
+Input: n = 145
+Output: true
+Explanation:
+The number 145 itself is digitorial since 1! + 4! + 5! = 1 + 24 + 120 = 145. Thus, the answer is true.
+#code:
+class Solution {
+public:
+    long long fact(int n){
+        if(n==0)return 1;
+        long long ans=1;
+        for(int i=1; i<=n; i++){
+            ans *= i;
+        }
+        return ans;
+    }
+    bool isDigitorialPermutation(int n) {
+        string s1 = to_string(n);
+        long long total=0;
+        for(int i=0; i<s1.size(); i++){
+            int k = s1[i]-'0';
+            total += fact(k);
+        }
+        string s2 = to_string(total);
+        if(s1.size() != s2.size()) return false;
+        sort(s1.begin(),s1.end());
+        sort(s2.begin(),s2.end());
+        return s1==s2;
+        
+    }
+};
