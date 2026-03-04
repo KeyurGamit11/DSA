@@ -1,0 +1,20 @@
+Input: n = 3
+Output: 27
+Explanation: In binary, 1, 2, and 3 corresponds to "1", "10", and "11".
+After concatenating them, we have "11011", which corresponds to the decimal value 27.
+#code:
+class Solution {
+public:
+    int m = 1e9+7;
+    int concatenatedBinary(int n) {
+        long ans=0;
+        int digit=0;
+        for(int num=1; num<=n; num++){
+            if((num&(num-1))==0){ // means num is power of 2
+                digit++;
+            }
+            ans = ((ans << digit)%m+num)%m;
+        }
+        return ans;
+    }
+};
