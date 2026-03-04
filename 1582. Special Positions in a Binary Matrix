@@ -1,0 +1,42 @@
+Input: mat = [[1,0,0],[0,0,1],[1,0,0]]
+Output: 1
+Explanation: (1, 2) is a special position because mat[1][2] == 1 and all other elements in row 1 and column 2 are 0.
+#code:
+class Solution {
+public:
+    bool check(int i, int j, vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+       
+       //check row
+        for (int k = 0; k < n; k++) {
+            if (k != i && mat[k][j] == 1) {
+                return true;
+            }
+        }
+        //check col
+        for (int k = 0; k < m; k++) {
+            if (k != j && mat[i][k] == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    int numSpecial(vector<vector<int>>& mat) {
+        int ans = 0;
+        int n = mat.size();
+        int m = mat[0].size();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 1) {
+                    // check in row and col both if there is another 1 or not
+                    bool ch = check(i, j, mat);
+                    if (!ch) {
+                        ans++;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
