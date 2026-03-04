@@ -1,0 +1,20 @@
+Input: root = [1,0,1,0,1,0,1]
+Output: 22
+Explanation: (100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22
+#code:
+class Solution {
+public:
+    int solve(TreeNode* root , int val){
+        if(root==NULL){
+            return 0;
+        }
+        val = (2*val) + root->val;
+        if(root->left==NULL && root->right==NULL){
+            return val;
+        }
+        return solve(root->left,val) + solve(root->right,val);
+    }
+    int sumRootToLeaf(TreeNode* root) {
+        return solve(root, 0);
+    }
+};
