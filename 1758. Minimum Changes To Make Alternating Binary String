@@ -1,0 +1,38 @@
+Input: s = "0100"
+Output: 1
+Explanation: If you change the last character to '1', s will be "0101", which is alternating.
+#code:
+class Solution {
+public:
+    int minOperations(string s) {
+        int ans = 0;
+        int onecnt = 0;
+        int zerocnt = 0;
+        // first start with 0
+        for (int i = 0; i < s.size(); i++) {
+            if (i % 2 == 0) {
+                if (s[i] == '1') {
+                    zerocnt++;
+                }
+            } else {
+                if (s[i] == '0') {
+                    zerocnt++;
+                }
+            }
+        }
+        // first start with 1
+        for (int i = 0; i < s.size(); i++) {
+            if (i % 2 == 0) {
+                if (s[i] == '0') {
+                    onecnt++;
+                }
+            } else {
+                if (s[i] == '1') {
+                    onecnt++;
+                }
+            }
+        }
+        ans = min(onecnt, zerocnt);
+        return ans;
+    }
+};
