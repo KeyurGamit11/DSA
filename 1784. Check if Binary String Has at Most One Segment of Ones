@@ -1,0 +1,16 @@
+Input: s = "1001"
+Output: false
+Explanation: The ones do not form a contiguous segment.
+#code:
+class Solution {
+public:
+    bool checkOnesSegment(string s) {
+        //1 should all continues so we just need to find that 0 shouldn't be in between 1
+        for(int i=0; i<s.size()-1; i++){
+            if(s[i]=='0' && s[i+1]=='1'){
+                return false;
+            }
+        }
+        return true;
+    }
+};
