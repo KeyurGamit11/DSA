@@ -1,0 +1,47 @@
+Input: nums = [2,8,2,2,5]
+Output: 2
+Explanation:
+For index i = 2:
+Left sum = 2 + 8 = 10
+Right product = 2 * 5 = 10
+Since the left sum equals the right product, index 2 is balanced.
+No smaller index satisfies the condition, so the answer is 2.
+#code:
+class Solution {
+public:
+    int smallestBalancedIndex(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> pref(n, 0);
+        vector<long long> mul(n, 1);
+        pref[0] = 0;
+        mul[n - 1] = 1;
+        for (int i = 1; i < n; i++) {
+            pref[i] = pref[i - 1] + nums[i - 1];
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            //for overflow
+            if (mul[i + 1] > LLONG_MAX / nums[i + 1]) {
+                mul[i] = LLONG_MAX;
+            } else {
+                mul[i] = mul[i + 1] * nums[i + 1];
+            }
+        }
+        // for (auto i : pref) {
+        //     cout << i << " ";
+        // }
+        // cout << endl;
+        // for (auto i : mul) {
+        //     cout << i << " ";
+        // }
+
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            if (pref[i] == mul[i]) {
+                ans = i;
+                break;
+            }
+        }
+        return ans;
+    }
+};
