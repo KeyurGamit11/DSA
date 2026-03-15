@@ -1,0 +1,15 @@
+Input: n = 1002
+Output: 3
+Explanation:
+The numbers "1,000", "1,001", and "1,002" each contain one comma, giving a total of 3.
+#code:
+class Solution {
+public:
+    int countCommas(int n) {
+        int ans=1;
+        string s = to_string(n);
+        if(s.size() < 4)return 0;
+        ans += n-1000;
+        return ans;
+    }
+};
