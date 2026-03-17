@@ -1,0 +1,33 @@
+Input: nums = [2,6,4]
+Output: 2
+Explanation:
+Construct prefixGcd:
+i	nums[i]	mxi	prefixGcd[i]
+0	2	2	2
+1	6	6	6
+2	4	6	2
+prefixGcd = [2, 6, 2]. After sorting, it forms [2, 2, 6].
+Pair the smallest and largest elements: gcd(2, 6) = 2. The remaining middle element 2 is ignored. Thus, the sum is 2.
+#code:
+class Solution {
+public:
+    long long gcdSum(vector<int>& nums) {
+        long long ans=0;
+        vector<int>arr;
+        int maxi=nums[0];
+        for(int i=0; i<nums.size(); i++){
+            maxi = max(nums[i],maxi);
+            int el = gcd(maxi,nums[i]);
+            arr.push_back(el); 
+        }
+        sort(arr.begin(),arr.end());
+        int i=0,j=arr.size()-1;
+        while(i < j){
+            int el = gcd(arr[i],arr[j]);
+            ans += el;
+            i++;
+            j--;
+        }
+        return ans;
+    }
+};
