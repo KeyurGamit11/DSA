@@ -1,0 +1,34 @@
+Input: nums1 = [1,4,7]
+Output: true
+Explanation:​​​​​​​​​​​​​​
+Set nums2[0] = nums1[0] = 1.
+Set nums2[1] = nums1[1] - nums1[0] = 4 - 1 = 3.
+Set nums2[2] = nums1[2] = 7.
+nums2 = [1, 3, 7], and all elements are odd. Thus, the answer is true.
+#code:
+class Solution {
+public:
+    bool uniformArray(vector<int>& nums1) {
+        int mini=INT_MAX;
+        int odd=0,even=0;
+        for(int i=0; i<nums1.size(); i++){
+            if(nums1[i]%2==0){
+                even++;
+            }else{
+                odd++;
+                mini = min(nums1[i],mini);
+            }
+        }
+        if(odd==0 || even ==0 ){
+            return true;
+        }
+        for(int i=0; i<nums1.size(); i++){
+            if(nums1[i] %2 == 0){
+                if(nums1[i] <= mini){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
